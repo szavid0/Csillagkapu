@@ -6,7 +6,7 @@ public class Door extends AbstractBlock {
 	@Override
 	public void moveToThisBlock() {
 		if(passable==true)	
-			maze.getGeneral().setPosBlock(this);	
+			Application.general.setPosBlock(this);	
 		System.out.println("Door.moveToThisBlock()");
 	}
 	@Override

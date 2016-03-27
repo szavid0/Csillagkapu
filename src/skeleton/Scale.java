@@ -8,10 +8,10 @@ public class Scale extends Field {
 	@Override
 	public void moveToThisBlock(){
 		if(containsBox == false){
-			maze.getGeneral().setPosBlock(this);
+			Application.general.setPosBlock(this);
 			doorToOpen.Open(true);
 			if(containsZpm == true){
-				maze.getGeneral().collectZpm(modul);
+				Application.general.collectZpm(modul);
 			}
 		}
 		System.out.println("Scale.moveToThisBlock()");

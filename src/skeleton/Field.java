@@ -25,9 +25,9 @@ public class Field extends AbstractBlock {
 	@Override
 	public void moveToThisBlock() {
 		if (containsBox == false){
-			maze.getGeneral().setPosBlock(this);
+			Application.general.setPosBlock(this);
 			if(containsZpm == true){
-				maze.getGeneral().collectZpm(modul);
+				Application.general.collectZpm(modul);
 			}
 		}
 		System.out.println("Field.moveToThisBlock()");

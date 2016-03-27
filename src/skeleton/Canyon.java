@@ -3,10 +3,10 @@ public class Canyon extends AbstractBlock {
 
 	@Override
 	public void moveToThisBlock() {
-		maze.getGeneral().setPosBlock(this);
-		maze.getGeneral().die();
+		Application.general.setPosBlock(this);
+		Application.general.die();
 		Field start = maze.getStartField();
-		maze.getGeneral().setPosBlock(start);
+		Application.general.setPosBlock(start);
 		System.out.println("Canyon.moveToThisBlock()");
 	}
 	@Override

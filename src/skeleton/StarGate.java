@@ -33,8 +33,8 @@ public class StarGate extends Wall {
 			}
 			Direction dir = pair.getDirection();
 			AbstractBlock neighbour = pair.getNeighbour(direction);	
-			maze.getGeneral().setPosBlock(neighbour);
-			maze.getGeneral().setDirection(dir);
+			Application.general.setPosBlock(neighbour);
+			Application.general.setDirection(dir);
 		}
 		System.out.println("StarGate.moveToThisBlock()");
 	}
