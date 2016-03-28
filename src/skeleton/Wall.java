@@ -1,4 +1,4 @@
-//Fal osztály megvalósítása, AbstractBlockból öröklődik
+//Fal osztály megvalósítása, AbstractBlockból öröklődik.
 public class Wall extends AbstractBlock {
 	//Speciális fal-e, melyre lőve csillagkapu alakul ki.
 	private boolean isSpecial;
@@ -22,7 +22,7 @@ public class Wall extends AbstractBlock {
 		System.out.println("Wall.shootOnThisBlock("+col+","+dir+")");
 	}
 	
-	//notifyBlock() nem csinál semmit, mivel nem mérleg.
+	//Falról lelépés esemény értesítésére.
 	@Override
 	public void notifyBlock() {
 		System.out.println("Wall.notifyBlock()");
