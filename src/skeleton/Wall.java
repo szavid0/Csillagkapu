@@ -22,4 +22,8 @@ public class Wall extends AbstractBlock {
 	public void notifyBlock() {
 		System.out.println("Wall.notifyBlock()");
 	}
+	@Override
+	public Box getBox() {
+		return null;
+	}
 }

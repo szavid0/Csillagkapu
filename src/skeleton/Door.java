@@ -17,4 +17,8 @@ public class Door extends AbstractBlock {
 	public void notifyBlock() {		
 		System.out.println("Door.notifyBlock()");
 	}
+	@Override
+	public Box getBox() {
+		return null;
+	}
 }
