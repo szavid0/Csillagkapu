@@ -5,6 +5,13 @@ public class StarGate extends Wall {
 	private Color color;
 	private boolean isPaired;
 	
+	public StarGate(int index,int[] neighbours,Direction dir,Color color,boolean isPaired){
+		super(index,neighbours);
+		this.direction = dir;
+		this.color = color;
+		this.isPaired = isPaired;
+	}
+	
 	//Csillagkapu irányának átkonvertálása integer-re.
 	private int dirToInt(Direction dir){
 		if(dir == Direction.EAST)
@@ -18,8 +25,8 @@ public class StarGate extends Wall {
 	}
 	
 	//Konstruktor, beállítja az irányt, színt és indexet.
-	public StarGate(Direction dir,Color col, int index){
-		super(true, index);  //**speciális falként inicalizálódik
+	public StarGate(int index,int[] neighbours,Direction dir,Color col){
+		super(index,neighbours,true);  //**speciális falként inicalizálódik
 		this.direction=dir;
 		this.color=col;
 	}
@@ -45,9 +52,9 @@ public class StarGate extends Wall {
 	//Rálépés esemény kezelése.
 	@Override
 	public void moveToThisBlock(){
+		//Ha van párja, megkeressük.
+		//Ha nincs, akkor nem csinálunk semmit.
 		if(isPaired){
-			//Ha van párja, megkeressük.
-			//Ha nincs, akkor nem csinálunk semmit.
 			StarGate pair = null;
 			if(color == Color.BLUE) {
 				//Sárga pár.

@@ -1,11 +1,24 @@
 //Mező osztály megvalósítása, AbstractBlockból öröklődik.
 public class Field extends AbstractBlock {
-	
 	//Letároljuk, tartalmaz-e ZPM modult vagy dobozt.
-	protected boolean containsZpm;
-	protected boolean containsBox;
-	protected Zpm modul;
+	protected boolean containsZpm = false;
+	protected boolean containsBox = false;
 	protected Box box;
+	
+	public Field(int id,int[] neighbours){
+		super(id,neighbours);
+	}
+	
+	public Field(int id,int[] neighbours,boolean hasBox,boolean hasZpm){
+		super(id,neighbours);
+		if(hasBox){
+			this.containsBox = true;
+			box = new Box();
+		}
+		if(hasZpm){
+			this.containsZpm = true;
+		}
+	}
 	
 	//Visszaadja van-e rajta doboz.
 	public boolean getContainsBox(){
@@ -49,7 +62,7 @@ public class Field extends AbstractBlock {
 	public void shootOnThisBlock(Color col, Direction dir) {
 		System.out.println(this.getClass()+" shootOnThisBlock("+col+","+dir+")");
 	}
-	
+
 	//Nem szükséges a jelzés neki, így nem csinál semmit.
 	@Override
 	public void notifyBlock() {

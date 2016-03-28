@@ -10,8 +10,9 @@ public abstract class AbstractBlock {
 	
 	//Az AbstractBlock konstruktorai.
 	public AbstractBlock(){}
-	public AbstractBlock(int[] neighbours){
+	public AbstractBlock(int id,int[] neighbours){
 		//Beállítjuk a blokk szomszédjainak indexét.
+		this.index = id;
 		this.neighbourIndexes=neighbours;
 	}
 	
@@ -49,6 +50,7 @@ public abstract class AbstractBlock {
 	//Abstract függvények:
 	public abstract void moveToThisBlock();
 	public abstract void shootOnThisBlock(Color col,Direction dir);
-	public abstract void notifyBlock(); //notify() név esetén hibát dob a fordító.
+	//notify() név esetén hibát dob a fordító.
+	public abstract void notifyBlock();
 	public abstract Box getBox();
 }

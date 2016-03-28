@@ -4,10 +4,19 @@ public class Wall extends AbstractBlock {
 	private boolean isSpecial;
 	
 	//Konstruktor, beállítja az isSpecial és az index értékét.
-	public Wall(boolean isSpecial, int index){
+	public Wall(int id,int[] n){
+		super(id,n);
+	}
+	public Wall(int id,int[] neighbours,boolean isSpecial){
+		super(id,neighbours);
 		this.isSpecial=isSpecial;
 		this.index = index;
 	}
+	public int[] getNeighboursIndex(){
+		return neighbourIndexes;
+	}
+	
+	//Falra nem lehet lépni.
 	@Override
 	public void moveToThisBlock() {
 		System.out.println("Wall.moveToThisBlock()");

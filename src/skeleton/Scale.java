@@ -1,11 +1,15 @@
 //Mérleg osztály megvalósítása, a mezőből öröklődik.
 public class Scale extends Field {
-
 	//A mérleghez tartozó ajtó.
 	private Door doorToOpen;
 	
 	//Konstruktor, doorToOpen-t állítja be.
-	public Scale(Door d){
+	public Scale(int id,int[] n){
+		super(id,n);
+	}
+	
+	public Scale(int id,int[] n,Door d,boolean hasBox,boolean hasZpm){
+		super(id,n,hasBox,hasZpm);
 		this.doorToOpen=d;
 	}
 	

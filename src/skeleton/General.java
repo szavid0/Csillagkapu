@@ -3,8 +3,7 @@
 import java.util.ArrayList;
 
 public class General {
-
-	//Tárolja az ezredes kezdő blockját, irányát, életeinek számát, nála lávő ZPM-ek, illetve a pályán lévő összes ZPM számát és a dobozokat.
+	//Tárolja az ezredes kezdő blockját, irányát, életeinek számát, nála lévő ZPM-ek, illetve a pályán lévő összes ZPM számát és a dobozokat.
 	private AbstractBlock PosBlock;
 	private Direction direction;
 	private int lives;
@@ -19,6 +18,9 @@ public class General {
 		lives = 3;
 		ZPMCnt = 0;
 		boxes = new ArrayList<Box>();
+	}
+	public General(ArrayList<Box> boxes){
+		this.boxes = boxes;
 	}
 	
 	//Visszaadja az ezredes pozicióját.
@@ -49,6 +51,7 @@ public class General {
 	//(az osztálydiagrammal ellentétben nem kell megkapja magát a modult)
 	public void collectZpm(){ 
 		System.out.println("General.collectZPM()");
+		
 		ZPMCnt++;
 		
 		//Itt megnézzük, hogy felszedtük-e az összes ZPM-et.
@@ -83,6 +86,7 @@ public class General {
 	//Az ezredest ellépteti az adott irányba, ha lehet.
 	public void move(Direction dir){
 		System.out.println("General.move("+ dir +")");
+		
 		AbstractBlock block = PosBlock.getNeighbour(dir);
 		
 		//Ha rá lehet lépni, akkor beállítjuk a pozíciónak.
@@ -97,8 +101,9 @@ public class General {
 	//Felveszi a dobozt, ha van előtte.
 	public void pick(){
 		System.out.println("General.pick()");
-		AbstractBlock b = PosBlock.getNeighbour(direction);
 		
+		
+		AbstractBlock b = PosBlock.getNeighbour(direction);
 		//Leellenőrizzük, hogy visszaad-e dobozt. Ha igen akkor felvesszük.
 		if(b.getBox() != null){
 			Field f = (Field)b;
@@ -114,7 +119,7 @@ public class General {
 		
 		if(PosBlock.getNeighbour(direction).isPassable()){
 			Field f = (Field)PosBlock.getNeighbour(direction);
-			//Megnézzük, hogy van-e rajta doboz .
+			//Megnézzük, hogy van-e rajta doboz.
 			if(!f.getContainsBox()){
 				if(hasBox())
 					f.setBox(getBox());;
