@@ -14,46 +14,67 @@ public class General {
 		boxes = new ArrayList<Box>();
 	}
 	
-	public AbstractBlock getPosBlock(){ return PosBlock;}
+	public AbstractBlock getPosBlock(){ 
+		System.out.println("General.getPosBlock()");
+		return PosBlock;
+	}
 	public void setDirection(Direction dir){
+		System.out.println("General.setDirection("+ dir +")");
 		this.direction = dir;
 	}
 	public Direction getDirection(){
+		System.out.println("General.getDirection()");
 		return direction;
 	}
 	public void setPosBlock(AbstractBlock block){
+		System.out.println("General.setPosBlock(block)");
 		PosBlock = block;
 	}
 	public void collectZpm(Zpm modul){
+		System.out.println("General.collectZPM(ZPM modul)");
 		//TODO
 	}
 	public void die(){
 		if(ZPMCnt == allZPMCnt){
-			//TODO
-			//Application endGame("WIN!")
+			Application.endGame("WIN!");
 		}
 		else{
-			//TODO
-			//Application endGame("LOSE!")
+			Application.endGame("LOSE!");
 		}
+		System.out.println("General.die()");
 
 	}
 	public boolean hasBox(){
+		System.out.println("General.hasBox()");
 		return boxes.size() > 0;
 	}
 	public Box getBox(){
+		System.out.println("General.getBox()");
 		return boxes.get(boxes.size() - 1);
 	}
 	public void move(Direction dir){
-		//TODO
+		System.out.println("General.move("+ dir +")");
+		
+		AbstractBlock block = PosBlock.getNeighbour(dir);
+		
+		if(block.isPassable())
+			block.moveToThisBlock();
 	}
 	public void pick(){
-		//TODO
+		System.out.println("General.pick()");
+		
+		//kérdéses!
+		Field f = (Field)PosBlock.getNeighbour(direction);
+		if(f.getContainsBox()){
+			boxes.add(f.getBox());
+		}
 	}
 	public void drop(){
+		System.out.println("General.drop()");
 		//TODO
 	}
 	public void shoot(Color col){
+		System.out.println("General.shoot()");
 		//TODO
 	}
 }
