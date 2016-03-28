@@ -4,8 +4,8 @@ public class StarGate extends Wall {
 	private Color color;
 	private boolean isPaired;
 	
-	public StarGate(Direction dir,Color col){
-		super(true);  //**speci·lis falkÈnt inicaliz·lÛdik
+	public StarGate(Direction dir,Color col, int index){
+		super(true, index);  //**speci√°lis falk√©nt inicaliz√°l√≥dik
 		this.direction=dir;
 		this.color=col;
 	}
@@ -26,10 +26,10 @@ public class StarGate extends Wall {
 		if(isPaired){
 			StarGate pair = null;
 			if(color == Color.BLUE) {
-				pair = maze.getYellowStarGate();
+				pair = Application.maze.getYellowStarGate();
 			}
 			else{
-				pair = maze.getBlueStarGate();
+				pair = Application.maze.getBlueStarGate();
 			}
 			Direction dir = pair.getDirection();
 			AbstractBlock neighbour = pair.getNeighbour(direction);	
@@ -41,10 +41,12 @@ public class StarGate extends Wall {
 	@Override
 	public void shootOnThisBlock(Color bulletcolor,Direction dir){
 		if (bulletcolor != this.color){
-			maze.deleteStarGate(this.color);
-			maze.createStarGate(this,bulletcolor,dir);
+			Application.maze.deleteStarGate(this.color);
+			Application.maze.createStarGate(this,bulletcolor,dir);
 		}
 		System.out.println("StarGate.shootOnThisBlock("+bulletcolor+","+dir+")");
 	}
-
+	public void setPair(int index, Direction dir){
+		//TODO
+	}
 }

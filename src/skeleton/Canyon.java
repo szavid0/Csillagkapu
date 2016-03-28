@@ -5,7 +5,7 @@ public class Canyon extends AbstractBlock {
 	public void moveToThisBlock() {
 		Application.general.setPosBlock(this);
 		Application.general.die();
-		Field start = maze.getStartField();
+		Field start = Application.maze.getStartField();
 		Application.general.setPosBlock(start);
 		System.out.println("Canyon.moveToThisBlock()");
 	}

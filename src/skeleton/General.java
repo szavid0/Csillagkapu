@@ -9,6 +9,8 @@ public class General {
 	private ArrayList<Box> boxes;
 	
 	public General(){
+		System.out.println("General constructor");
+		
 		lives = 3;
 		ZPMCnt = 0;
 		boxes = new ArrayList<Box>();

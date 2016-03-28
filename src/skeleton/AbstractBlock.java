@@ -1,7 +1,6 @@
 
 public abstract class AbstractBlock {
 	
-	protected LabirinthManager maze;
 	protected int index;
 	protected int[] neighbourIndexes = new int[4];
 	protected boolean passable;
@@ -10,16 +9,13 @@ public abstract class AbstractBlock {
 	public AbstractBlock(int[] neighbours){
 		this.neighbourIndexes=neighbours;
 	}
-	public void setMaze(LabirinthManager maze){
-		this.maze = maze;
-	}
 	public AbstractBlock getNeighbour(Direction dir){
 			AbstractBlock neighbour = null;
 			switch(dir){
-			case NORTH: neighbour= maze.getBlock(neighbourIndexes[0]);
-			case SOUTH: neighbour= maze.getBlock(neighbourIndexes[1]);
-			case EAST: neighbour=maze.getBlock(neighbourIndexes[2]);
-			case WEST: neighbour= maze.getBlock(neighbourIndexes[3]);	
+			case NORTH: neighbour= Application.maze.getBlock(neighbourIndexes[0]);
+			case SOUTH: neighbour= Application.maze.getBlock(neighbourIndexes[1]);
+			case EAST: neighbour= Application.maze.getBlock(neighbourIndexes[2]);
+			case WEST: neighbour= Application.maze.getBlock(neighbourIndexes[3]);	
 			}
 			System.out.println("AbstractBlock.getNegihbour("+dir+")");
 			return neighbour;
