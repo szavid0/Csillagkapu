@@ -1,18 +1,21 @@
-
+//AbstractBlock osztály megvalósítása.
+//Alap építőelem, ebből származik a Field, Wall, Canyon és Door osztály.
+//Nem lehet példányosítani.
 public abstract class AbstractBlock {
 	
+	//Az elem indexének, szomszédjainak és áthaladhatóságának tárolása.
 	protected int index;
 	protected int[] neighbourIndexes = new int[4];
 	protected boolean passable;
 	
-	//Az AbstractBlock konstruktorai
+	//Az AbstractBlock konstruktorai.
 	public AbstractBlock(){}
 	public AbstractBlock(int[] neighbours){
-		//beállítjuk a blokk indexeit
+		//Beállítjuk a blokk szomszédjainak indexét.
 		this.neighbourIndexes=neighbours;
 	}
 	
-	//visszaadja az adott irányú szomszédját
+	//Visszaadja az adott irányú szomszédját.
 	public AbstractBlock getNeighbour(Direction dir){
 			AbstractBlock neighbour = null;
 			switch(dir){
@@ -25,19 +28,19 @@ public abstract class AbstractBlock {
 			return neighbour;
 	}
 	
-	//visszaadja az adott blokk indexét
+	//Visszaadja az adott blokk indexét.
 	public int getIndex(){
 		System.out.println("AbstractBlock.getIndex()");
 		return index;
 	}
 	
-	//visszaadja, hogy át lehet-e rajta jutni. Lövedék vagy ezredes
+	//Visszaadja, hogy át lehet-e rajta jutni. Lövedék vagy ezredes.
 	public boolean isPassable(){
 		System.out.println("AbstractBlock.isPassable()");
 		return passable;
 	}
 	
-	//beállítjuk, az áthaladhatóságát
+	//Beállítjuk, az áthaladhatóságát.
 	public void setPassable(boolean tf){
 		System.out.println("AbstractBlock.setPassable("+tf+")");
 		passable = tf;
@@ -46,6 +49,6 @@ public abstract class AbstractBlock {
 	//Abstract függvények:
 	public abstract void moveToThisBlock();
 	public abstract void shootOnThisBlock(Color col,Direction dir);
-	public abstract void notifyBlock(); //notify() n�v eset�n hib�t dob a ford�t�
+	public abstract void notifyBlock(); //notify() név esetén hibát dob a fordító.
 	public abstract Box getBox();
 }
