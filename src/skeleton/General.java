@@ -57,11 +57,11 @@ public class General {
 	}
 	public void move(Direction dir){
 		System.out.println("General.move("+ dir +")");
-		
+	
 		AbstractBlock block = PosBlock.getNeighbour(dir);
 		
 		if(block.isPassable()){
-			block.notifyBlock();
+			PosBlock.notifyBlock();
 			block.moveToThisBlock();
 		}
 			
