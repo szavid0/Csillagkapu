@@ -9,6 +9,19 @@ public class LabirinthManager {
 	private StarGate blueStarGate;
 	private Field startField = new Field();
 	
+	private Direction oppDir(Direction dir){
+		if(dir == Direction.EAST)
+			dir = Direction.WEST;
+		else if(dir == Direction.WEST)
+			dir = Direction.EAST;
+		else if(dir == Direction.NORTH)
+			dir = Direction.SOUTH;
+		else 
+			dir = Direction.NORTH;
+		
+		return dir;
+	}
+	
 	public AbstractBlock getBlock(int i){
 		System.out.println("LabirinthManager.getBlock()");
 		return map.get(i);
@@ -50,5 +63,8 @@ public class LabirinthManager {
 	}
 	public void createWormHole(){
 		WormHoleExists = true;
+		
+		yellowStarGate.setPair(blueStarGate.getIndex(), oppDir(blueStarGate.getDirection()));
+		blueStarGate.setPair(yellowStarGate.getIndex(), oppDir(yellowStarGate.getDirection()));
 	}
 }

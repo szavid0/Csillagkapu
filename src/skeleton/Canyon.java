@@ -1,5 +1,5 @@
 
-public class Canyon extends AbstractBlock {
+class Canyon extends AbstractBlock {
 
 	@Override
 	public void moveToThisBlock() {

@@ -4,6 +4,17 @@ public class StarGate extends Wall {
 	private Color color;
 	private boolean isPaired;
 	
+	private int dirToInt(Direction dir){
+		if(dir == Direction.EAST)
+			return 0;
+		else if(dir == Direction.WEST)
+			return 2;
+		else if(dir == Direction.NORTH)
+			return 1;
+		else 
+			return 3;
+	}
+	
 	public StarGate(Direction dir,Color col, int index){
 		super(true, index);  //**speciális falként inicalizálódik
 		this.direction=dir;
@@ -47,6 +58,6 @@ public class StarGate extends Wall {
 		System.out.println("StarGate.shootOnThisBlock("+bulletcolor+","+dir+")");
 	}
 	public void setPair(int index, Direction dir){
-		//TODO
+		neighbourIndexes[dirToInt(dir)] = index;
 	}
 }

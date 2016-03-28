@@ -37,18 +37,13 @@ public class General {
 		
 		ZPMCnt++;
 		if(ZPMCnt == allZPMCnt)
-			die();
+			Application.endGame("WIN!");
 	}
 	public void die(){
-		if(ZPMCnt == allZPMCnt){
-			Application.endGame("WIN!");
-		}
-		else{
-			if(lives ==	0)
-				Application.endGame("LOSE!");
-			else
-				lives--;
-		}
+		if(lives ==	0)
+			Application.endGame("LOSE!");
+		else
+			lives--;
 		System.out.println("General.die()");
 
 	}

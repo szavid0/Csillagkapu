@@ -1,5 +1,5 @@
 
-public class Application {
+class Application {
 	public static General general = new General();
 	public static LabirinthManager maze = new LabirinthManager();	
 	public static void main(String[] args) {
