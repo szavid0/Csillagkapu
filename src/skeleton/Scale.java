@@ -23,7 +23,7 @@ public class Scale extends Field {
 		System.out.println("Scale.moveToThisBlock()");
 	}
 	
-	//Blokkról lelépés esemény értesítésére. Ajtót bezárja.
+	//Lelépés esemény értesítésére. Ajtót bezárja.
 	@Override
 	public void notifyBlock(){
 		System.out.println("Scale.notifyBlock()");

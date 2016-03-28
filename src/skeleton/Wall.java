@@ -22,13 +22,13 @@ public class Wall extends AbstractBlock {
 		System.out.println("Wall.shootOnThisBlock("+col+","+dir+")");
 	}
 	
-	//Falról lelépés esemény értesítésére.
+	//Nem szükséges a jelzés neki, így nem csinál semmit.
 	@Override
 	public void notifyBlock() {
 		System.out.println("Wall.notifyBlock()");
 	}
 	
-	//Falon nincsen doboz, tehát nem lehet felvenni.
+	//Null értéket ad vissza, hisz nem lehet rajta doboz.
 	@Override
 	public Box getBox() {
 		return null;

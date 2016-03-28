@@ -50,7 +50,7 @@ public class Field extends AbstractBlock {
 		System.out.println(this.getClass()+" shootOnThisBlock("+col+","+dir+")");
 	}
 	
-	//Mezőről lelépés esemény értesítésére.
+	//Nem szükséges a jelzés neki, így nem csinál semmit.
 	@Override
 	public void notifyBlock() {
 		System.out.println("Field.notifyBlock()");
