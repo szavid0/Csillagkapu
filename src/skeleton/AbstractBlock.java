@@ -38,7 +38,5 @@ public abstract class AbstractBlock {
 	}
 	public abstract void moveToThisBlock();
 	public abstract void shootOnThisBlock(Color col,Direction dir);
-	public abstract void notifyBlock(); //notify() név esetén hibát dob a fordító
-	
-	
+	public abstract void notifyBlock(); //notify() nï¿½v esetï¿½n hibï¿½t dob a fordï¿½tï¿½
 }

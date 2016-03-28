@@ -30,16 +30,22 @@ public class General {
 		System.out.println("General.setPosBlock(block)");
 		PosBlock = block;
 	}
-	public void collectZpm(Zpm modul){
-		System.out.println("General.collectZPM(ZPM modul)");
-		//TODO
+	public void collectZpm(){ //nem kell megkapja magát a modult
+		System.out.println("General.collectZPM()");
+		
+		ZPMCnt++;
+		if(ZPMCnt == allZPMCnt)
+			die();
 	}
 	public void die(){
 		if(ZPMCnt == allZPMCnt){
 			Application.endGame("WIN!");
 		}
 		else{
-			Application.endGame("LOSE!");
+			if(lives ==	0)
+				Application.endGame("LOSE!");
+			else
+				lives--;
 		}
 		System.out.println("General.die()");
 
@@ -71,10 +77,21 @@ public class General {
 	}
 	public void drop(){
 		System.out.println("General.drop()");
-		//TODO
+		
+		Field f = (Field)PosBlock.getNeighbour(direction);
+		if(f.getContainsBox()){
+			f.setBox(getBox());;
+		}
 	}
 	public void shoot(Color col){
 		System.out.println("General.shoot()");
-		//TODO
+		
+		AbstractBlock bulletPos;
+		
+		for( bulletPos = PosBlock.getNeighbour(direction); bulletPos.isPassable(); bulletPos = bulletPos.getNeighbour(direction)){
+			//elmegy a lövedék a falig.
+		}
+		
+		bulletPos.shootOnThisBlock(col, direction);
 	}
 }

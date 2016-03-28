@@ -11,7 +11,8 @@ public class Scale extends Field {
 			Application.general.setPosBlock(this);
 			doorToOpen.Open(true);
 			if(containsZpm == true){
-				Application.general.collectZpm(modul);
+				Application.general.collectZpm();
+				containsZpm = false;
 			}
 		}
 		System.out.println("Scale.moveToThisBlock()");

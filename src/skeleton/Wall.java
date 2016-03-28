@@ -21,5 +21,4 @@ public class Wall extends AbstractBlock {
 	public void notifyBlock() {
 		System.out.println("Wall.notifyBlock()");
 	}
-
 }

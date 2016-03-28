@@ -27,7 +27,8 @@ public class Field extends AbstractBlock {
 		if (containsBox == false){
 			Application.general.setPosBlock(this);
 			if(containsZpm == true){
-				Application.general.collectZpm(modul);
+				Application.general.collectZpm();
+				containsZpm = false;
 			}
 		}
 		System.out.println("Field.moveToThisBlock()");
@@ -41,5 +42,4 @@ public class Field extends AbstractBlock {
 	public void notifyBlock() {
 		System.out.println("Field.notifyBlock()");
 	}
-
 }

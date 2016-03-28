@@ -17,4 +17,5 @@ public class Canyon extends AbstractBlock {
 	public void notifyBlock() {
 		System.out.println("Canyon.notifyBlock()");
 	}
+	
 }
