@@ -60,8 +60,11 @@ public class General {
 		
 		AbstractBlock block = PosBlock.getNeighbour(dir);
 		
-		if(block.isPassable())
+		if(block.isPassable()){
+			block.notifyBlock();
 			block.moveToThisBlock();
+		}
+			
 	}
 	public void pick(){
 		System.out.println("General.pick()");
@@ -76,8 +79,9 @@ public class General {
 		System.out.println("General.drop()");
 		
 		Field f = (Field)PosBlock.getNeighbour(direction);
-		if(f.getContainsBox()){
-			f.setBox(getBox());;
+		if(!f.getContainsBox()){
+			if(hasBox())
+				f.setBox(getBox());;
 		}
 	}
 	public void shoot(Color col){
