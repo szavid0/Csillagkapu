@@ -1,6 +1,9 @@
+//Az ezredes osztalyanak megvalositasa.
+//Az ezredest tudja iranyitani a jatekos a palyan.
 import java.util.ArrayList;
 
 public class General {
+	//Tarolja az ezredes kezdo blockjat, iranyat, eleteinek szamat, nala levo ZPM-ek, illetve a palyan levo osszes ZPM szamat es a dobozokat.
 	private AbstractBlock PosBlock;
 	private Direction direction;
 	private int lives = 3;
@@ -8,54 +11,56 @@ public class General {
 	private int allZPMCnt;
 	private ArrayList<Box> boxes;
 	
-	//A General konstruktora
-	//3 az alapbeállított életek száma, beállítja, hogy nincs nála ZPM
-	//sem pedig doboz.
+	//A General konstruktora.
+		//3 az alapbeallitott eletek szama, beallitja, hogy nincs nala ZPM, se doboz.
 	public General(){
 		boxes = new ArrayList<Box>();
 	}
+	
+	//Konstruktor. Az ezredesnel levo dobozokat tarolja.
 	public General(ArrayList<Box> boxes){
 		this.boxes = new ArrayList<Box>(boxes);
 	}
-	//visszaadja az ezredes pozicióját
+	
+	//Visszaadja az ezredes poziciojat.
 	public AbstractBlock getPosBlock(){ 
 		System.out.println("General.getPosBlock()");
 		return PosBlock;
 	}
 	
-	//a kapott irányba állítja az ezredes irányát
+	//A kapott iranyba allitja az ezredes iranyat.
 	public void setDirection(Direction dir){
 		System.out.println("General.setDirection("+ dir +")");
 		this.direction = dir;
 	}
 	
-	//visszaadja az ezredes irányát
+	//Visszaadja az ezredes iranyat.
 	public Direction getDirection(){
 		System.out.println("General.getDirection()");
 		return direction;
 	}
 	
-	//beállítja az ezredes pozicióját a kapott blokkra
+	//Beallitja az ezredes poziciojat a kapott blokkra.
 	public void setPosBlock(AbstractBlock block){
 		System.out.println("General.setPosBlock(block)");
 		PosBlock = block;
 	}
 	
-	//Ha meghívják, akkor az ezredes ZPM számlálója megnő eggyel
-	//(az osztálydiagrammal ellentétben nem kell megkapja magát a modult)
+	//Ha meghivjak, akkor az ezredes ZPM szamlaloja megno eggyel.
+	//(az osztalydiagrammal ellentetben nem kell megkapja magat a modult)
 	public void collectZpm(){ 
 		System.out.println("General.collectZPM()");		
 		ZPMCnt++;
 		
-		//itt megnézzük, hogy felszedtük-e az összes ZPM-et
-		//ha igen, akkor jelezzük az Applicationnek, hogy nyertünk.
+		//Itt megnezzuk, hogy felszedtuk-e az osszes ZPM-et.
+		//Ha igen, akkor jelezzuk az Applicationnek, hogy nyertunk.
 		if(ZPMCnt == allZPMCnt)
 			Application.endGame("WIN!");
 	}
 	
-	//ha meghívják, akkor meghal az ezredes. 
+	//Ha meghivjak, akkor meghal az ezredes.
 	public void die(){
-		//megnézi, hogy van e még veszthető élete, ha nincs jelezzük, hogy vesztett a játékos.
+		//Megnezi, hogy van e meg vesztheto elete, ha nincs jelezzuk, hogy vesztett a jatekos.
 		if(lives ==	0)
 			Application.endGame("LOSE!");
 		else
@@ -64,61 +69,66 @@ public class General {
 
 	}
 	
-	//visszaadja, hogy van-e az ezredesnél még dobboz
+	//Visszaadja, hogy van-e az ezredesnel meg dobboz.
 	public boolean hasBox(){
 		System.out.println("General.hasBox()");
 		return !boxes.isEmpty();
 	}
 	
-	//visszaadja az utoljára felvett dobozt
+	//Visszaadja az utoljara felvett dobozt.
 	public Box getBox(){
 		System.out.println("General.getBox()");
 		return boxes.get(boxes.size() - 1);
 	}
 	
-	//az ezredest ellépteti az adott irányba, ha lehet
+	//Az ezredest ellepteti az adott iranyba, ha lehet.
 	public void move(Direction dir){
 		System.out.println("General.move("+ dir +")");
 		direction = dir;
 			AbstractBlock block = PosBlock.getNeighbour(dir);
+			//Ha ra lehet lepni, akkor beallitjuk a pozicionak.
+			//Az eddigi blokkot pedig ertesitjuk, hogy elleptunk rola.
 			if(block.isPassable()){
 				PosBlock.notifyBlock();
 				block.moveToThisBlock();
 		}
 	}
-	//felveszi a dobozt, ha van előtte
+	
+	//Felveszi a dobozt, ha van elotte.
 	public void pick(){
 		System.out.println("General.pick()");
 		AbstractBlock b = PosBlock.getNeighbour(direction);
-		//leellenőrizzük, hogy visszaad-e dobozt. Ha igen akkor catolhatunk
-		//különben elszállna a program
+		//Leellenorizzuk, hogy visszaad-e dobozt. Ha igen akkor felvesszuk.
 		if(b.getBox() != null){
 				boxes.add(b.getBox());
 			}	
 	}
-	//lerakja maga elé a dobozt, ha letudja
+	
+	//Lerakja maga ele a dobozt, ha letudja.
 	public void drop(){
 		System.out.println("General.drop()");
 
 		if(PosBlock.getNeighbour(direction).isPassable()){
 			AbstractBlock f = PosBlock.getNeighbour(direction);
-			//megnézzük, hogy van-e rajta doboz 
+			//Megnezzuk, hogy van-e rajta doboz. 
 				if(hasBox())f.setBox(getBox());
 		}
 	}
 	
-	//kapott színűt l�
+	//Kapott szinu lovedeket lo.
 	public void shoot(Color col){
 		System.out.println("General.shoot("+col+")");
 		
 		AbstractBlock bulletPos;
 		
 		for( bulletPos = PosBlock.getNeighbour(direction); bulletPos.isPassable(); bulletPos = bulletPos.getNeighbour(direction)){
-			//elmegy a lövedék ameddig nem ütközik valamibe.
+			//Elmegy a lovedek, ameddig nem utkozik valamibe.
 		}
-		//a blokk, amibe megakadt a lövedék lekezeli, hogy rálőttek 
+		//A blokk, amibe megakadt a lovedek lekezeli, hogy ralottek.
 		bulletPos.shootOnThisBlock(col, direction);
 	}
+	
+	//A palyan levo osszes Zpm szamanak megadasa.
 	public void setallZpmCnt(int i) {
 		this.allZPMCnt=i;
 	}

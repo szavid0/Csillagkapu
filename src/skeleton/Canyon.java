@@ -1,12 +1,14 @@
-
+//A szakadek osztalyt valositja meg, az AbstractBlock-bol oroklodik.
 class Canyon extends AbstractBlock {
 	
+	//Konstruktor.
 	public Canyon(int id,int[] n){
 		super(id,n);
 		passable = true;
 	}
-	//ha szakadékba lépünk, akkor az ezredes életet veszít
-	//ha nincs vége a játéknak, akkor beállítja az ezredest a start-pozícióba
+	
+	//Ha szakadekba lepunk, akkor az ezredes eletet veszit.
+	//Ha nincs vege a jateknak, akkor beallitja az ezredest a start-pozicioba.
 	@Override
 	public void moveToThisBlock() {
 		System.out.println("Canyon.moveToThisBlock()");
@@ -16,29 +18,33 @@ class Canyon extends AbstractBlock {
 		Application.general.setPosBlock(start);
 	}
 	
-	//erre a blokkra nem tudunk rálőni, így nem csinál a függvény semmit, ha meghívják
+	//Erre a blokkra nem tudunk raloni, igy nem csinal a fuggveny semmit, ha meghivjak.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
 		System.out.println("Canyon.shootOnThisBlock("+col+","+dir+")");
 	}
 	
-	//nem szükséges a jelzés neki, így nem csinál semmit
+	//Nem szukseges a jelzes neki, igy nem csinal semmit.
 	@Override
 	public void notifyBlock() {
 		System.out.println("Canyon.notifyBlock()");
 	}
 	
-	//null értéket ad vissza, hisz nem lehet rajta doboz
+	//Null erteket ad vissza, hisz nem lehet rajta doboz.
 	@Override
 	public Box getBox() {
 		System.out.println("Canyon.getBox()");
 		return null;
 	}
+	
+	//Athaladhatosag lekerdezese.
 	@Override
 	public boolean isPassable(){
 		System.out.println("Canyon.isPassable()");
 		return true;
 	}
+	
+	//Doboz lerakasa es megsemmisitese.
 	@Override
 	public void setBox(Box box){
 		System.out.println("Canyon.setBox("+box.getClass()+")");
