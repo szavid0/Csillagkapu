@@ -5,6 +5,7 @@ public abstract class AbstractBlock {
 	//Az elem indexenek, szomszedjainak es athaladhatosaganak tarolasa.
 	protected int index;
 	protected int[] neighbourIndexes = new int[4];
+	
 	protected boolean passable =true;
 	protected boolean shootable = true;
 	public boolean isShootable() {

@@ -1,4 +1,3 @@
-
 public class Character extends Creature {
 
 	@Override
@@ -17,5 +16,16 @@ public class Character extends Creature {
 		// TODO Auto-generated method stub
 		
 	}
-
+	
+	public void pick(){
+		//TODO
+	}
+	
+	public void shoot(Color col){
+		//TODO
+	}
+	
+	public void drop(){
+		//TODO
+	}
 }
