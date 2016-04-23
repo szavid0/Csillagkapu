@@ -148,7 +148,9 @@ class Application {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		int i=0;
 		i = Integer.parseInt(in.readLine());
-			general = new General();
+		general = new General();
+			
+		/*
 		// Switch construct
 		switch (i) {
 		case 1:
@@ -228,7 +230,7 @@ class Application {
 		default:
 		  System.out.println("Invalid selection");
 		  break; // This break is not really necessary
-		}
+		}*/
 	}
 	public static void endGame(String winOrLose){
 		System.out.println("Application.endGame(" + winOrLose + ")");
