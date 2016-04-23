@@ -14,9 +14,8 @@ public class Door extends AbstractBlock {
 	
 	//Ralepes esemeny, ha athaladhatosag engedelyezve van, a pozicio erre az elemre valtozik.
 	@Override
-	public void moveToThisBlock(Creature c) {
-		if(passable==true)	
-			Application.general.setPosBlock(this);	
+	public void moveToThisBlock(Character c) {
+			c.setPosBlock(this);	
 		System.out.println("Door.moveToThisBlock()");
 	}
 	
@@ -41,6 +40,11 @@ public class Door extends AbstractBlock {
 	
 	@Override
 	public void setBox(Box box){
+	}
+
+	@Override
+	public void moveToThisBlock(Replicator r) {
+			r.setPosBlock(this);
 	}
 	
 }

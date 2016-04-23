@@ -72,14 +72,12 @@ public class Field extends AbstractBlock {
 	
 	//Az ezredes ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta.
 	@Override
-	public void moveToThisBlock(Creature c) {
+	public void moveToThisBlock(Character c) {
 		System.out.println("Field.moveToThisBlock()");
-		if (containsBox == false){
-			Application.general.setPosBlock(this);
+			c.setPosBlock(this);
 			if(containsZpm == true){
-				Application.general.collectZpm();
+				c.collectZpm();
 				containsZpm = false;
-			}
 		}
 	}
 	
@@ -94,5 +92,11 @@ public class Field extends AbstractBlock {
 	public void notifyBlock() {
 		System.out.println("Field.notifyBlock()");
 	}
+
+	@Override
+	public void moveToThisBlock(Replicator r) {
+		r.setPosBlock(this);
+	}
+
 
 }

@@ -2,7 +2,7 @@
 //Az ezredest tudja iranyitani a jatekos a palyan.
 import java.util.ArrayList;
 
-public class General extends Creature{
+public class General extends Character{
 	//Tarolja az ezredes kezdo blockjat, iranyat, eleteinek szamat, nala levo ZPM-ek, illetve a palyan levo osszes ZPM szamat es a dobozokat.
 	private AbstractBlock PosBlock;
 	private Direction direction;
@@ -90,6 +90,7 @@ public class General extends Creature{
 			//Az eddigi blokkot pedig ertesitjuk, hogy elleptunk rola.
 			if(block.isPassable()){
 				PosBlock.notifyBlock();
+				
 				block.moveToThisBlock(this);
 		}
 	}

@@ -10,18 +10,12 @@ class Canyon extends AbstractBlock {
 	//Ha szakadekba lepunk, akkor az ezredes eletet veszit.
 	//Ha nincs vege a jateknak, akkor beallitja az ezredest a start-pozicioba.
 	@Override
-	public void moveToThisBlock(Creature c) {
+	public void moveToThisBlock(Replicator r) {
 		System.out.println("Canyon.moveToThisBlock()");
-		
-		if(c != Application.replicator){
-			Field start = Application.maze.getStartField();
-			c.setPosBlock(start);
-			c.die();
-		}else{
-			c = null;
+			
+			r = null;
 			Application.maze.transformCanyon(index);	
-		}
-		
+		 	
 	}
 	
 	//Erre a blokkra nem tudunk raloni, igy nem csinal a fuggveny semmit, ha meghivjak.
@@ -56,5 +50,13 @@ class Canyon extends AbstractBlock {
 		System.out.println("Canyon.setBox("+box.getClass()+")");
 		box = null;
 	}
+
+	@Override
+	public void moveToThisBlock(Character c) {
+		Field start = Application.maze.getStartField();
+		c.die();
+		c.setPosBlock(start);
+	}
+
 	
 }

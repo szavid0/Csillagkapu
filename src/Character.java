@@ -13,4 +13,9 @@ public class Character extends Creature {
 		
 	}
 
+	public void collectZpm() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

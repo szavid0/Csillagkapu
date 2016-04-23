@@ -13,6 +13,9 @@ public abstract class Creature {
 	public Field getStartField() {
 		return startField;
 	}
+	public int getWeight() {
+		return weight;
+	}
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}

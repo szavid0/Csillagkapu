@@ -5,9 +5,16 @@ import java.util.ArrayList;
 public class LabirinthManager {
 	//Letaroljuk a palyat, a csillagkapukat es a kezdopoziciot.
 	private List<AbstractBlock> map = new ArrayList<AbstractBlock>();
-	private boolean WormHoleExists = false;
+	private boolean blueyellowWormHoleExists = false;
+	private boolean redgreenWormHoleExists = false;
 	private StarGate yellowStarGate;
 	private StarGate blueStarGate;
+	private StarGate greenStarGate;
+	private StarGate redStarGate;
+	public StarGate getRedStarGate() {
+		return redStarGate;
+	}
+
 	private Field startField;
 
 	//A konstruktorban a parameterkent atadott tesztesethez szukseges palyat hozzuk letre.
@@ -136,19 +143,33 @@ public class LabirinthManager {
 			map.set(w.getIndex(), blueStarGate);
 			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
-			if(yellowStarGate!= null)createWormHole();
+			if(yellowStarGate!= null)createWormHole(col);
 		}
 		
 		//Egyebkent sarga csillagkapu.
-		else{
+		else if (col == Color.YELLOW){
 			yellowStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.YELLOW);
 			map.set(w.getIndex(), yellowStarGate);
 			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
-			if(blueStarGate!= null)createWormHole();
+			if(blueStarGate!= null)createWormHole(col);
 
 		}
+		else if (col == Color.GREEN){
+			greenStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.YELLOW);
+			map.set(w.getIndex(), greenStarGate);
+			
+			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
+			if(redStarGate!= null)createWormHole(col);
 
+		}else{
+			redStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.YELLOW);
+			map.set(w.getIndex(), redStarGate);
+			
+			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
+			if(greenStarGate!= null)createWormHole(col);
+
+		}
 	}
 	
 	//Csillagkapu torlese.
@@ -186,17 +207,28 @@ public class LabirinthManager {
 	}
 	
 	//Feregjarat letrehozasa.
-	public void createWormHole(){
+	public void createWormHole(Color col1){
 		System.out.println("LabirinthManager.CreateWormHole()");
-		WormHoleExists = true;
-		
+		if(col1 == Color.YELLOW || col1 == Color.BLUE){
+			blueyellowWormHoleExists = true;
+			yellowStarGate.setPair(blueStarGate.getIndex(),oppDir(blueStarGate.getDirection()));
+			blueStarGate.setPair(yellowStarGate.getIndex(),oppDir(yellowStarGate.getDirection()));
+		}
+		else{
+			redgreenWormHoleExists = true;
+			greenStarGate.setPair(redStarGate.getIndex(),oppDir(blueStarGate.getDirection()));
+			redStarGate.setPair(greenStarGate.getIndex(),oppDir(yellowStarGate.getDirection()));
+		}
 		//Csillagkapu parok beallitasa.
-		yellowStarGate.setPair(blueStarGate.getIndex(),oppDir(blueStarGate.getDirection()));
-		blueStarGate.setPair(yellowStarGate.getIndex(),oppDir(yellowStarGate.getDirection()));
+		
 	}
 
 	public void transformCanyon(int index) {
 		int[] n = map.get(index).getNeighbours();
 		map.set(index,new Field(index, n));
+	}
+
+	public StarGate getGreenStarGate() {
+		return greenStarGate;
 	}
 }

@@ -24,16 +24,12 @@ public class Scale extends Field {
 	
 	//Az ezredes ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta. Ajtot nyit.
 	@Override
-	public void moveToThisBlock(Creature c){
+	public void moveToThisBlock(Character c){
 		System.out.println("Scale.moveToThisBlock()");
-		if(containsBox == false){
-			Application.general.setPosBlock(this);
-			doorToOpen.Open(true);
-			if(containsZpm == true){
-				Application.general.collectZpm();
-				containsZpm = false;
+		c.setPosBlock(this);
+			if (c.getWeight() >= weightlimit){
+				doorToOpen.Open(true);
 			}
-		}
 	}
 	
 	//Doboz merlegre rakasa, ajto nyitasa.

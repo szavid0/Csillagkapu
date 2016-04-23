@@ -57,7 +57,7 @@ public class StarGate extends Wall {
 
 	//Ralepes esemeny kezelese.
 	@Override
-	public void moveToThisBlock(Creature c){
+	public void moveToThisBlock(Character c){
 		//Ha van parja, megkeressuk.
 		//Ha nincs, akkor nem csinalunk semmit.
 		System.out.println("StarGate.moveToThisBlock()");
@@ -67,16 +67,20 @@ public class StarGate extends Wall {
 				//Sarga par.
 				pair = Application.maze.getYellowStarGate();
 			}
-			else{
+			else if(color == Color.YELLOW){
 				//Kek par.
 				pair = Application.maze.getBlueStarGate();
+			}else if(color == Color.RED){
+				pair = Application.maze.getGreenStarGate();
+			}else{
+				pair = Application.maze.getRedStarGate();
 			}
 			//Lekeri a parjanak az iranyat es az ott levo szomszedot.
 			Direction dir = pair.getDirection();
 			AbstractBlock neighbour = pair.getNeighbour(dir);	
 			//Atlepunk arra a blockra es beallitjuk az ezredes iranyat.
-			Application.general.setPosBlock(neighbour);
-			Application.general.setDirection(dir);
+			c.setPosBlock(neighbour);
+			c.setDirection(dir);
 		}
 	}
 	

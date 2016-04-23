@@ -52,7 +52,9 @@ public abstract class AbstractBlock {
 	}
 	
 	//Abstract fuggvenyek:
-	public abstract void moveToThisBlock(Creature creature);
+	public abstract void moveToThisBlock(Character creature);
+	public abstract void moveToThisBlock(Replicator creature);
+
 	public abstract void shootOnThisBlock(Color col,Direction dir);
 	//notify() nev eseten hibat dob a fordito.
 	public abstract void notifyBlock();

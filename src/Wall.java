@@ -23,7 +23,7 @@ public class Wall extends AbstractBlock {
 	
 	//Falra nem lehet lepni.
 	@Override
-	public void moveToThisBlock(Creature c) {
+	public void moveToThisBlock(Character c) {
 		System.out.println("Wall.moveToThisBlock()");
 	}
 	
@@ -49,5 +49,10 @@ public class Wall extends AbstractBlock {
 	}
 	
 	public void setBox(Box box){
+	}
+
+	@Override
+	public void moveToThisBlock(Replicator creature) {
+		
 	}
 }
