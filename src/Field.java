@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +37,6 @@ public class Field extends AbstractBlock {
 	
 	//Visszaadja van-e rajta doboz.
 	public boolean getContainsBox(){
-		System.out.println("Field.getContainsBox()");
 		return containsBox;
 	}
 	
@@ -79,7 +79,12 @@ public class Field extends AbstractBlock {
 	//Lovesnel megadja a lovedek helyzetet, iranyat, szinet.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
-		System.out.println(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");;
+		System.out.println(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");
+		try {
+			Application.log.write(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.
@@ -94,6 +99,11 @@ public class Field extends AbstractBlock {
 
 	public void setZpm() {
 		System.out.println("PUTZPM "+index);
+		try {
+			Application.log.write("PUTZPM "+index);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		containsZpm = true;
 	}
 

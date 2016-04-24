@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import com.sun.org.apache.bcel.internal.generic.RETURN;
 
 //Fal osztaly megvalositasa, AbstractBlockbol oroklodik.
@@ -32,11 +34,21 @@ public class Wall extends AbstractBlock {
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
 			if (isSpecial){
-			Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
-			System.out.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
-			return;
+				Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
+				System.out.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
+				try {
+					Application.log.write(col+" BULLET HIT SPECIALWALL(ID="+index+")");
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				return;
 			}
 			System.out.println(col+" BULLET HIT WALL(ID="+index+")");
+			try {
+				Application.log.write(col+" BULLET HIT WALL(ID="+index+")");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
 	}
 	

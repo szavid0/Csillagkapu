@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import javafx.scene.input.TouchPoint;
 
 public class Character extends Creature {
@@ -24,10 +26,15 @@ public class Character extends Creature {
 			return direction;
 		}
 		
-	//Visszaadja, hogy van-e az karakternél meg doboz.
+	//Visszaadja, hogy van-e az karakternï¿½l meg doboz.
 	public boolean hasBox(){
 		boolean b = box != null;
 		System.out.println("HASBOX="+b);
+		try {
+			Application.log.write("HASBOX="+b);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return b;
 	}
 	
@@ -35,6 +42,11 @@ public class Character extends Creature {
 	//Kapott szinu lovedeket lo.
 	public void shoot(Color col){
 		System.out.println(getClass().toString().toUpperCase()+" SHOOT "+col);
+		try {
+			Application.log.write(getClass().toString().toUpperCase()+" SHOOT "+col);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 		AbstractBlock bulletPos;
 		

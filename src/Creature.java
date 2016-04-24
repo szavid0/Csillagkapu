@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public abstract class Creature {
 	protected Direction direction;
@@ -16,6 +17,11 @@ public abstract class Creature {
 	}
 	public void setPosBlock(AbstractBlock PosBlock) {
 		System.out.println(getClass().toString().toUpperCase()+" ARRIVEAT "+PosBlock.getClass().toString().toUpperCase()+"(ID="+PosBlock.getIndex()+")");
+		try {
+			Application.log.write(getClass().toString().toUpperCase()+" ARRIVEAT "+PosBlock.getClass().toString().toUpperCase()+"(ID="+PosBlock.getIndex()+")");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		this.PosBlock = PosBlock;
 	}
 	public Field getStartField() {
@@ -26,6 +32,11 @@ public abstract class Creature {
 	}
 	public void setDirection(Direction direction) {
 		System.out.println(getClass().toString().toUpperCase()+" IS SET TO "+direction);  //pl: GENERAL IS SET TO WEST
+		try {
+			Application.log.write(getClass().toString().toUpperCase()+" IS SET TO "+direction);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		this.direction = direction;
 	}
 	public abstract void move(Direction dir);

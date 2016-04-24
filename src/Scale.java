@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //Merleg osztaly megvalositasa, a mezobol oroklodik.
 public class Scale extends Field {
 	//A merleghez tartozo ajto.
@@ -26,6 +28,12 @@ public class Scale extends Field {
 	@Override
 	public void moveToThisBlock(Character c){
 		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+		try {
+			Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		c.setPosBlock(this);
 			if (c.getWeight() >= weightlimit){
 				doorToOpen.Open(true);
@@ -40,6 +48,12 @@ public class Scale extends Field {
 		shootable = false;
 		currentWeight += box.getWeight();
 		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+		try {
+			Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 		if(currentWeight >= weightlimit)
 			doorToOpen.Open(true);
 	}
@@ -55,6 +69,12 @@ public class Scale extends Field {
 			Box box = boxes.get(boxes.size()-1);
 			currentWeight -= box.getWeight();
 			System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+			try {
+				Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			
 			if(currentWeight < weightlimit)
 				doorToOpen.Open(false);
 			return box;
@@ -65,7 +85,6 @@ public class Scale extends Field {
 	//Lelepes esemeny ertesitesere. Ajtot bezarja.
 	@Override
 	public void notifyBlock(){
-		System.out.println("NOTIFY SCALE");
 		doorToOpen.Open(false);
 	}
 }

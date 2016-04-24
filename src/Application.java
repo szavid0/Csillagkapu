@@ -215,15 +215,15 @@ class Application {
 		String[] command;
 		
 		for(int i = 0; (line = br.readLine()) != null; i++){
-			if (i == 0) {
+			if (i == 0 || i == 1) {
 				String[] parts = line.split(",");
-				general.setPosBlock(maze.getBlock(Integer.parseInt(parts[0])));
-				general.setDirection(stringToDirection(parts[1]));
-			}
-			
-			if(i == 1){
-				if(line.equals("NEW GAME")){
-					loadMap();
+				if(parts[0].equals("GENERAL")){
+					general.setPosBlock(maze.getBlock(Integer.parseInt(parts[0])));
+					general.setDirection(stringToDirection(parts[1]));
+				}
+				if(parts[0].equals("JAFFA")){
+					general.setPosBlock(maze.getBlock(Integer.parseInt(parts[0])));
+					general.setDirection(stringToDirection(parts[1]));
 				}
 			}
 			
@@ -232,17 +232,26 @@ class Application {
 			//itt a parancsoknál mindegyiket külön meg kell valósítani
 			command = line.split(" ");
 			switch (command[0]){
+			case "NEW GAME": loadMap(); break;
 			case "RANDOM":
-				if(command[1].equals("ON"))
+				if(command[1].equals("ON")){
 					System.out.println("RANDOM MODE ON");
-				if(command[1].equals("OFF"))
+					log.write("RANDOM MODE ON");
+				}
+				if(command[1].equals("OFF")){
 					System.out.println("RANDOM MODE OFF");
+					log.write("RANDOM MODE OFF");
+				}
 				break;
 			case "MULTI-THREAD":
-				if(command[1].equals("ON"))
+				if(command[1].equals("ON")){
 					System.out.println("MULTI-THREAD MODE ON");
-				if(command[1].equals("OFF"))
+					log.write("MULTI-THREAD MODE ON");
+				}
+				if(command[1].equals("OFF")){
 					System.out.println("MULTI-THREAD MODE OFF");
+					log.write("MULTI-THREAD MODE OFF");
+				}
 				break;
 			case "SET":
 				if(command[1].equals("GENERAL")){
@@ -275,13 +284,13 @@ class Application {
 					}
 					
 				if(command[1].equals("JAFFA")){
-						character = "JAFFA";
-						if(command[2].equals("RED"))
-							jaffa.shoot(Color.RED);
-						if(command[2].equals("GREEN"))
-							jaffa.shoot(Color.GREEN);
-					}
-					break;
+					character = "JAFFA";
+					if(command[2].equals("RED"))
+						jaffa.shoot(Color.RED);
+					if(command[2].equals("GREEN"))
+						jaffa.shoot(Color.GREEN);
+				}
+				break;
 			case "DROP":
 				if(command[1].equals("GENERAL")){
 					character = "GENERAL";
@@ -293,7 +302,10 @@ class Application {
 					jaffa.drop();
 				}
 				break;
-			case "SAVE"://TODO
+			case "SAVE":
+				System.out.println("GAME SAVED"); 
+				log.write("GAME SAVED"); 
+				break;
 			case "MOVE":
 				if(command[1].equals("GENERAL")){
 					character = "GENERAL";
@@ -314,9 +326,13 @@ class Application {
 	public static General general = new General();
 	public static Replicator replicator = new Replicator();
 	public static Jaffa jaffa;
+	public static BufferedWriter log;
+	public static LabirinthManager maze;
 	
-	public static LabirinthManager maze;	
 	public static void main(String[] args) throws IOException{
+		
+		File logFile=new File("log.txt");
+	    log = new BufferedWriter(new FileWriter(logFile));
 		
 		System.out.println("---------------------------------------------------------");
 		System.out.println("|   			PROTOTÍPUS MENU\t|");
@@ -339,6 +355,7 @@ class Application {
 		i = Integer.parseInt(in.readLine());
 		general = new General();
 	}
+	
 	public static void endGame(String winOrLose){
 		System.out.println(winOrLose);
 	}

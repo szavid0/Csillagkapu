@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //AbstractBlock osztaly megvalositasa.
 //Alap epitoelem, ebbol szarmazik a Field, Wall, Canyon es Door osztaly.
 //Nem lehet peldanyositani.
@@ -39,8 +41,14 @@ public abstract class AbstractBlock {
 	
 	//Visszaadja, hogy at lehet-e rajta jutni. Lovedek vagy ezredes.
 	public boolean isPassable(){
-		if(!passable)
+		if(!passable){
 			System.out.println("NEIGHBOUR NOT PASSABLE");
+			try {
+				Application.log.write("NEIGHBOUR NOT PASSABLE");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		return passable;
 	}
 	
@@ -59,6 +67,11 @@ public abstract class AbstractBlock {
 	
 	public boolean getContainsBox(){
 		System.out.println("NO BOX ON NEIGHBOUR");
+		try {
+			Application.log.write("NO BOX ON NEIGHBOUR");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 	public Box getBox(){

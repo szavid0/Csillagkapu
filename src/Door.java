@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //Ajto osztaly megvalositasa, AbstractBlock-bol oroklodik.
 public class Door extends AbstractBlock {
 	//Konstruktor.
@@ -8,8 +10,22 @@ public class Door extends AbstractBlock {
 	
 	//Nyitas fuggveny, athaladhatosag beallitasra kerul.
 	public void Open(boolean tf){
-		if(tf == true)System.out.println("OPEN DOOR(ID="+index+")");
-		else System.out.println("CLOSE DOOR(ID="+index+")");
+		if(tf == true){
+			System.out.println("OPEN DOOR(ID="+index+")");
+			try {
+				Application.log.write("OPEN DOOR(ID="+index+")");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		else {
+			System.out.println("CLOSE DOOR(ID="+index+")");
+			try {
+				Application.log.write("CLOSE DOOR(ID="+index+")");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		passable=tf;
 	}
 	
@@ -23,6 +39,11 @@ public class Door extends AbstractBlock {
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {		
 		System.out.println(col+" BULLET HIT DOOR(ID="+index+")");
+		try {
+			Application.log.write(col+" BULLET HIT DOOR(ID="+index+")");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.

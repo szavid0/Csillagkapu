@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //A csillagkapu osztaly megvalositasa, a falbol oroklodik.
 public class StarGate extends Wall {
 	//Irany, szin, van-e csillagkapu parja meghatarozasa.
@@ -84,6 +86,11 @@ public class StarGate extends Wall {
 	@Override
 	public void shootOnThisBlock(Color bulletcolor,Direction dir){
 		System.out.println(bulletcolor + " BULLET HIT STARGATE(ID="+index+")");
+		try {
+			Application.log.write(bulletcolor + " BULLET HIT STARGATE(ID="+index+")");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		//Ha kulonbozo szinu a letezo csillagkapu, amire lovunk, mint a lovedek.
 		if (bulletcolor != this.color){
 			//Regi csillagkapu torlese.

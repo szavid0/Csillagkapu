@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 //A szakadek osztalyt valositja meg, az AbstractBlock-bol oroklodik.
 class Canyon extends AbstractBlock {
 	
@@ -10,8 +12,13 @@ class Canyon extends AbstractBlock {
 	//Ha szakadekba lepunk, akkor az ezredes eletet veszit.
 	//Ha nincs vege a jateknak, akkor beallitja az ezredest a start-pozicioba.
 	@Override
-	public void moveToThisBlock(Replicator r) {
+	public void moveToThisBlock(Replicator r){
 		System.out.println("REPLICATOR DISAPPEARS");
+		try {
+			Application.log.write("REPLICATOR DISAPPEARS");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 			r = null;
 			Application.maze.transformCanyon(index);	
 		 	
