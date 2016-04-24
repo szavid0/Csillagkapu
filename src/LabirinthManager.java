@@ -23,7 +23,7 @@ public class LabirinthManager {
 
 
 	//A konstruktorban a parameterkent atadott tesztesethez szukseges palyat hozzuk letre.
-	public LabirinthManager(int teszteset){
+	public LabirinthManager(){
 		//Ezredes letrehozasa.
 		
 	}
