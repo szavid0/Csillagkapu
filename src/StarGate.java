@@ -39,19 +39,16 @@ public class StarGate extends Wall {
 	
 	//Visszaadja, hogy van-e parja.
 	public boolean getIsPaired(){
-		System.out.println("StarGate.getIsPaired()");
 		return isPaired;
 	}
 	
 	//Visszaadja az iranyat.
 	public Direction getDirection(){
-		System.out.println("StarGate.getDirection()");
 		return direction;
 	}
 	
 	//Visszaadja a szinet.
 	public Color getColor(){
-		System.out.println("StarGate.getColor()");
 		return color;
 	}
 
@@ -60,7 +57,6 @@ public class StarGate extends Wall {
 	public void moveToThisBlock(Character c){
 		//Ha van parja, megkeressuk.
 		//Ha nincs, akkor nem csinalunk semmit.
-		System.out.println("StarGate.moveToThisBlock()");
 		if(isPaired){
 			StarGate pair = null;
 			if(color == Color.BLUE) {
@@ -87,7 +83,7 @@ public class StarGate extends Wall {
 	//Loves esemeny kezelese.
 	@Override
 	public void shootOnThisBlock(Color bulletcolor,Direction dir){
-		System.out.println("StarGate.shootOnThisBlock("+bulletcolor+","+dir+")");
+		System.out.println(bulletcolor + " BULLET HIT STARGATE(ID="+index+")");
 		//Ha kulonbozo szinu a letezo csillagkapu, amire lovunk, mint a lovedek.
 		if (bulletcolor != this.color){
 			//Regi csillagkapu torlese.

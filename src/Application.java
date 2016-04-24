@@ -340,7 +340,7 @@ class Application {
 		general = new General();
 	}
 	public static void endGame(String winOrLose){
-		System.out.println("Application.endGame(" + winOrLose + ")");
+		System.out.println(winOrLose);
 	}
 }
 

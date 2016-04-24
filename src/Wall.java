@@ -1,3 +1,5 @@
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+
 //Fal osztaly megvalositasa, AbstractBlockbol oroklodik.
 public class Wall extends AbstractBlock {
 	//Specialis fal-e, melyre love csillagkapu alakul ki.
@@ -24,22 +26,23 @@ public class Wall extends AbstractBlock {
 	//Falra nem lehet lepni.
 	@Override
 	public void moveToThisBlock(Character c) {
-		System.out.println("Wall.moveToThisBlock()");
 	}
 	
 	//Specialis fal eseten raloves kezelese.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
-		System.out.println("Wall.shootOnThisBlock("+col+","+dir+")");
 			if (isSpecial){
 			Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
-		}
+			System.out.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
+			return;
+			}
+			System.out.println(col+" BULLET HIT WALL(ID="+index+")");
+
 	}
 	
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.
 	@Override
 	public void notifyBlock() {
-		System.out.println("Wall.notifyBlock()");
 	}
 	
 	//Null erteket ad vissza, hisz nem lehet rajta doboz.

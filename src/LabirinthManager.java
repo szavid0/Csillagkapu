@@ -165,24 +165,26 @@ public class LabirinthManager {
 			if(GeneralZpmCnt % 2 == 0){
 				CreateZpm();
 			}
+			System.out.println("COLLECTZPM ZPMCNT="+GeneralZpmCnt);
 		}else{
 			JaffaZpmCnt++;
+			System.out.println("COLLECTZPM ZPMCNT="+JaffaZpmCnt);
 		}
 		
 		if(JaffaZpmCnt + GeneralZpmCnt == allZpmCnt){
-			Application.endGame(GeneralZpmCnt > JaffaZpmCnt ? "General Wins" : "Jaffa Wins");
+			Application.endGame(GeneralZpmCnt > JaffaZpmCnt ? "GENERAL WINS" : "JAFFA WINS");
 		}
 	}
 
 
 	private static  void CreateZpm() {  //RANDOM
-		//TODO
-		
+		//TODO	
 	}
 	private  void CreateZpm(int fieldIndex) {  //DETERMINISZTIKUS
 		Field f = (Field)map.get(fieldIndex);
 		f.setZpm();
 		allZpmCnt++;
+		System.out.println("PUTZPM "+fieldIndex);
 	}
 	
 	public void addBlock(AbstractBlock a){
