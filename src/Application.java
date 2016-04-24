@@ -8,7 +8,7 @@ class Application {
 		BufferedReader br = new BufferedReader(new FileReader("map.txt"));
 		while(true){
 			String line=br.readLine();
-			if(line==null)
+			if(line == null)
 				break;
 			String[] palyaelem=line.split(" ");
 			String[] koordinatak=palyaelem[0].split(":");
@@ -357,6 +357,7 @@ class Application {
 		int i=0;
 		i = Integer.parseInt(in.readLine());
 		general = new General();
+		jaffa = new Jaffa();
 		runPrototype(i);
 	}
 	
