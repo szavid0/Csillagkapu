@@ -187,4 +187,8 @@ public class LabirinthManager {
 		f.setZpm();
 		allZpmCnt++;
 	}
+	
+	public void addBlock(AbstractBlock a){
+		map.add(a);
+	}
 }
