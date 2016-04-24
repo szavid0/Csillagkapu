@@ -1,3 +1,5 @@
+import javafx.scene.input.TouchPoint;
+
 public class Character extends Creature {
 
 	protected int lives = 3;
@@ -19,20 +21,20 @@ public class Character extends Creature {
 	
 	//Visszaadja a karakter iranyat.
 		public Direction getDirection(){
-			System.out.println("Character.getDirection()");
 			return direction;
 		}
 		
 	//Visszaadja, hogy van-e az karakternél meg doboz.
 	public boolean hasBox(){
-		System.out.println("Character.hasBox()");
-		return box != null;
+		boolean b = box != null;
+		System.out.println("HASBOX="+b);
+		return b;
 	}
 	
 
 	//Kapott szinu lovedeket lo.
 	public void shoot(Color col){
-		System.out.println("Character.shoot("+col+")");
+		System.out.println(getClass().toString().toUpperCase()+" SHOOT "+col);
 		
 		AbstractBlock bulletPos;
 		
@@ -46,7 +48,7 @@ public class Character extends Creature {
 	
 	//Felveszi a dobozt, ha van elotte, es nincs nala.
 		public void pick(){
-			System.out.println("Character.pick()");
+			System.out.println(getClass().toString().toUpperCase()+" PICK");
 			AbstractBlock b = PosBlock.getNeighbour(direction);
 			//Leellenorizzuk, hogy visszaad-e dobozt. Ha igen akkor felvesszuk.
 			if(b.getContainsBox() && !hasBox()){
@@ -57,7 +59,7 @@ public class Character extends Creature {
 	
 	//Lerakja maga ele a dobozt, ha letudja.
 	public void drop(){
-		System.out.println("Character.drop()");
+		System.out.println(getClass().toString().toUpperCase()+ " DROP");
 
 		AbstractBlock n = PosBlock.getNeighbour(direction);
 		if(n.isPassable()  || n.getContainsBox()){ //vagy ures vagy dobozos blokkra lehet rakni
@@ -69,12 +71,11 @@ public class Character extends Creature {
 
 	//Visszaadja a felvett dobozt.
 		public Box getBox(){
-			System.out.println("Character.getBox()");
 			return box;
 		}
 
 	public void move(Direction dir){
-			System.out.println("General.move("+ dir +")");
+			System.out.println("MOVE "+getClass().toString().toUpperCase()+" "+ dir);
 			direction = dir;
 				AbstractBlock block = PosBlock.getNeighbour(dir);
 				//Ha ra lehet lepni, akkor beallitjuk a pozicionak.
@@ -83,15 +84,14 @@ public class Character extends Creature {
 					PosBlock.notifyBlock();	
 					block.moveToThisBlock(this);
 			}
-		}
+	}
 	public void die(){
 		//Megnezi, hogy van e meg vesztheto elete, ha nincs jelezzuk, hogy vesztett a jatekos.
+		System.out.println(getClass().toString().toUpperCase()+ " DIE LIVES="+lives);
 		if(lives ==	0)
-			Application.endGame("LOSE!");
+			Application.endGame("LOSE");
 		else
 			lives--;
-		System.out.println("Character.die()");
-
 	}
 
 	public void collectZpm() {

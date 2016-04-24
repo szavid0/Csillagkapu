@@ -50,13 +50,12 @@ public class LabirinthManager {
 
 	//Block lekerese.
 	public AbstractBlock getBlock(int i){
-		System.out.println("LabirinthManager.getBlock()");
 		return map.get(i);
 	}
 	
 	//Csillagkapu letrehozasa.
 	public void createStarGate(Wall w,Color col,Direction dir){
-		System.out.println("LabirinthMaganger.createStarGate(w,"+col+","+ dir+")");
+		System.out.println("CREATESTARGATE "+col);
 		
 		//Ha kek volt a lovedek, akkor kek csillagkapu.
 		if(col == Color.BLUE){
@@ -95,7 +94,7 @@ public class LabirinthManager {
 	
 	//Csillagkapu torlese.
 	public void deleteStarGate(Color col){
-		System.out.println("LabirinthMaganger.deleteStarGate("+col+")");
+		System.out.println("DELETESTARGATE "+col);
 		
 		//Kitoroljuk az adott szinu csillagkaput es letrehozunk helyette egy specialis falat.
 		if(col == Color.BLUE){
@@ -117,25 +116,22 @@ public class LabirinthManager {
 	
 	//Sagra csillagkapu lekerese.
 	public StarGate getYellowStarGate(){
-		System.out.println("LabirinthMaganger.getYellowStarGate()");
 		return yellowStarGate;
 	}
 	
 	//Kek csillagkapu lekerese.
 	public StarGate getBlueStarGate(){
-		System.out.println("LabirinthMaganger.getBlueStarGate()");
 		return blueStarGate;
 	}
 	
 	//Kezdo pozicio lekerese.
 	public Field getStartField() {
-		System.out.println("LabirinthMaganger.getStartField()");
 		return startField;
 	}
 	
 	//Feregjarat letrehozasa.
 	public void createWormHole(Color col1){
-		System.out.println("LabirinthManager.CreateWormHole()");
+		System.out.println("CREATEWORMHOLE");
 		if(col1 == Color.YELLOW || col1 == Color.BLUE){
 			blueyellowWormHoleExists = true;
 			yellowStarGate.setPair(blueStarGate.getIndex(),oppDir(blueStarGate.getDirection()));
@@ -151,6 +147,7 @@ public class LabirinthManager {
 	}
 
 	public void transformCanyon(int index) {
+		System.out.println("TRANSFORM CANYON");
 		int[] n = map.get(index).getNeighbours();
 		map.set(index,new Field(index, n));
 	}

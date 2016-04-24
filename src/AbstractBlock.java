@@ -22,7 +22,6 @@ public abstract class AbstractBlock {
 	
 	//Visszaadja az adott iranyu szomszedjat.
 	public AbstractBlock getNeighbour(Direction dir){
-		System.out.println("AbstractBlock.getNeighbour("+dir+")");
 			AbstractBlock neighbour = null;
 			switch(dir){
 			case NORTH: neighbour= Application.maze.getBlock(neighbourIndexes[0]);break;
@@ -35,19 +34,18 @@ public abstract class AbstractBlock {
 	
 	//Visszaadja az adott blokk indexet.
 	public int getIndex(){
-		System.out.println("AbstractBlock.getIndex()");
 		return index;
 	}
 	
 	//Visszaadja, hogy at lehet-e rajta jutni. Lovedek vagy ezredes.
 	public boolean isPassable(){
-		System.out.println("AbstractBlock.IsPassable()");
+		if(!passable)
+			System.out.println("NEIGHBOUR NOT PASSABLE");
 		return passable;
 	}
 	
 	//Beallitjuk, az athaladhatosagat.
 	public void setPassable(boolean tf){
-		System.out.println("AbstractBlock.setPassable("+tf+")");
 		passable = tf;
 	}
 	
@@ -60,6 +58,7 @@ public abstract class AbstractBlock {
 	public abstract void notifyBlock();
 	
 	public boolean getContainsBox(){
+		System.out.println("NO BOX ON NEIGHBOUR");
 		return false;
 	}
 	public Box getBox(){

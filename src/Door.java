@@ -8,27 +8,26 @@ public class Door extends AbstractBlock {
 	
 	//Nyitas fuggveny, athaladhatosag beallitasra kerul.
 	public void Open(boolean tf){
-		System.out.println("Door.Open("+tf+")");
+		if(tf == true)System.out.println("OPEN DOOR(ID="+index+")");
+		else System.out.println("CLOSE DOOR(ID="+index+")");
 		passable=tf;
 	}
 	
 	//Ralepes esemeny, ha athaladhatosag engedelyezve van, a pozicio erre az elemre valtozik.
 	@Override
 	public void moveToThisBlock(Character c) {
-			c.setPosBlock(this);	
-		System.out.println("Door.moveToThisBlock()");
+		c.setPosBlock(this);	
 	}
 	
 	//Loves kezelese az ajtonal.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {		
-		System.out.println("Door.shootOnThisBlock("+col+","+dir+")");
+		System.out.println(col+" BULLET HIT DOOR(ID="+index+")");
 	}
 	
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.
 	@Override
 	public void notifyBlock() {		
-		System.out.println("Door.notifyBlock()");
 	}
 	
 

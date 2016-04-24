@@ -25,7 +25,7 @@ public class Scale extends Field {
 	//Az ezredes ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta. Ajtot nyit.
 	@Override
 	public void moveToThisBlock(Character c){
-		System.out.println("Scale.moveToThisBlock()");
+		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
 		c.setPosBlock(this);
 			if (c.getWeight() >= weightlimit){
 				doorToOpen.Open(true);
@@ -35,11 +35,11 @@ public class Scale extends Field {
 	//Doboz merlegre rakasa, ajto nyitasa.
 	@Override
 	public void setBox(Box box){
-		System.out.println("Scale.setBox(box)");
 		boxes.add(box);
 		passable = false;
 		shootable = false;
 		currentWeight += box.getWeight();
+		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
 		if(currentWeight >= weightlimit)
 			doorToOpen.Open(true);
 	}
@@ -47,7 +47,6 @@ public class Scale extends Field {
 	//Doboz merlegrol levetele, ajto zarasa.
 	@Override
 	public Box getBox(){
-		System.out.println("Scale.getBox()");
 		if(getContainsBox()){
 			if(boxes.size()==1){
 				passable = true;
@@ -55,6 +54,7 @@ public class Scale extends Field {
 			}
 			Box box = boxes.get(boxes.size()-1);
 			currentWeight -= box.getWeight();
+			System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
 			if(currentWeight < weightlimit)
 				doorToOpen.Open(false);
 			return box;
@@ -65,7 +65,7 @@ public class Scale extends Field {
 	//Lelepes esemeny ertesitesere. Ajtot bezarja.
 	@Override
 	public void notifyBlock(){
-		System.out.println("Scale.notifyBlock()");
+		System.out.println("NOTIFY SCALE");
 		doorToOpen.Open(false);
 	}
 }

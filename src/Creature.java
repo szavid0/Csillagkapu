@@ -15,6 +15,7 @@ public abstract class Creature {
 		return PosBlock;
 	}
 	public void setPosBlock(AbstractBlock PosBlock) {
+		System.out.println(getClass().toString().toUpperCase()+" ARRIVEAT "+PosBlock.getClass().toString().toUpperCase()+"(ID="+PosBlock.getIndex()+")");
 		this.PosBlock = PosBlock;
 	}
 	public Field getStartField() {
@@ -24,6 +25,7 @@ public abstract class Creature {
 		return weight;
 	}
 	public void setDirection(Direction direction) {
+		System.out.println(getClass().toString().toUpperCase()+" IS SET TO "+direction);  //pl: GENERAL IS SET TO WEST
 		this.direction = direction;
 	}
 	public abstract void move(Direction dir);

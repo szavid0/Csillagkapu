@@ -42,14 +42,12 @@ public class Field extends AbstractBlock {
 	
 	//Visszaadja van-e rajta ZPM modul.
 	public boolean getContainsZpm(){
-		System.out.println("Field.getContainsZpm()");
 		return containsZpm;
 	}
 	
 	//Visszaadja a rajta tarolt dobozt.
 	@Override
 	public Box getBox(){
-		System.out.println("Field.getBox()");
 		if(getContainsBox()){
 			if(boxes.size() == 1){
 				passable = true;
@@ -63,23 +61,14 @@ public class Field extends AbstractBlock {
 	//Rarak egy dobozt a mezore.
 	@Override
 	public void setBox(Box box){
-		System.out.println("Field.setBox(box)");
 		boxes.add(box);
 		passable = false;
 		shootable = false;
-	}
-
-	//Visszaadja az athaladhatosagot.
-	@Override
-	public boolean isPassable(){
-		System.out.println("Field.isPassable()");
-		return passable;
 	}
 	
 	//Az ezredes ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta.
 	@Override
 	public void moveToThisBlock(Character c) {
-		System.out.println("Field.moveToThisBlock()");
 			c.setPosBlock(this);
 			if(containsZpm == true){
 				c.collectZpm();
@@ -90,13 +79,12 @@ public class Field extends AbstractBlock {
 	//Lovesnel megadja a lovedek helyzetet, iranyat, szinet.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
-		System.out.println(this.getClass()+" shootOnThisBlock("+col+","+dir+")");
+		System.out.println(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");;
 	}
 
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.
 	@Override
 	public void notifyBlock() {
-		System.out.println("Field.notifyBlock()");
 	}
 
 	@Override
@@ -105,6 +93,7 @@ public class Field extends AbstractBlock {
 	}
 
 	public void setZpm() {
+		System.out.println("PUTZPM "+index);
 		containsZpm = true;
 	}
 
