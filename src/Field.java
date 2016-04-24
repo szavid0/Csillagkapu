@@ -51,6 +51,10 @@ public class Field extends AbstractBlock {
 	public Box getBox(){
 		System.out.println("Field.getBox()");
 		if(getContainsBox()){
+			if(boxes.size() == 1){
+				passable = true;
+				shootable = true;
+			}
 			return boxes.get(boxes.size()-1);
 		}
 		return null;
@@ -61,8 +65,10 @@ public class Field extends AbstractBlock {
 	public void setBox(Box box){
 		System.out.println("Field.setBox(box)");
 		boxes.add(box);
+		passable = false;
+		shootable = false;
 	}
-	
+
 	//Visszaadja az athaladhatosagot.
 	@Override
 	public boolean isPassable(){
@@ -96,6 +102,10 @@ public class Field extends AbstractBlock {
 	@Override
 	public void moveToThisBlock(Replicator r) {
 		r.setPosBlock(this);
+	}
+
+	public void setZpm() {
+		containsZpm = true;
 	}
 
 

@@ -37,6 +37,8 @@ public class Scale extends Field {
 	public void setBox(Box box){
 		System.out.println("Scale.setBox(box)");
 		boxes.add(box);
+		passable = false;
+		shootable = false;
 		currentWeight += box.getWeight();
 		if(currentWeight >= weightlimit)
 			doorToOpen.Open(true);
@@ -47,6 +49,10 @@ public class Scale extends Field {
 	public Box getBox(){
 		System.out.println("Scale.getBox()");
 		if(getContainsBox()){
+			if(boxes.size()==1){
+				passable = true;
+				shootable = true;
+			}
 			Box box = boxes.get(boxes.size()-1);
 			currentWeight -= box.getWeight();
 			if(currentWeight < weightlimit)

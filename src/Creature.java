@@ -1,14 +1,21 @@
 
 public abstract class Creature {
 	protected Direction direction;
-	protected AbstractBlock posBlock;
+	protected AbstractBlock PosBlock;
 	protected Field startField;
 	protected int weight = 0;
-	public AbstractBlock getPosBlock() {
-		return posBlock;
+	public Creature(){
+		this.direction = Direction.WEST;
 	}
-	public void setPosBlock(AbstractBlock posBlock) {
-		this.posBlock = posBlock;
+	public Creature(Direction direction, Field startField) {
+		this.direction = direction;
+		this.startField = startField;
+	}
+	public AbstractBlock getPosBlock() {
+		return PosBlock;
+	}
+	public void setPosBlock(AbstractBlock PosBlock) {
+		this.PosBlock = PosBlock;
 	}
 	public Field getStartField() {
 		return startField;
@@ -20,6 +27,5 @@ public abstract class Creature {
 		this.direction = direction;
 	}
 	public abstract void move(Direction dir);
-	public  void die(){}
 	
 }

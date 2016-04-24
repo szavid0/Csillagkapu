@@ -1,111 +1,32 @@
 //A LabirinthManager osztaly megvalositasa.
 import java.util.List;
+import java.util.Random;
 import java.util.ArrayList;
+
+import sun.security.action.GetBooleanAction;
 
 public class LabirinthManager {
 	//Letaroljuk a palyat, a csillagkapukat es a kezdopoziciot.
-	private List<AbstractBlock> map = new ArrayList<AbstractBlock>();
+	private static List<AbstractBlock> map = new ArrayList<AbstractBlock>();
 	private boolean blueyellowWormHoleExists = false;
 	private boolean redgreenWormHoleExists = false;
 	private StarGate yellowStarGate;
 	private StarGate blueStarGate;
 	private StarGate greenStarGate;
 	private StarGate redStarGate;
-	public StarGate getRedStarGate() {
-		return redStarGate;
-	}
-
 	private Field startField;
+	private static int allZpmCnt;
+	private static int JaffaZpmCnt = 0;
+	private static int GeneralZpmCnt = 0;
+
+
 
 	//A konstruktorban a parameterkent atadott tesztesethez szukseges palyat hozzuk letre.
 	public LabirinthManager(int teszteset){
 		//Ezredes letrehozasa.
-		Application.general= new General();
-		
-		//Tesztesetek es hozzajuk tartozo palyak.
-		switch(teszteset){
-		case 1: init1();break;
-		case 2: init1();break;
-		case 3: init3();break;
-		case 4: init4();break;
-		case 5: init5();break;
-		case 6: init6();break;
-		case 7: init7();break;
-		case 8: init7();break;
-		case 9: init9();break;
-		case 10: init10();break;
-		case 11: init11();break;
-		case 12: init12();break;
-		case 13: init13();break;
-		case 14: init14();break;
-		default:return;
-		}
-		
-		//Az ezredest a kezdopozicioba rakjuk.
-		Application.general.setPosBlock(startField);
-
-	}
-	
-	//Ajto-merlegkezdomezo-mezo palya letrehozasa.
-	private void init14() {
 		
 	}
 	
-	//Ajto-merleg-kezdomezo palya letrehozasa.
-	private void init13() {
-
-	}
-
-	//Specialis fal-mezo-kezdomezo-sarga csillagkapu palya letrehozasa.
-	private void init12() {
-		
-	}
-	
-	//Kek csillagkapu-mezo-kezdomezo palya letrehozasa.
-	private void init11() {
-		
-	}
-	
-	//Specialis fal-mezo-kezdomezo palya letrehozasa.
-	private void init10() {
-		
-
-	}
-	
-	//Sarga csillagkapu-kezdomezo-mezo-kek csillagkapu palya letrehozasa.
-	private void init9() {
-		
-	}
-	
-	//Mezo-kezdomezo, ezredesnel van egy doboz palya letrehozasa.
-	private void init7() {
-		
-	}
-	
-	//Kezdomezo-dobozos mezo palya letrehozasa.
-	private void init6() {
-		
-	}
-	
-	//Ajto-merleg-kezdomezo palya letrehozasa.
-	private void init5() {
-		
-	}
-	
-	//Ajto-dobozos merleg-kezdomezo  palya letrehozasa.
-	private void init4() {
-		
-	}
-	
-	//Zpm-es mezo-kezdomezo palya letrehozasa.
-	private void init3() {
-	
-	}
-	
-	//Szakadek-kezdomezo, ezredesnel doboz palya letrehozasa.
-	private void init1() {
-		
-	}
 	
 	//Csillagkapu lekerese..
 	public void setStarGate(StarGate s){
@@ -156,14 +77,14 @@ public class LabirinthManager {
 
 		}
 		else if (col == Color.GREEN){
-			greenStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.YELLOW);
+			greenStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.GREEN);
 			map.set(w.getIndex(), greenStarGate);
 			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
 			if(redStarGate!= null)createWormHole(col);
 
 		}else{
-			redStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.YELLOW);
+			redStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.RED);
 			map.set(w.getIndex(), redStarGate);
 			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
@@ -182,9 +103,15 @@ public class LabirinthManager {
 			blueStarGate=null;
 		}
 		//Kitoroljuk az adott szinu csillagkaput es letrehozunk helyette egy specialis falat.
-		else{
-			map.set(yellowStarGate.getIndex(), new Wall(blueStarGate.getIndex(),blueStarGate.getNeighboursIndex(),true));
+		else if(col == Color.YELLOW){
+			map.set(yellowStarGate.getIndex(), new Wall(yellowStarGate.getIndex(),yellowStarGate.getNeighboursIndex(),true));
 			yellowStarGate=null;
+		}else if(col == Color.GREEN){
+			map.set(greenStarGate.getIndex(), new Wall(greenStarGate.getIndex(),greenStarGate.getNeighboursIndex(),true));
+			greenStarGate=null;
+		}else{
+			map.set(redStarGate.getIndex(), new Wall(redStarGate.getIndex(),redStarGate.getNeighboursIndex(),true));
+			redStarGate=null;
 		}
 	}
 	
@@ -230,5 +157,34 @@ public class LabirinthManager {
 
 	public StarGate getGreenStarGate() {
 		return greenStarGate;
+	}
+	public StarGate getRedStarGate() {
+		return redStarGate;
+	}
+
+	public static  void addZpm(Character character) {
+		if (character == Application.general){
+			GeneralZpmCnt++;
+			if(GeneralZpmCnt % 2 == 0){
+				CreateZpm();
+			}
+		}else{
+			JaffaZpmCnt++;
+		}
+		
+		if(JaffaZpmCnt + GeneralZpmCnt == allZpmCnt){
+			Application.endGame(GeneralZpmCnt > JaffaZpmCnt ? "General Wins" : "Jaffa Wins");
+		}
+	}
+
+
+	private static  void CreateZpm() {  //RANDOM
+		//TODO
+		
+	}
+	private  void CreateZpm(int fieldIndex) {  //DETERMINISZTIKUS
+		Field f = (Field)map.get(fieldIndex);
+		f.setZpm();
+		allZpmCnt++;
 	}
 }

@@ -9,9 +9,9 @@ public class Replicator  extends Creature implements Runnable  {
 
 	@Override
 	public void move(Direction dir) {
-		AbstractBlock n = posBlock.getNeighbour(dir);
+		AbstractBlock n = PosBlock.getNeighbour(dir);
 		if(n.isPassable() || n.getContainsBox()){ //passable vagy dobozos mezo a szomszed
-			posBlock.setShootable(true);
+			PosBlock.setShootable(true);
 			setPosBlock(n);
 			n.setShootable(false);
 			n.moveToThisBlock(this);

@@ -1,4 +1,4 @@
 
-public class Jaffa extends Character{
+public class Jaffa extends Character {
 
 }

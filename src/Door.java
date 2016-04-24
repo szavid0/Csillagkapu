@@ -31,16 +31,6 @@ public class Door extends AbstractBlock {
 		System.out.println("Door.notifyBlock()");
 	}
 	
-	//getBox() megvalositasa; de ajton nem lehet doboz, tehat felvenni sem lehet.
-	@Override
-	public Box getBox() {
-		return null;
-	}
-	
-	
-	@Override
-	public void setBox(Box box){
-	}
 
 	@Override
 	public void moveToThisBlock(Replicator r) {
