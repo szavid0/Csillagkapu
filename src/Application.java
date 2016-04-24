@@ -2,7 +2,7 @@ import java.io.*;
 class Application {
 	
 	/**
-	 * A térképbetöltésnek ez a függvénye.
+	 * A 
 	 */
 	static void loadMap() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader("map.txt"));
@@ -12,6 +12,7 @@ class Application {
 				break;
 			String[] palyaelem=line.split(" ");
 			String[] koordinatak=palyaelem[0].split(":");
+			System.out.println(line);
 			switch(palyaelem[1]){
 			case "WALL":
 				if(koordinatak.length==2){
@@ -192,7 +193,7 @@ class Application {
 				break;
 			}
 			}
-			maze.createWormHole(Color.YELLOW);
+			//maze.createWormHole(Color.YELLOW);
 		}
 		br.close();
 	}
@@ -214,16 +215,17 @@ class Application {
 		String line = new String();
 		String[] command;
 		
+
 		for(int i = 0; (line = br.readLine()) != null; i++){
 			if (i == 0 || i == 1) {
 				String[] parts = line.split(",");
 				if(parts[0].equals("GENERAL")){
-					general.setPosBlock(maze.getBlock(Integer.parseInt(parts[0])));
-					general.setDirection(stringToDirection(parts[1]));
+					general.setPosBlock(maze.getBlock(Integer.parseInt(parts[1])));
+					general.setDirection(stringToDirection(parts[2]));
 				}
 				if(parts[0].equals("JAFFA")){
-					general.setPosBlock(maze.getBlock(Integer.parseInt(parts[0])));
-					general.setDirection(stringToDirection(parts[1]));
+					jaffa.setPosBlock(maze.getBlock(Integer.parseInt(parts[1])));
+					jaffa.setDirection(stringToDirection(parts[2]));
 				}
 			}
 			
@@ -327,7 +329,7 @@ class Application {
 	public static Replicator replicator = new Replicator();
 	public static Jaffa jaffa;
 	public static BufferedWriter log;
-	public static LabirinthManager maze;
+	public static LabirinthManager maze = new LabirinthManager();
 	
 	public static void main(String[] args) throws IOException{
 		
@@ -335,25 +337,27 @@ class Application {
 	    log = new BufferedWriter(new FileWriter(logFile));
 		
 		System.out.println("---------------------------------------------------------");
-		System.out.println("|   			PROTOTÍPUS MENU\t|");
+		System.out.println("|   			PROTOTIPUS MENU\t						|");
 		System.out.println("---------------------------------------------------------");
-		System.out.println("|	1.Lépés mezőre, ZPM felvétele, új ZPM keletkezése|");
-		System.out.println("|	2.Lépés Mérlegre\t\t\t\t|");
-		System.out.println("|	3.Lépés Ajtóra\t\t\t\t\t|");
-		System.out.println("|	4.Lépés Szakadékra\t\t\t\t|");
-		System.out.println("|	5.Lépés Csillagkapura\t\t\t\t|");
-		System.out.println("|	6.Doboz lerakása\t\t\t\t|");
-		System.out.println("|	7.Doboz felvétele\t\t\t\t|");
-		System.out.println("|	8.Lövés falra\t\t\t\t\t|");
-		System.out.println("|	9.Lövés csillagkapura\t\t\t\t|");
-		System.out.println("|	10.Replikátort lelövik\t\t\t\t|");
+		System.out.println("|	1.Lepes Mezore,ZPM felvetele,Uj ZPM keletkezese|");
+		System.out.println("|	2.Lepes Merlegre\t\t\t\t|");
+		System.out.println("|	3.Lepes Ajtora\t\t\t\t\t|");
+		System.out.println("|	4.Lepes Szakadekra\t\t\t\t|");
+		System.out.println("|	5.Lepes Csillagkapura\t\t\t\t|");
+		System.out.println("|	6.Doboz lerakasa\t\t\t\t|");
+		System.out.println("|	7.Doboz felvetele\t\t\t\t|");
+		System.out.println("|	8.Loves falra\t\t\t\t\t|");
+		System.out.println("|	9.Loves csillagkapura\t\t\t\t|");
+		System.out.println("|	10.Replikatort lelovik\t\t\t\t|");
 		System.out.println("---------------------------------------------------------");
 		System.out.println("Valassz egy tesztesetet es ird be a szamat!");
 		
+		loadMap();
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		int i=0;
 		i = Integer.parseInt(in.readLine());
 		general = new General();
+		runPrototype(i);
 	}
 	
 	public static void endGame(String winOrLose){
