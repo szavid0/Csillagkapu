@@ -213,7 +213,7 @@ class Application {
 		
 
 		for(int i = 0; (line = br.readLine()) != null; i++){
-			if (i == 0 || i == 1) {
+			if (i <= 3) {
 				String[] parts = line.split(",");
 				if(parts[0].equals("GENERAL")){
 					general.setPosBlock(maze.getBlock(Integer.parseInt(parts[1])));
@@ -222,6 +222,10 @@ class Application {
 				if(parts[0].equals("JAFFA")){
 					jaffa.setPosBlock(maze.getBlock(Integer.parseInt(parts[1])));
 					jaffa.setDirection(stringToDirection(parts[2]));
+				}
+				if(parts[0].equals("REPLICATOR")){
+					replicator.setPosBlock(maze.getBlock(Integer.parseInt(parts[1])));
+					replicator.setDirection(stringToDirection(parts[2]));
 				}
 			}
 			
@@ -263,7 +267,10 @@ class Application {
 					
 				if(command[1].equals("JAFFA")){
 					jaffa.setDirection(stringToDirection(command[3]));
+				}if(command[1].equals("REPLICATOR")){
+					replicator.setDirection(stringToDirection(command[3]));
 				}
+				
 				break;
 			case "PICK":
 				if(command[1].equals("GENERAL")){
