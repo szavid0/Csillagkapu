@@ -1,9 +1,7 @@
 import java.io.*;
 class Application {
 	
-	/**
-	 * A 
-	 */
+
 	static void loadMap() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader("map.txt"));
 		while(true){
@@ -12,7 +10,6 @@ class Application {
 				break;
 			String[] palyaelem=line.split(" ");
 			String[] koordinatak=palyaelem[0].split(":");
-			System.out.println(line);
 			switch(palyaelem[1]){
 			case "WALL":
 				if(koordinatak.length==2){
@@ -193,7 +190,6 @@ class Application {
 				break;
 			}
 			}
-			//maze.createWormHole(Color.YELLOW);
 		}
 		br.close();
 	}
@@ -234,25 +230,29 @@ class Application {
 			//itt a parancsoknál mindegyiket külön meg kell valósítani
 			command = line.split(" ");
 			switch (command[0]){
-			case "NEW GAME": loadMap(); break;
+			case "NEW": 
+				System.out.println("NEW GAME STARTED");
+				log.println("NEW GAME STARTED");
+				loadMap();
+				break;
 			case "RANDOM":
 				if(command[1].equals("ON")){
 					System.out.println("RANDOM MODE ON");
-					log.write("RANDOM MODE ON");
+					log.println("RANDOM MODE ON");
 				}
 				if(command[1].equals("OFF")){
 					System.out.println("RANDOM MODE OFF");
-					log.write("RANDOM MODE OFF");
+					log.println("RANDOM MODE OFF");
 				}
 				break;
 			case "MULTI-THREAD":
 				if(command[1].equals("ON")){
 					System.out.println("MULTI-THREAD MODE ON");
-					log.write("MULTI-THREAD MODE ON");
+					log.println("MULTI-THREAD MODE ON");
 				}
 				if(command[1].equals("OFF")){
 					System.out.println("MULTI-THREAD MODE OFF");
-					log.write("MULTI-THREAD MODE OFF");
+					log.println("MULTI-THREAD MODE OFF");
 				}
 				break;
 			case "SET":
@@ -306,7 +306,7 @@ class Application {
 				break;
 			case "SAVE":
 				System.out.println("GAME SAVED"); 
-				log.write("GAME SAVED"); 
+				log.println("GAME SAVED"); 
 				break;
 			case "MOVE":
 				if(command[1].equals("GENERAL")){
@@ -318,7 +318,8 @@ class Application {
 					character = "JAFFA";
 					jaffa.move(stringToDirection(command[2]));
 				}
-			default:
+				break;
+			default: break;
 			}
 		}
 	}
@@ -327,28 +328,29 @@ class Application {
 	//azért staticok, mert csak egy létezik belőlük.
 	public static General general = new General();
 	public static Replicator replicator = new Replicator();
-	public static Jaffa jaffa;
-	public static BufferedWriter log;
+	public static Jaffa jaffa = new Jaffa();
+	public static PrintWriter log;
 	public static LabirinthManager maze = new LabirinthManager();
 	
 	public static void main(String[] args) throws IOException{
 		
 		File logFile=new File("log.txt");
-	    log = new BufferedWriter(new FileWriter(logFile));
+	    log = new PrintWriter(new FileWriter(logFile));
 		
 		System.out.println("---------------------------------------------------------");
 		System.out.println("|   			PROTOTIPUS MENU\t						|");
 		System.out.println("---------------------------------------------------------");
-		System.out.println("|	1.Lepes Mezore,ZPM felvetele,Uj ZPM keletkezese|");
-		System.out.println("|	2.Lepes Merlegre\t\t\t\t|");
-		System.out.println("|	3.Lepes Ajtora\t\t\t\t\t|");
-		System.out.println("|	4.Lepes Szakadekra\t\t\t\t|");
-		System.out.println("|	5.Lepes Csillagkapura\t\t\t\t|");
-		System.out.println("|	6.Doboz lerakasa\t\t\t\t|");
-		System.out.println("|	7.Doboz felvetele\t\t\t\t|");
-		System.out.println("|	8.Loves falra\t\t\t\t\t|");
-		System.out.println("|	9.Loves csillagkapura\t\t\t\t|");
-		System.out.println("|	10.Replikatort lelovik\t\t\t\t|");
+		System.out.println("|	1.Iranyvaltas\t\t\t\t\t|");
+		System.out.println("|	2.Lepes mezore,ZPM felvetele,Uj ZPM keletkezese|");
+		System.out.println("|	3.Lepes Merlegre\t\t\t\t|");
+		System.out.println("|	4.Lepes Ajtora\t\t\t\t\t|");
+		System.out.println("|	5.Lepes Szakadekra\t\t\t\t|");
+		System.out.println("|	6.Lepes Csillagkapura\t\t\t\t|");
+		System.out.println("|	7.Doboz lerakasa\t\t\t\t|");
+		System.out.println("|	8.Doboz felvetele\t\t\t\t|");
+		System.out.println("|	9.Loves falra\t\t\t\t\t|");
+		System.out.println("|	10.Loves csillagkapura\t\t\t\t|");
+		System.out.println("|	11.Replikatort lelovik\t\t\t\t|");
 		System.out.println("---------------------------------------------------------");
 		System.out.println("Valassz egy tesztesetet es ird be a szamat!");
 		
@@ -356,9 +358,8 @@ class Application {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		int i=0;
 		i = Integer.parseInt(in.readLine());
-		general = new General();
-		jaffa = new Jaffa();
 		runPrototype(i);
+		log.close();
 	}
 	
 	public static void endGame(String winOrLose){

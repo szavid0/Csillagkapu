@@ -36,19 +36,12 @@ public class Wall extends AbstractBlock {
 			if (isSpecial){
 				Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
 				System.out.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
-				try {
-					Application.log.write(col+" BULLET HIT SPECIALWALL(ID="+index+")");
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				Application.log.write(col+" BULLET HIT SPECIALWALL(ID="+index+")");
 				return;
 			}
 			System.out.println(col+" BULLET HIT WALL(ID="+index+")");
-			try {
-				Application.log.write(col+" BULLET HIT WALL(ID="+index+")");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Application.log.println(col+" BULLET HIT WALL(ID="+index+")");
+
 
 	}
 	

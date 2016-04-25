@@ -80,11 +80,7 @@ public class Field extends AbstractBlock {
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
 		System.out.println(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");
-		try {
-			Application.log.write(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");
 	}
 
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.
@@ -99,11 +95,8 @@ public class Field extends AbstractBlock {
 
 	public void setZpm() {
 		System.out.println("PUTZPM "+index);
-		try {
-			Application.log.write("PUTZPM "+index);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.write("PUTZPM "+index);
+
 		containsZpm = true;
 	}
 

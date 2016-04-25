@@ -14,11 +14,7 @@ class Canyon extends AbstractBlock {
 	@Override
 	public void moveToThisBlock(Replicator r){
 		System.out.println("REPLICATOR DISAPPEARS");
-		try {
-			Application.log.write("REPLICATOR DISAPPEARS");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.write("REPLICATOR DISAPPEARS");
 			r = null;
 			Application.maze.transformCanyon(index);	
 		 	
@@ -54,6 +50,7 @@ class Canyon extends AbstractBlock {
 
 	@Override
 	public void moveToThisBlock(Character c) {
+		c.setPosBlock(this);
 		Field start = Application.maze.getStartField();
 		c.die();
 		c.setPosBlock(start);

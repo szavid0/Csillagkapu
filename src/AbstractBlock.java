@@ -43,11 +43,7 @@ public abstract class AbstractBlock {
 	public boolean isPassable(){
 		if(!passable){
 			System.out.println("NEIGHBOUR NOT PASSABLE");
-			try {
-				Application.log.write("NEIGHBOUR NOT PASSABLE");
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Application.log.println("NEIGHBOUR NOT PASSABLE");
 		}
 		return passable;
 	}
@@ -67,11 +63,8 @@ public abstract class AbstractBlock {
 	
 	public boolean getContainsBox(){
 		System.out.println("NO BOX ON NEIGHBOUR");
-		try {
-			Application.log.write("NO BOX ON NEIGHBOUR");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println("NO BOX ON NEIGHBOUR");
+
 		return false;
 	}
 	public Box getBox(){

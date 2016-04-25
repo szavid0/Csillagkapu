@@ -1,7 +1,7 @@
 import java.io.IOException;
 
 public class Replicator  extends Creature implements Runnable  {
-
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
@@ -10,12 +10,9 @@ public class Replicator  extends Creature implements Runnable  {
 
 	@Override
 	public void move(Direction dir) {
-		System.out.println("MOVE "+getClass().toString().toUpperCase()+" "+dir);
-		try {
-			Application.log.write("MOVE "+getClass().toString().toUpperCase()+" "+dir);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		System.out.println("MOVE "+getClass().getName().toUpperCase()+" "+dir);
+		Application.log.write("MOVE "+getClass().getName().toUpperCase()+" "+dir);
+
 		
 		AbstractBlock n = PosBlock.getNeighbour(dir);
 		if(n.isPassable() || n.getContainsBox()){ //passable vagy dobozos mezo a szomszed

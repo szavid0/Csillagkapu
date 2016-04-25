@@ -57,11 +57,8 @@ public class LabirinthManager {
 	//Csillagkapu letrehozasa.
 	public void createStarGate(Wall w,Color col,Direction dir){
 		System.out.println("CREATESTARGATE "+col);
-		try {
-			Application.log.write("CREATESTARGATE "+col);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println("CREATESTARGATE "+col);
+
 		
 		//Ha kek volt a lovedek, akkor kek csillagkapu.
 		if(col == Color.BLUE){
@@ -101,11 +98,8 @@ public class LabirinthManager {
 	//Csillagkapu torlese.
 	public void deleteStarGate(Color col){
 		System.out.println("DELETESTARGATE "+col);
-		try {
-			Application.log.write("DELETESTARGATE "+col);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println("DELETESTARGATE "+col);
+
 		
 		//Kitoroljuk az adott szinu csillagkaput es letrehozunk helyette egy specialis falat.
 		if(col == Color.BLUE){
@@ -137,17 +131,14 @@ public class LabirinthManager {
 	
 	//Kezdo pozicio lekerese.
 	public Field getStartField() {
-		return startField;
+		return (Field)map.get(54);
 	}
 	
 	//Feregjarat letrehozasa.
 	public void createWormHole(Color col1){
 		System.out.println("CREATEWORMHOLE");
-		try {
-			Application.log.write("CREATEWORMHOLE");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println("CREATEWORMHOLE");
+
 		
 		if(col1 == Color.YELLOW || col1 == Color.BLUE){
 			blueyellowWormHoleExists = true;
@@ -165,11 +156,8 @@ public class LabirinthManager {
 
 	public void transformCanyon(int index) {
 		System.out.println("TRANSFORM CANYON");
-		try {
-			Application.log.write("TRANSFORM CANYON");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println("TRANSFORM CANYON");
+
 		
 		int[] n = map.get(index).getNeighbours();
 		map.set(index,new Field(index, n));
@@ -185,24 +173,17 @@ public class LabirinthManager {
 	public static  void addZpm(Character character) {
 		if (character == Application.general){
 			GeneralZpmCnt++;
+			System.out.println("COLLECTZPM ZPMCNT="+GeneralZpmCnt);
+			Application.log.println("COLLECTZPM ZPMCNT="+GeneralZpmCnt);
 			if(GeneralZpmCnt % 2 == 0){
 				CreateZpm();
 			}
-			System.out.println("COLLECTZPM ZPMCNT="+GeneralZpmCnt);
-			try {
-				Application.log.write("COLLECTZPM ZPMCNT="+GeneralZpmCnt);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
 			
 		}else{
 			JaffaZpmCnt++;
 			System.out.println("COLLECTZPM ZPMCNT="+JaffaZpmCnt);
-			try {
-				Application.log.write("COLLECTZPM ZPMCNT="+JaffaZpmCnt);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Application.log.println("COLLECTZPM ZPMCNT="+JaffaZpmCnt);
 		}
 		
 		if(JaffaZpmCnt + GeneralZpmCnt == allZpmCnt){
@@ -212,18 +193,16 @@ public class LabirinthManager {
 
 
 	private static  void CreateZpm() {  //RANDOM
-		//TODO	
+		System.out.println("CREATEZPM");
+		Application.log.println("CREATEZPM");
 	}
 	private  void CreateZpm(int fieldIndex) {  //DETERMINISZTIKUS
 		Field f = (Field)map.get(fieldIndex);
 		f.setZpm();
 		allZpmCnt++;
 		System.out.println("PUTZPM "+fieldIndex);
-		try {
-			Application.log.write("PUTZPM "+fieldIndex);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println("PUTZPM "+fieldIndex);
+
 	}
 	
 	public void addBlock(AbstractBlock a){

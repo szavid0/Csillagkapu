@@ -27,17 +27,17 @@ public class Scale extends Field {
 	//Az ezredes ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta. Ajtot nyit.
 	@Override
 	public void moveToThisBlock(Character c){
-		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-		try {
-			Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+
 		c.setPosBlock(this);
-			if (c.getWeight() >= weightlimit){
+		System.out.println("WEIGHT ON SCALE="+c.getWeight()+" WEIGHTLIMIT="+weightlimit);
+		Application.log.println("WEIGHT ON SCALE="+c.getWeight()+" WEIGHTLIMIT="+weightlimit);	
+		if (c.getWeight() >= weightlimit){
 				doorToOpen.Open(true);
 			}
+		
+	
+
+			
 	}
 	
 	//Doboz merlegre rakasa, ajto nyitasa.
@@ -48,11 +48,7 @@ public class Scale extends Field {
 		shootable = false;
 		currentWeight += box.getWeight();
 		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-		try {
-			Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
 		
 		if(currentWeight >= weightlimit)
 			doorToOpen.Open(true);
@@ -69,11 +65,8 @@ public class Scale extends Field {
 			Box box = boxes.get(boxes.size()-1);
 			currentWeight -= box.getWeight();
 			System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-			try {
-				Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Application.log.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+
 			
 			if(currentWeight < weightlimit)
 				doorToOpen.Open(false);
@@ -85,6 +78,8 @@ public class Scale extends Field {
 	//Lelepes esemeny ertesitesere. Ajtot bezarja.
 	@Override
 	public void notifyBlock(){
+		System.out.println("NOTIFY SCALE");
+		Application.log.println("NOTIFY SCALE");
 		doorToOpen.Open(false);
 	}
 }
