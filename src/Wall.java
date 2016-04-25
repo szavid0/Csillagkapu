@@ -18,6 +18,7 @@ public class Wall extends AbstractBlock {
 		this.isSpecial=isSpecial;
 		this.index = id;
 		passable = false;
+		shootable = false;
 	}
 	
 	//Visszaadja a szomszedokat.

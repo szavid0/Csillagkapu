@@ -11,10 +11,10 @@ public class LabirinthManager {
 	private static List<AbstractBlock> map = new ArrayList<AbstractBlock>();
 	private boolean blueyellowWormHoleExists = false;
 	private boolean redgreenWormHoleExists = false;
-	private StarGate yellowStarGate;
-	private StarGate blueStarGate;
-	private StarGate greenStarGate;
-	private StarGate redStarGate;
+	static StarGate yellowStarGate;
+	static StarGate blueStarGate;
+	static StarGate greenStarGate;
+	static StarGate redStarGate;
 	private Field startField;
 	private static int allZpmCnt;
 	private static int JaffaZpmCnt = 0;
@@ -51,6 +51,7 @@ public class LabirinthManager {
 
 	//Block lekerese.
 	public AbstractBlock getBlock(int i){
+		System.out.println(i);
 		return map.get(i);
 	}
 	

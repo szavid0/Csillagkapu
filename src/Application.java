@@ -6,7 +6,7 @@ class Application {
         BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
         BufferedReader br2 = new BufferedReader(new FileReader("log.txt"));
         String line=br.readLine();
-        while(line.isEmpty())
+        while(!line.isEmpty())
             line = br.readLine();
        
         String logline;
@@ -186,8 +186,8 @@ class Application {
 				t[1]=poz+10;
 				t[2]=poz+1;
 				t[3]=poz-1;
-				StarGate yellow = new StarGate(poz,t,Direction.WEST,Color.YELLOW,true);
-				yellow.setPair(50, Direction.EAST);
+				StarGate yellow = new StarGate(89,t,Direction.WEST,Color.YELLOW,true);
+				LabirinthManager.yellowStarGate=yellow;
 				maze.addBlock(yellow);
 				break;
 			}
@@ -198,8 +198,8 @@ class Application {
 				t[1]=poz+10;
 				t[2]=poz+1;
 				t[3]=poz-1;
-				StarGate blue = new StarGate(poz,t,Direction.WEST,Color.BLUE,true);
-				blue.setPair(89, Direction.WEST);
+				StarGate blue = new StarGate(50,t,Direction.EAST,Color.BLUE,true);
+				LabirinthManager.blueStarGate=blue;
 				maze.addBlock(blue);
 				break;
 			}
