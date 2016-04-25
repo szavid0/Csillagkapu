@@ -1,6 +1,27 @@
 import java.io.*;
 class Application {
 	
+	static boolean checklog(Integer testnum) throws IOException{
+        BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
+        BufferedReader br2 = new BufferedReader(new FileReader("log.txt"));
+        String line=br.readLine();
+        while(line!="")
+            line=br.readLine();
+       
+        String logline;
+        while(line!=null){
+            line=br.readLine();
+            logline=br2.readLine();
+            if(line!=logline){
+                br.close();
+                br2.close();
+                return false;
+            }
+        }
+        br.close();
+        br2.close();
+        return true;
+    }
 
 	static void loadMap() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader("map.txt"));
