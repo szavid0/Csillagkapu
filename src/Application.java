@@ -5,14 +5,13 @@ class Application {
         BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
         BufferedReader br2 = new BufferedReader(new FileReader("log.txt"));
         String line=br.readLine();
-        while(line!="")
-            line=br.readLine();
+        while(!line.equals(""))
+            line = br.readLine();
        
         String logline;
-        while(line!=null){
-            line=br.readLine();
+        while((line = br.readLine()) != null){
             logline=br2.readLine();
-            if(line!=logline){
+            if(!line.equals(logline)){
                 br.close();
                 br2.close();
                 return false;
@@ -347,6 +346,7 @@ class Application {
 			default: break;
 			}
 		}
+		log.close();
 	}
 
 
@@ -384,7 +384,11 @@ class Application {
 		int i=0;
 		i = Integer.parseInt(in.readLine());
 		runPrototype(i);
-		log.close();
+		if(checklog(i)){
+			System.out.println("Success");
+		}
+		else
+			System.out.println("Failure");
 	}
 	
 	public static void endGame(String winOrLose){
