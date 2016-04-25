@@ -61,6 +61,8 @@ public class Scale extends Field {
 			if(boxes.size()==1){
 				passable = true;
 				shootable = true;
+				System.out.println("COLLECTBOX");
+				Application.log.println("COLLECTBOX");
 			}
 			Box box = boxes.get(boxes.size()-1);
 			currentWeight -= box.getWeight();

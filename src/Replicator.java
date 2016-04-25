@@ -1,9 +1,11 @@
+
 import java.io.IOException;
 
 public class Replicator  extends Creature implements Runnable  {
 	
 	public Replicator(AbstractBlock pos, Direction dir){
 		PosBlock = pos;
+		PosBlock.setShootable(false);
 		direction = dir;
 	}
 	public Replicator(){}

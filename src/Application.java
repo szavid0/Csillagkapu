@@ -1,11 +1,12 @@
+
 import java.io.*;
 class Application {
 	
 	static boolean checklog(Integer testnum) throws IOException{
-        BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
+        BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + "_result.txt"));
         BufferedReader br2 = new BufferedReader(new FileReader("log.txt"));
         String line=br.readLine();
-        while(!line.equals(""))
+        while(line != null)
             line = br.readLine();
        
         String logline;
@@ -236,10 +237,18 @@ class Application {
 			if (i <= 3) {
 				String[] parts = line.split(",");
 				if(parts[0].equals("GENERAL")){
-					general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]));
+					if(parts.length == 4)
+						general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),true);
+					else
+						general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),false);
+
 				}
 				if(parts[0].equals("JAFFA")){
-					jaffa = new Jaffa(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]));
+					if(parts.length == 4)
+						jaffa = new Jaffa(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),true);
+					else 
+						jaffa = new Jaffa(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),false);
+
 				}
 				if(parts[0].equals("REPLICATOR")){
 					replicator = new Replicator(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]));
@@ -248,7 +257,7 @@ class Application {
 			
 			String character = new String();
 			
-			//itt a parancsoknÃ¡l mindegyiket kÃ¼lÃ¶n meg kell valÃ³sÃ­tani
+			//itt a parancsoknál mindegyiket külön meg kell valósítani
 			command = line.split(" ");
 			switch (command[0]){
 			case "NEW": 
@@ -350,7 +359,7 @@ class Application {
 	}
 
 
-	//azÃ©rt staticok, mert csak egy lÃ©tezik belÅ‘lÃ¼k.
+	//azért staticok, mert csak egy létezik belõlük.
 	public static General general = new General();
 	public static Replicator replicator = new Replicator();
 	public static Jaffa jaffa = new Jaffa();
@@ -395,4 +404,5 @@ class Application {
 		System.out.println(winOrLose);
 	}
 }
+
 

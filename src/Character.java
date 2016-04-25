@@ -33,16 +33,16 @@ public class Character extends Creature {
 	//Visszaadja, hogy van-e az karaktern�l meg doboz.
 	public boolean hasBox(){
 		boolean b = box != null;
-		System.out.println("HASBOX="+b);
-		Application.log.println("HASBOX="+b);
+		System.out.println("HASBOX="+Boolean.toString(b).toUpperCase());
+		Application.log.println("HASBOX="+Boolean.toString(b).toUpperCase());
 		return b;
 	}
 	
 
 	//Kapott szinu lovedeket lo.
 	public void shoot(Color col){
-		System.out.println(getClass().getName().toUpperCase()+" SHOOT "+col);
-		Application.log.write(getClass().getName().toUpperCase()+" SHOOT "+col);
+//		System.out.println(getClass().getName().toUpperCase()+" SHOOT "+col);
+//		Application.log.write(getClass().getName().toUpperCase()+" SHOOT "+col);
 
 		
 		AbstractBlock bulletPos;
@@ -58,9 +58,11 @@ public class Character extends Creature {
 	//Felveszi a dobozt, ha van elotte, es nincs nala.
 		public void pick(){
 			System.out.println(getClass().getName().toUpperCase()+" PICK");
+			Application.log.println(getClass().getName().toUpperCase()+" PICK");
+
 			AbstractBlock b = PosBlock.getNeighbour(direction);
 			//Leellenorizzuk, hogy visszaad-e dobozt. Ha igen akkor felvesszuk.
-			if(b.getContainsBox() && !hasBox()){
+			if(!hasBox() && b.getContainsBox()){
 					b.getBox();
 				}	
 		}

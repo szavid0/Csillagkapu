@@ -37,6 +37,10 @@ public class Field extends AbstractBlock {
 	
 	//Visszaadja van-e rajta doboz.
 	public boolean getContainsBox(){
+		if(!containsBox){
+			System.out.println("NO BOX ON NEIGHBOUR");
+			Application.log.println("NO BOX ON NEIGHBOUR");
+		}
 		return containsBox;
 	}
 	
@@ -52,6 +56,8 @@ public class Field extends AbstractBlock {
 			if(boxes.size() == 1){
 				passable = true;
 				shootable = true;
+				System.out.println("COLLECTBOX");
+				Application.log.println("COLLECTBOX");
 			}
 			return boxes.get(boxes.size()-1);
 		}
@@ -64,6 +70,7 @@ public class Field extends AbstractBlock {
 		boxes.add(box);
 		passable = false;
 		shootable = false;
+
 	}
 	
 	//Az ezredes ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta.
@@ -79,9 +86,15 @@ public class Field extends AbstractBlock {
 	//Lovesnel megadja a lovedek helyzetet, iranyat, szinet.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
-		System.out.println(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");
-		Application.log.println(col+" BULLET HIT "+getClass().toString().toUpperCase()+"(ID="+index+")");
-	}
+		if(this==Application.replicator.PosBlock){
+			System.out.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
+			Application.log.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
+		}
+		else {
+		System.out.println(col+" BULLET HIT "+getClass().getName().toUpperCase()+"(ID="+index+")");
+		Application.log.println(col+" BULLET HIT "+getClass().getName().toUpperCase()+"(ID="+index+")");
+		}
+		}
 
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.
 	@Override
