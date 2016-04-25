@@ -212,20 +212,17 @@ class Application {
 		String[] command;
 		
 
-		for(int i = 0; (line = br.readLine()) != null; i++){
+		for(int i = 0; !(line = br.readLine()).equals(""); i++){
 			if (i <= 3) {
 				String[] parts = line.split(",");
 				if(parts[0].equals("GENERAL")){
-					general.setPosBlock(maze.getBlock(Integer.parseInt(parts[1])));
-					general.setDirection(stringToDirection(parts[2]));
+					general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]));
 				}
 				if(parts[0].equals("JAFFA")){
-					jaffa.setPosBlock(maze.getBlock(Integer.parseInt(parts[1])));
-					jaffa.setDirection(stringToDirection(parts[2]));
+					jaffa = new Jaffa(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]));
 				}
 				if(parts[0].equals("REPLICATOR")){
-					replicator.setPosBlock(maze.getBlock(Integer.parseInt(parts[1])));
-					replicator.setDirection(stringToDirection(parts[2]));
+					replicator = new Replicator(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]));
 				}
 			}
 			

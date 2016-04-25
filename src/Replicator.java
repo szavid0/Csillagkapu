@@ -2,6 +2,12 @@ import java.io.IOException;
 
 public class Replicator  extends Creature implements Runnable  {
 	
+	public Replicator(AbstractBlock pos, Direction dir){
+		PosBlock = pos;
+		direction = dir;
+	}
+	public Replicator(){}
+	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
