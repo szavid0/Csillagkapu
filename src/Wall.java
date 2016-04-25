@@ -35,9 +35,10 @@ public class Wall extends AbstractBlock {
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
 			if (isSpecial){
-				Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
 				System.out.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
-				Application.log.write(col+" BULLET HIT SPECIALWALL(ID="+index+")");
+				Application.log.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
+				Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
+			
 				return;
 			}
 			System.out.println(col+" BULLET HIT WALL(ID="+index+")");

@@ -85,8 +85,8 @@ public class StarGate extends Wall {
 	//Loves esemeny kezelese.
 	@Override
 	public void shootOnThisBlock(Color bulletcolor,Direction dir){
-		System.out.println(bulletcolor + " BULLET HIT STARGATE(ID="+index+")");
-		Application.log.println(bulletcolor + " BULLET HIT STARGATE(ID="+index+")");
+		System.out.println(bulletcolor + " BULLET HIT STARGATE(ID="+index+",COLOR="+color+")");
+		Application.log.println(bulletcolor + " BULLET HIT STARGATE(ID="+index+",COLOR="+color+")");
 
 		//Ha kulonbozo szinu a letezo csillagkapu, amire lovunk, mint a lovedek.
 		if (bulletcolor != this.color){

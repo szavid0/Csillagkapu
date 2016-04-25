@@ -33,14 +33,10 @@ public class Character extends Creature {
 	//Visszaadja, hogy van-e az karaktern�l meg doboz.
 	public boolean hasBox(){
 		boolean b = box != null;
-		if(b){
+		
 		System.out.println("HASBOX="+Boolean.toString(b).toUpperCase());
 		Application.log.println("HASBOX="+Boolean.toString(b).toUpperCase());
-		}else{
-			System.out.println(getClass().getName().toUpperCase()+ " HAS NO BOX LEFT");
-			Application.log.println(getClass().getName().toUpperCase()+ " HAS NO BOX LEFT");
-		}
-			
+		
 		return b;
 	}
 	

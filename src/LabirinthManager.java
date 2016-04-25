@@ -51,7 +51,6 @@ public class LabirinthManager {
 
 	//Block lekerese.
 	public AbstractBlock getBlock(int i){
-		System.out.println(i);
 		return map.get(i);
 	}
 	
@@ -94,6 +93,7 @@ public class LabirinthManager {
 			if(greenStarGate!= null)createWormHole(col);
 
 		}
+
 	}
 	
 	//Csillagkapu torlese.
@@ -106,17 +106,41 @@ public class LabirinthManager {
 		if(col == Color.BLUE){
 			map.set(blueStarGate.getIndex(), new Wall(blueStarGate.getIndex(),blueStarGate.getNeighboursIndex(),true));
 			blueStarGate=null;
+			if(blueyellowWormHoleExists){
+				map.set(yellowStarGate.getIndex(), new Wall(yellowStarGate.getIndex(),yellowStarGate.getNeighboursIndex(),true));
+				yellowStarGate=null;
+				System.out.println("DELETESTARGATE "+Color.YELLOW);
+				Application.log.println("DELETESTARGATE "+Color.YELLOW);
+			}
 		}
 		//Kitoroljuk az adott szinu csillagkaput es letrehozunk helyette egy specialis falat.
 		else if(col == Color.YELLOW){
 			map.set(yellowStarGate.getIndex(), new Wall(yellowStarGate.getIndex(),yellowStarGate.getNeighboursIndex(),true));
 			yellowStarGate=null;
+			if(blueyellowWormHoleExists){
+				map.set(blueStarGate.getIndex(), new Wall(blueStarGate.getIndex(),blueStarGate.getNeighboursIndex(),true));
+				blueStarGate=null;
+				System.out.println("DELETESTARGATE "+Color.BLUE);
+				Application.log.println("DELETESTARGATE "+Color.BLUE);
+			}
 		}else if(col == Color.GREEN){
 			map.set(greenStarGate.getIndex(), new Wall(greenStarGate.getIndex(),greenStarGate.getNeighboursIndex(),true));
 			greenStarGate=null;
+			if(redgreenWormHoleExists){
+				map.set(redStarGate.getIndex(), new Wall(redStarGate.getIndex(),redStarGate.getNeighboursIndex(),true));
+				redStarGate=null;
+				System.out.println("DELETESTARGATE "+Color.RED);
+				Application.log.println("DELETESTARGATE "+Color.RED);
+			}
 		}else{
 			map.set(redStarGate.getIndex(), new Wall(redStarGate.getIndex(),redStarGate.getNeighboursIndex(),true));
 			redStarGate=null;
+			if(redgreenWormHoleExists){
+				map.set(greenStarGate.getIndex(), new Wall(greenStarGate.getIndex(),greenStarGate.getNeighboursIndex(),true));
+				greenStarGate=null;
+				System.out.println("DELETESTARGATE "+Color.GREEN);
+				Application.log.println("DELETESTARGATE "+Color.GREEN);
+			}
 		}
 	}
 	
