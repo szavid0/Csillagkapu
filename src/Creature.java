@@ -16,13 +16,10 @@ public abstract class Creature {
 		return PosBlock;
 	}
 	public void setPosBlock(AbstractBlock PosBlock) {
-		System.out.println(getClass().toString().toUpperCase()+" ARRIVEAT "+PosBlock.getClass().toString().toUpperCase()+"(ID="+PosBlock.getIndex()+")");
-		try {
-			Application.log.write(getClass().toString().toUpperCase()+" ARRIVEAT "+PosBlock.getClass().toString().toUpperCase()+"(ID="+PosBlock.getIndex()+")");
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		this.PosBlock = PosBlock;
+		System.out.println(getClass().getName().toString().toUpperCase()+" ARRIVEAT "+PosBlock.getClass().getName().toString().toUpperCase()+"(ID="+PosBlock.getIndex()+")");
+		Application.log.println(getClass().getName().toString().toUpperCase()+" ARRIVEAT "+PosBlock.getClass().getName().toString().toUpperCase()+"(ID="+PosBlock.getIndex()+")");
+	
 	}
 	public Field getStartField() {
 		return startField;
@@ -31,13 +28,9 @@ public abstract class Creature {
 		return weight;
 	}
 	public void setDirection(Direction direction) {
-		System.out.println(getClass().toString().toUpperCase()+" IS SET TO "+direction);  //pl: GENERAL IS SET TO WEST
-		try {
-			Application.log.write(getClass().toString().toUpperCase()+" IS SET TO "+direction);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 		this.direction = direction;
+		System.out.println(getClass().getName().toString().toUpperCase()+" IS SET TO "+direction);  //pl: GENERAL IS SET TO WEST
+		Application.log.println(getClass().getName().toString().toUpperCase()+" IS SET TO "+direction);
 	}
 	public abstract void move(Direction dir);
 	

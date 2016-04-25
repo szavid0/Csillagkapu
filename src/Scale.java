@@ -28,12 +28,8 @@ public class Scale extends Field {
 	@Override
 	public void moveToThisBlock(Character c){
 		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-		try {
-			Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
+		Application.log.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+
 		c.setPosBlock(this);
 			if (c.getWeight() >= weightlimit){
 				doorToOpen.Open(true);
@@ -48,11 +44,7 @@ public class Scale extends Field {
 		shootable = false;
 		currentWeight += box.getWeight();
 		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-		try {
-			Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		Application.log.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
 		
 		if(currentWeight >= weightlimit)
 			doorToOpen.Open(true);
@@ -69,11 +61,8 @@ public class Scale extends Field {
 			Box box = boxes.get(boxes.size()-1);
 			currentWeight -= box.getWeight();
 			System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-			try {
-				Application.log.write("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			Application.log.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
+
 			
 			if(currentWeight < weightlimit)
 				doorToOpen.Open(false);

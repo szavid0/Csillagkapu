@@ -6,13 +6,16 @@ class Application {
 	 */
 	static void loadMap() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader("map.txt"));
+		System.out.println("NEW GAME STARTED");
+		Application.log.write("NEW GAME STARTED");
+	
 		while(true){
 			String line=br.readLine();
 			if(line==null)
 				break;
 			String[] palyaelem=line.split(" ");
 			String[] koordinatak=palyaelem[0].split(":");
-			System.out.println(line);
+			
 			switch(palyaelem[1]){
 			case "WALL":
 				if(koordinatak.length==2){
@@ -214,7 +217,7 @@ class Application {
 		BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
 		String line = new String();
 		String[] command;
-		
+
 
 		for(int i = 0; (line = br.readLine()) != null; i++){
 			if (i == 0 || i == 1) {
@@ -327,14 +330,14 @@ class Application {
 	//azért staticok, mert csak egy létezik belőlük.
 	public static General general = new General();
 	public static Replicator replicator = new Replicator();
-	public static Jaffa jaffa;
-	public static BufferedWriter log;
+	public static Jaffa jaffa = new Jaffa();
+	public static PrintWriter log;
 	public static LabirinthManager maze = new LabirinthManager();
 	
 	public static void main(String[] args) throws IOException{
 		
 		File logFile=new File("log.txt");
-	    log = new BufferedWriter(new FileWriter(logFile));
+	    log = new PrintWriter(logFile);
 		
 		System.out.println("---------------------------------------------------------");
 		System.out.println("|   			PROTOTIPUS MENU\t						|");
@@ -358,6 +361,7 @@ class Application {
 		i = Integer.parseInt(in.readLine());
 		general = new General();
 		runPrototype(i);
+		log.close();
 	}
 	
 	public static void endGame(String winOrLose){
