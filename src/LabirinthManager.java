@@ -206,6 +206,6 @@ public class LabirinthManager {
 	}
 	
 	public void addBlock(AbstractBlock a){
-		map.add(a);
+			map.add(a);
 	}
 }

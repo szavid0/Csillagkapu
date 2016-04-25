@@ -33,8 +33,14 @@ public class Character extends Creature {
 	//Visszaadja, hogy van-e az karaktern�l meg doboz.
 	public boolean hasBox(){
 		boolean b = box != null;
+		if(b){
 		System.out.println("HASBOX="+Boolean.toString(b).toUpperCase());
 		Application.log.println("HASBOX="+Boolean.toString(b).toUpperCase());
+		}else{
+			System.out.println(getClass().getName().toUpperCase()+ " HAS NO BOX LEFT");
+			Application.log.println(getClass().getName().toUpperCase()+ " HAS NO BOX LEFT");
+		}
+			
 		return b;
 	}
 	
@@ -72,12 +78,10 @@ public class Character extends Creature {
 	public void drop(){
 
 		AbstractBlock f = PosBlock.getNeighbour(direction);
-		if(f.isPassable()  || f.getContainsBox()) //vagy ures vagy dobozos blokkra lehet rakni
-			if(!(f.getClass() == Field.class) && ((Field)f).containsZpm)
+		if(f.isPassable()) //vagy ures vagy dobozos blokkra lehet rakni
 				if(hasBox()){
-					System.out.println(getClass().getName().toUpperCase()+ " DROPPED BOX ON "+f.getClass().getName().toUpperCase()+"ID=(+"+f.getIndex()+")");
-					Application.log.println(getClass().getName().toUpperCase()+ " DROPPED BOX ON "+f.getClass().getName().toUpperCase()+"ID=(+"+f.getIndex()+")");
-
+					System.out.println(getClass().getName().toUpperCase()+ " DROPPED BOX ON "+f.getClass().getName().toUpperCase()+"(ID="+f.getIndex()+")");
+					Application.log.println(getClass().getName().toUpperCase()+ " DROPPED BOX ON "+f.getClass().getName().toUpperCase()+"(ID="+f.getIndex()+")");
 					
 					f.setBox(getBox());
 					this.box=null;
@@ -91,7 +95,6 @@ public class Character extends Creature {
 		}
 
 	public void move(Direction dir){
-			System.out.println("MOVE "+getClass().getName().toUpperCase()+" "+ dir);
 			direction = dir;
 				AbstractBlock block = PosBlock.getNeighbour(dir);
 				//Ha ra lehet lepni, akkor beallitjuk a pozicionak.

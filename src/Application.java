@@ -3,10 +3,10 @@ import java.io.*;
 class Application {
 	
 	static boolean checklog(Integer testnum) throws IOException{
-        BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + "_result.txt"));
+        BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
         BufferedReader br2 = new BufferedReader(new FileReader("log.txt"));
         String line=br.readLine();
-        while(line != null)
+        while(line.isEmpty())
             line = br.readLine();
        
         String logline;
@@ -186,7 +186,9 @@ class Application {
 				t[1]=poz+10;
 				t[2]=poz+1;
 				t[3]=poz-1;
-				maze.addBlock(new StarGate(poz,t,Direction.WEST,Color.YELLOW,true));
+				StarGate yellow = new StarGate(poz,t,Direction.WEST,Color.YELLOW,true);
+				yellow.setPair(50, Direction.EAST);
+				maze.addBlock(yellow);
 				break;
 			}
 			case "BLUE_STARGATE":{
@@ -196,7 +198,9 @@ class Application {
 				t[1]=poz+10;
 				t[2]=poz+1;
 				t[3]=poz-1;
-				maze.addBlock(new StarGate(poz,t,Direction.WEST,Color.YELLOW,true));
+				StarGate blue = new StarGate(poz,t,Direction.WEST,Color.BLUE,true);
+				blue.setPair(89, Direction.WEST);
+				maze.addBlock(blue);
 				break;
 			}
 			case "SCALE":{
@@ -237,9 +241,10 @@ class Application {
 			if (i <= 3) {
 				String[] parts = line.split(",");
 				if(parts[0].equals("GENERAL")){
-					if(parts.length == 4)
+					if(parts.length == 4){
 						general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),true);
-					else
+					}
+						else
 						general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),false);
 
 				}
