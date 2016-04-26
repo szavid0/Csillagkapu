@@ -46,6 +46,7 @@ public class Scale extends Field {
 		boxes.add(box);
 		passable = false;
 		shootable = false;
+		containsBox = true;
 		currentWeight += box.getWeight();
 		System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);
 		Application.log.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);

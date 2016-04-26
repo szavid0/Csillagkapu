@@ -4,7 +4,7 @@ import java.io.IOException;
 public class Character extends Creature {
 
 	protected int lives = 3;
-	protected int weight = 2;
+	protected int weight = 3;
 	protected Box box;	
 	
 
@@ -63,7 +63,7 @@ public class Character extends Creature {
 			AbstractBlock b = PosBlock.getNeighbour(direction);
 			//Leellenorizzuk, hogy visszaad-e dobozt. Ha igen akkor felvesszuk.
 			if(!hasBox() && b.getContainsBox()){
-					b.getBox();
+					box = b.getBox();
 				}	
 		}
 	
@@ -95,7 +95,8 @@ public class Character extends Creature {
 				//Az eddigi blokkot pedig ertesitjuk, hogy elleptunk rola.
 				if(block.isPassable()){
 					PosBlock.notifyBlock();
-					PosBlock.setPassable(true);					
+					PosBlock.setPassable(true);	
+					PosBlock.setShootable(true);
 					block.moveToThisBlock(this);
 			}
 	}

@@ -9,7 +9,7 @@ public class General extends Character{
 		direction = dir;
 		//Van-e doboz az ezredesnel.
 		if(hasbox)
-			this.box = new Box(1);
+			this.box = new Box(2);
 	}
 	public General(){}
 }

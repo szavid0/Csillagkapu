@@ -4,13 +4,17 @@ class Application {
 	
 	static BufferedReader br;
 	static int i = 0;
+	
+	//teszt kimenet ellenorzese
+	//a log fajl tartalmat veti ossze az elvart kimenettel	
 	static boolean checklog(Integer testnum) throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader("teszt_"+testnum+".txt"));
 		BufferedReader br2 = new BufferedReader(new FileReader("log.txt"));
         String line=br.readLine();
         while(!line.isEmpty())
             line = br.readLine();
-       
+     
+        //soronkent tortenik az osszehasonlitas
         String logline;
         while((line = br.readLine()) != null){
             logline=br2.readLine();
@@ -25,6 +29,9 @@ class Application {
         return true;
     }
 
+	//Palya betoltese a map.txt fajlbol
+	//palyaelemenkent beallitja a szomszedokat es az egyedi blokktulajdonsagokat
+	//majd hozzaadja a map-hoz
 	static void loadMap() throws IOException{
 		BufferedReader br = new BufferedReader(new FileReader("map.txt"));
 		while(true){
@@ -221,7 +228,7 @@ class Application {
 		br.close();
 	}
 	
-	static Direction stringToDirection(String dir){
+	static Direction stringToDirection(String dir){		
 		switch(dir){
 		case "WEST": return Direction.WEST;
 		case "EAST": return Direction.EAST;
@@ -231,10 +238,11 @@ class Application {
 		}
 	}
 	
+	//adott szamu teszteset futtatasa
 	static void runPrototype(Integer testnum) throws IOException{
-		
+		loadMap();
 		String line = new String();
-		if(testnum < 12){
+		if(testnum < 12){	//automatikus tesztesetek
 			br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
 			for(int i = 0; !(line = br.readLine()).equals(""); i++){
 				processCommand(line, testnum);
@@ -244,14 +252,17 @@ class Application {
 			System.out.println("MANUAL MOD - ENTER STATUSZ FOR FULLSTATUSZ");
 			System.out.println("\nNEW GAME STARTED");
 			log.println("NEW GAME STARTED");
-			loadMap();
-			general = new General(maze.getBlock(52),Direction.EAST,true);
-			jaffa = new Jaffa(maze.getBlock(27), Direction.WEST,true);
+			general = new General(maze.getBlock(52),Direction.EAST,false);
+			jaffa = new Jaffa(maze.getBlock(27), Direction.WEST,false);
 			replicator = new Replicator(maze.getBlock(77),Direction.NORTH);
-			System.out.println("GENERAL,52,EAST\nJAFFA,27,WEST\nREPLICATOR,77,NORTH\n");
-			log.println("GENERAL,52,EAST\nJAFFA,27,WEST\nREPLICATOR,77,NORTH");
+			if(replicator != null)
+				System.out.println("\n"+general+"\n"+jaffa+"\n"+replicator+"\n");
+			else{
+				System.out.println("\n"+general+"\n"+jaffa+"\n"+"REPLICATOR:NULL\n");
 
-			
+			}
+
+			//parancs feldolgozasa, reszekre tordelese
 			for(int i = 0; !(line = br.readLine()).equals("EXIT"); i++){	//EXIT PARANCS
 				processCommand(line, testnum);
 			}
@@ -259,6 +270,7 @@ class Application {
 		log.close();
 	
 	}
+	//parancs ertelmezese
 	public static void processCommand(String line,Integer testnum) throws IOException{
 		String[] command;
 		
@@ -295,7 +307,7 @@ class Application {
 			log.println("NEW GAME STARTED");
 			loadMap();
 			break;
-		case "RANDOM":
+		case "RANDOM":		//nincs megvalositva (random mod)
 			if(command[1].equals("ON")){
 				System.out.println("RANDOM MODE ON");
 				log.println("RANDOM MODE ON");
@@ -428,6 +440,7 @@ class Application {
 	
 	public static void main(String[] args) throws IOException{
 		
+		//logfajl
 		File logFile=new File("log.txt");
 	    log = new PrintWriter(new FileWriter(logFile));
 		
@@ -449,11 +462,12 @@ class Application {
 		System.out.println("---------------------------------------------------------");
 		System.out.println("Valassz egy tesztesetet es ird be a szamat!");
 		
-		loadMap();
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		int i=0;
 		i = Integer.parseInt(in.readLine());
 		runPrototype(i);
+		
+		//logfajl ellenorzes
 		if(i != 12)
 			if(checklog(i)){
 				System.out.println("Success");
@@ -463,9 +477,12 @@ class Application {
 		log.close();
 	}
 	
+	//jatek vege
 	public static void endGame(String winOrLose){
 		System.out.println(winOrLose);
 	}
+	//teljes statuszkepet ad a jatekrol
+	//STATUSZ parancs
 	public static void fullStatusz(){
 		if(replicator != null)
 			System.out.println("\n"+general+"\n"+jaffa+"\n"+replicator);

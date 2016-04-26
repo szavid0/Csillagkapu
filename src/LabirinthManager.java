@@ -149,7 +149,7 @@ public class LabirinthManager {
 		return yellowStarGate;
 	}
 	
-	//Kek csillagkapu lekerese.
+	//Kek csillagkapu lekerese
 	public StarGate getBlueStarGate(){
 		return blueStarGate;
 	}
@@ -179,14 +179,15 @@ public class LabirinthManager {
 		
 	}
 
+	//replikator atalakitja a szakadekot
+	//a szakadek kikerul a terkeprol, egy ures mezo adodik hozza
 	public void transformCanyon(int index) {
 		System.out.println("TRANSFORM CANYON");
 		Application.log.println("TRANSFORM CANYON");
 
 		int[] n = map.get(index).getNeighbours();
 		Field f = new Field(index, n);
-		System.out.println(f);
-		map.add(index,f);
+		map.set(index,f);
 	}
 
 	public StarGate getGreenStarGate() {
@@ -196,6 +197,7 @@ public class LabirinthManager {
 		return redStarGate;
 	}
 
+	//hozzaad a karakter zpm-jeihez egyet
 	public static  void addZpm(Character character) {
 		if (character == Application.general){
 			GeneralZpmCnt++;
@@ -212,16 +214,19 @@ public class LabirinthManager {
 			Application.log.println("COLLECTZPM ZPMCNT="+JaffaZpmCnt);
 		}
 		
+		//jatek vege, osszeszedtuk a zpm-eket a palyan
 		if(JaffaZpmCnt + GeneralZpmCnt == allZpmCnt){
 			Application.endGame(GeneralZpmCnt > JaffaZpmCnt ? "GENERAL WINS" : "JAFFA WINS");
 		}
 	}
 
 
+	//zpm elhelyezese a palyan
 	private static  void CreateZpm() {  //RANDOM
 		System.out.println("CREATEZPM");
 		Application.log.println("CREATEZPM");
 	}
+	//zpm elhelyezese a palyan
 	private  void CreateZpm(int fieldIndex) {  //DETERMINISZTIKUS
 		Field f = (Field)map.get(fieldIndex);
 		f.setZpm();
@@ -234,10 +239,12 @@ public class LabirinthManager {
 	public void addBlock(AbstractBlock a){
 			map.add(a);
 	}
+	//terkep statuszanak listazasa mezonkent
 	public void listStatusz(){
 		System.out.println("GENERALZPM:"+GeneralZpmCnt+" JAFFAZPM:"+JaffaZpmCnt+" ALL:"+allZpmCnt+"\n");
 		for(AbstractBlock s:map){
 			System.out.println(s);
 		}
+		System.out.println();
 	}
 }

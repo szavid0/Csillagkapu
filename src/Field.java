@@ -23,6 +23,7 @@ public class Field extends AbstractBlock {
 		if(hasBox){
 			this.containsBox = true;
 			passable = false;
+			shootable = false;
 			boxes.add(new Box(1));
 		}
 		//Ha nincs a mezon doboz, akkor athaladhato.
@@ -89,7 +90,9 @@ public class Field extends AbstractBlock {
 	//Lovesnel megadja a lovedek helyzetet, iranyat, szinet.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
-		if(this==Application.replicator.PosBlock){
+		if(Application.replicator != null && this==Application.replicator.PosBlock){
+			Application.replicator = null;
+			shootable = true;
 			System.out.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
 			Application.log.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
 		}
@@ -107,7 +110,6 @@ public class Field extends AbstractBlock {
 	//Ha a replikator ralep, akkor jelzi.
 	@Override
 	public void moveToThisBlock(Replicator r) {
-		r.setPosBlock(this);
 	}
 
 	//ZPM-et tudunk rakni mezore.

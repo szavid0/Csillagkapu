@@ -7,6 +7,7 @@ public class Door extends AbstractBlock {
 		super(index,neighbours);
 		//Nem athaladhato.
 		passable=false;
+		shootable = false;
 	}
 	
 	//Nyitas fuggveny, athaladhatosag beallitasra kerul.

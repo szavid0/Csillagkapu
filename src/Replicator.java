@@ -2,7 +2,7 @@
 import java.io.IOException;
 
 public class Replicator  extends Creature implements Runnable  {
-	
+	//Replicator konstruktora
 	public Replicator(AbstractBlock pos, Direction dir){
 		PosBlock = pos;
 		PosBlock.setShootable(false);
@@ -17,6 +17,7 @@ public class Replicator  extends Creature implements Runnable  {
 	}
 
 	@Override
+	//Replicator mozgasat leiro fuggveny
 	public void move(Direction dir) {
 		
 		AbstractBlock n = PosBlock.getNeighbour(dir);
