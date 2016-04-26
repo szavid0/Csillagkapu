@@ -7,12 +7,14 @@ public class StarGate extends Wall {
 	private Color color;
 	private boolean isPaired;
 	
+	//Csillagkapu konstruktora: irany, szin, par es passable beallitasa.
 	public StarGate(int index,int[] neighbours,Direction dir,Color color,boolean isPaired){
 		super(index,neighbours);
 		this.direction = dir;
 		this.color = color;
 		this.isPaired = isPaired;
 		isSpecial = true;
+		//Ha van parja, akkor a passable true, ha nincs, akkor false.
 		if (isPaired){
 			passable=true;
 		}
@@ -102,6 +104,7 @@ public class StarGate extends Wall {
 	public void setPair(int index, Direction dir){
 		neighbourIndexes[dirToInt(dir)] = index;
 	}
+	
 	@Override
 	public String toString() {
 		String s = super.toString();

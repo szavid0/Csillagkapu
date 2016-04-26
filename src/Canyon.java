@@ -9,12 +9,13 @@ class Canyon extends AbstractBlock {
 		passable = true;
 	}
 	
-	//Ha szakadekba lepunk, akkor az ezredes eletet veszit.
+	//Ha szakadekba lepunk, akkor a karakter eletet veszit, replikator meghal es mezove alakul.
 	//Ha nincs vege a jateknak, akkor beallitja az ezredest a start-pozicioba.
 	@Override
 	public void moveToThisBlock(Replicator r){
 		System.out.println("REPLICATOR DISAPPEARS");
 		Application.log.write("REPLICATOR DISAPPEARS");
+			//Replicator megszunik es mezo lesz a szakadek azon resze helyett.
 			Application.replicator = null;
 			Application.maze.transformCanyon(index);	
 		 	
@@ -48,6 +49,7 @@ class Canyon extends AbstractBlock {
 		box = null;
 	}
 
+	//Ha karakter lep ra, akkor meghivja a die() fuggvenyet.
 	@Override
 	public void moveToThisBlock(Character c) {
 		c.setPosBlock(this);
@@ -55,6 +57,7 @@ class Canyon extends AbstractBlock {
 		c.die();
 		c.setPosBlock(start);
 	}
+	
 	@Override
 	public String toString() {
 		return super.toString();

@@ -17,6 +17,7 @@ public class Wall extends AbstractBlock {
 		super(id,neighbours);
 		this.isSpecial=isSpecial;
 		this.index = id;
+		//Passable, shootable beallitasa.
 		passable = false;
 		shootable = false;
 	}
@@ -34,17 +35,16 @@ public class Wall extends AbstractBlock {
 	//Specialis fal eseten raloves kezelese.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
+			//Ha specialis falra lottunk.
 			if (isSpecial){
 				System.out.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
 				Application.log.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
+				//Csillagkapu letrehozasa a megfelelo szinnel.
 				Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
-			
 				return;
 			}
 			System.out.println(col+" BULLET HIT WALL(ID="+index+")");
 			Application.log.println(col+" BULLET HIT WALL(ID="+index+")");
-
-
 	}
 	
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.
@@ -58,13 +58,16 @@ public class Wall extends AbstractBlock {
 		return null;
 	}
 	
+	//Falra nem tudunk dobozt rakni, igy nem csinal semmit.
 	public void setBox(Box box){
 	}
 
+	//Replicator nem lehet falon, igy nem csinal semmit.
 	@Override
 	public void moveToThisBlock(Replicator creature) {
 		
 	}
+	
 	@Override
 	public String toString() {
 		return super.toString()+" SPECIAL:"+ Boolean.toString(isSpecial).toUpperCase();

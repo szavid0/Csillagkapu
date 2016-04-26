@@ -12,6 +12,7 @@ public class Field extends AbstractBlock {
 	//Konstruktor.
 	public Field(int id,int[] neighbours){
 		super(id,neighbours);
+		//Passable beallitasa.
 		 passable=true;
 	}
 	
@@ -52,6 +53,7 @@ public class Field extends AbstractBlock {
 	//Visszaadja a rajta tarolt dobozt.
 	@Override
 	public Box getBox(){
+		//Ha van rajta egy doboz, amit felvesznek, akkor passable es shootable lesz.
 		if(getContainsBox()){
 			if(boxes.size() == 1){
 				passable = true;
@@ -68,12 +70,13 @@ public class Field extends AbstractBlock {
 	@Override
 	public void setBox(Box box){
 		boxes.add(box);
+		//Nem passable, shootable ha van a mezon doboz.
 		passable = false;
 		shootable = false;
 
 	}
 	
-	//Az ezredes ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta.
+	//A karakter ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta.
 	@Override
 	public void moveToThisBlock(Character c) {
 			c.setPosBlock(this);
@@ -101,15 +104,17 @@ public class Field extends AbstractBlock {
 	public void notifyBlock() {
 	}
 
+	//Ha a replikator ralep, akkor jelzi.
 	@Override
 	public void moveToThisBlock(Replicator r) {
 		r.setPosBlock(this);
 	}
 
+	//ZPM-et tudunk rakni mezore.
 	public void setZpm() {
 		System.out.println("PUTZPM "+index);
 		Application.log.write("PUTZPM "+index);
-
+		//Beallitjuk, hogy tartalmaz a mezp ZPM-et.
 		containsZpm = true;
 	}
 	
