@@ -15,7 +15,7 @@ class Canyon extends AbstractBlock {
 	public void moveToThisBlock(Replicator r){
 		System.out.println("REPLICATOR DISAPPEARS");
 		Application.log.write("REPLICATOR DISAPPEARS");
-			r = null;
+			Application.replicator = null;
 			Application.maze.transformCanyon(index);	
 		 	
 	}
@@ -54,6 +54,10 @@ class Canyon extends AbstractBlock {
 		Field start = Application.maze.getStartField();
 		c.die();
 		c.setPosBlock(start);
+	}
+	@Override
+	public String toString() {
+		return super.toString();
 	}
 
 

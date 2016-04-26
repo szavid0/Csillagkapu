@@ -12,6 +12,7 @@ public class StarGate extends Wall {
 		this.direction = dir;
 		this.color = color;
 		this.isPaired = isPaired;
+		isSpecial = true;
 		if (isPaired){
 			passable=true;
 		}
@@ -100,5 +101,11 @@ public class StarGate extends Wall {
 	//A csillagkapu parjanak beallitasa.
 	public void setPair(int index, Direction dir){
 		neighbourIndexes[dirToInt(dir)] = index;
+	}
+	@Override
+	public String toString() {
+		String s = super.toString();
+		s += " "+ color+" DIRECTION:"+direction+" PAIRED:"+Boolean.toString(isPaired).toUpperCase();
+		return s;
 	}
 }

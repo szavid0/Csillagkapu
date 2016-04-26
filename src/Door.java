@@ -45,5 +45,12 @@ public class Door extends AbstractBlock {
 	public void moveToThisBlock(Replicator r) {
 			r.setPosBlock(this);
 	}
+	@Override
+	public String toString() {
+		String s = super.toString();
+		if(passable) s+= " OPEN";
+		else s += " CLOSED";
+		return s;
+	}
 	
 }

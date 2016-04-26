@@ -16,7 +16,7 @@ public class LabirinthManager {
 	static StarGate greenStarGate;
 	static StarGate redStarGate;
 	private Field startField;
-	private static int allZpmCnt;
+	private static int allZpmCnt = 2;
 	private static int JaffaZpmCnt = 0;
 	private static int GeneralZpmCnt = 0;
 
@@ -183,9 +183,10 @@ public class LabirinthManager {
 		System.out.println("TRANSFORM CANYON");
 		Application.log.println("TRANSFORM CANYON");
 
-		
 		int[] n = map.get(index).getNeighbours();
-		map.set(index,new Field(index, n));
+		Field f = new Field(index, n);
+		System.out.println(f);
+		map.add(index,f);
 	}
 
 	public StarGate getGreenStarGate() {
@@ -232,5 +233,11 @@ public class LabirinthManager {
 	
 	public void addBlock(AbstractBlock a){
 			map.add(a);
+	}
+	public void listStatusz(){
+		System.out.println("GENERALZPM:"+GeneralZpmCnt+" JAFFAZPM:"+JaffaZpmCnt+" ALL:"+allZpmCnt+"\n");
+		for(AbstractBlock s:map){
+			System.out.println(s);
+		}
 	}
 }

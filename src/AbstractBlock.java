@@ -75,5 +75,9 @@ public abstract class AbstractBlock {
 	public int[] getNeighbours() {
 		return neighbourIndexes;
 	}
+	@Override
+	public String toString() {
+		return getClass().getName().toUpperCase()+"(ID="+index+")";
+	}
 
 }

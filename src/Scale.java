@@ -84,4 +84,10 @@ public class Scale extends Field {
 		Application.log.println("NOTIFY SCALE");
 		doorToOpen.Open(false);
 	}
+	@Override
+	public String toString() {
+		String s = super.toString();
+		s += " WEIGHT:"+currentWeight+" WEIGHTLIMIT:"+weightlimit+" DOOR:"+doorToOpen.getIndex();
+		return s;
+	}
 }

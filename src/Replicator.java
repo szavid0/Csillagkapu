@@ -18,9 +18,6 @@ public class Replicator  extends Creature implements Runnable  {
 
 	@Override
 	public void move(Direction dir) {
-		System.out.println("MOVE "+getClass().getName().toUpperCase()+" "+dir);
-		Application.log.write("MOVE "+getClass().getName().toUpperCase()+" "+dir);
-
 		
 		AbstractBlock n = PosBlock.getNeighbour(dir);
 		if(n.isPassable() || n.getContainsBox()){ //passable vagy dobozos mezo a szomszed

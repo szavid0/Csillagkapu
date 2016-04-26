@@ -112,6 +112,13 @@ public class Field extends AbstractBlock {
 
 		containsZpm = true;
 	}
+	
+	@Override
+	public String toString() {
+		String s = super.toString();
+		s += " BOXES:"+boxes.size()+" ZPM:"+Boolean.toString(containsZpm).toUpperCase();
+		return s;
+	}
 
 
 }

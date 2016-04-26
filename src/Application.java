@@ -2,9 +2,11 @@
 import java.io.*;
 class Application {
 	
+	static BufferedReader br;
+	static int i = 0;
 	static boolean checklog(Integer testnum) throws IOException{
-        BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
-        BufferedReader br2 = new BufferedReader(new FileReader("log.txt"));
+		BufferedReader br = new BufferedReader(new FileReader("teszt_"+testnum+".txt"));
+		BufferedReader br2 = new BufferedReader(new FileReader("log.txt"));
         String line=br.readLine();
         while(!line.isEmpty())
             line = br.readLine();
@@ -231,66 +233,92 @@ class Application {
 	
 	static void runPrototype(Integer testnum) throws IOException{
 		
-		
-		BufferedReader br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
 		String line = new String();
+		if(testnum < 12){
+			br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
+			for(int i = 0; !(line = br.readLine()).equals(""); i++){
+				processCommand(line, testnum);
+			}
+		}else{
+			br = new BufferedReader(new InputStreamReader(System.in));		//Manual mod
+			System.out.println("MANUAL MOD - ENTER STATUSZ FOR FULLSTATUSZ");
+			System.out.println("\nNEW GAME STARTED");
+			log.println("NEW GAME STARTED");
+			loadMap();
+			general = new General(maze.getBlock(52),Direction.EAST,true);
+			jaffa = new Jaffa(maze.getBlock(27), Direction.WEST,true);
+			replicator = new Replicator(maze.getBlock(77),Direction.NORTH);
+			System.out.println("GENERAL,52,EAST\nJAFFA,27,WEST\nREPLICATOR,77,NORTH\n");
+			log.println("GENERAL,52,EAST\nJAFFA,27,WEST\nREPLICATOR,77,NORTH");
+
+			
+			for(int i = 0; !(line = br.readLine()).equals("EXIT"); i++){	//EXIT PARANCS
+				processCommand(line, testnum);
+			}
+		}
+		log.close();
+	
+	}
+	public static void processCommand(String line,Integer testnum) throws IOException{
 		String[] command;
 		
-
-		for(int i = 0; !(line = br.readLine()).equals(""); i++){
-			if (i <= 3) {
-				String[] parts = line.split(",");
-				if(parts[0].equals("GENERAL")){
-					if(parts.length == 4){
-						general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),true);
-					}
-						else
-						general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),false);
-
+			if(i<3 && testnum != 12){		//karakter inicializálás, csak fájlból olvasás esetén
+			String[] parts = line.split(",");
+			if(parts[0].equals("GENERAL")){
+				if(parts.length == 4){
+					general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),true);
 				}
-				if(parts[0].equals("JAFFA")){
-					if(parts.length == 4)
-						jaffa = new Jaffa(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),true);
-					else 
-						jaffa = new Jaffa(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),false);
+					else
+					general = new General(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),false);
 
-				}
-				if(parts[0].equals("REPLICATOR")){
-					replicator = new Replicator(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]));
-				}
 			}
+			if(parts[0].equals("JAFFA")){
+				if(parts.length == 4)
+					jaffa = new Jaffa(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),true);
+				else 
+					jaffa = new Jaffa(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]),false);
+
+			}
+			if(parts[0].equals("REPLICATOR")){
+				replicator = new Replicator(maze.getBlock(Integer.parseInt(parts[1])), stringToDirection(parts[2]));
+			}
+		}
+		i++;
+
+		String character = new String();
+		
+		//itt a parancsoknál mindegyiket külön meg kell valósítani
+		command = line.split(" ");
+		switch (command[0]){
+		case "NEW": 
+			System.out.println("NEW GAME STARTED");
+			log.println("NEW GAME STARTED");
+			loadMap();
+			break;
+		case "RANDOM":
+			if(command[1].equals("ON")){
+				System.out.println("RANDOM MODE ON");
+				log.println("RANDOM MODE ON");
+			}
+			if(command[1].equals("OFF")){
+				System.out.println("RANDOM MODE OFF");
+				log.println("RANDOM MODE OFF");
+			}
+			break;
+		case "MULTI-THREAD":			//Tobbszalusag ki/bekapcsolasa. Nincs meg megvalositva.
+			if(command[1].equals("ON")){
+				System.out.println("MULTI-THREAD MODE ON");
+				log.println("MULTI-THREAD MODE ON");
+			}
+			if(command[1].equals("OFF")){		
+				System.out.println("MULTI-THREAD MODE OFF");
+				log.println("MULTI-THREAD MODE OFF");
+			}
+			break;
+		case "SET":
 			
-			String character = new String();
-			
-			//itt a parancsoknál mindegyiket külön meg kell valósítani
-			command = line.split(" ");
-			switch (command[0]){
-			case "NEW": 
-				System.out.println("NEW GAME STARTED");
-				log.println("NEW GAME STARTED");
-				loadMap();
-				break;
-			case "RANDOM":
-				if(command[1].equals("ON")){
-					System.out.println("RANDOM MODE ON");
-					log.println("RANDOM MODE ON");
-				}
-				if(command[1].equals("OFF")){
-					System.out.println("RANDOM MODE OFF");
-					log.println("RANDOM MODE OFF");
-				}
-				break;
-			case "MULTI-THREAD":
-				if(command[1].equals("ON")){
-					System.out.println("MULTI-THREAD MODE ON");
-					log.println("MULTI-THREAD MODE ON");
-				}
-				if(command[1].equals("OFF")){
-					System.out.println("MULTI-THREAD MODE OFF");
-					log.println("MULTI-THREAD MODE OFF");
-				}
-				break;
-			case "SET":
+			if(command.length != 4)	System.out.println("Invalid command! Usage: SET GENERAL DIRECTION WEST");
+			else{
 				if(command[1].equals("GENERAL")){
 					character = "GENERAL";
 					general.setDirection(stringToDirection(command[3]));
@@ -301,20 +329,24 @@ class Application {
 				}if(command[1].equals("REPLICATOR")){
 					replicator.setDirection(stringToDirection(command[3]));
 				}
-				
-				break;
-			case "PICK":
+			}
+			break;
+		case "PICK":
+			if(command.length != 2)	System.out.println("Invalid command! Usage: GENERAL PICK");
+			else{
 				if(command[1].equals("GENERAL")){
-					character = "GENERAL";
-					general.pick();
-				}
-				
-				if(command[1].equals("JAFFA")){
-					character = "JAFFA";
-					jaffa.pick();
-				}
-				break;
-			case "SHOOT":
+						character = "GENERAL";
+						general.pick();
+					}
+					
+					if(command[1].equals("JAFFA")){
+						character = "JAFFA";
+						jaffa.pick();
+					}
+			}	
+			break;
+		case "SHOOT":
+			if(command.length == 3){
 				if(command[1].equals("GENERAL")){
 					character = "GENERAL";
 					if(command[2].equals("BLUE"))
@@ -329,39 +361,62 @@ class Application {
 						jaffa.shoot(Color.RED);
 					if(command[2].equals("GREEN"))
 						jaffa.shoot(Color.GREEN);
-				}
-				break;
-			case "DROP":
-				if(command[1].equals("GENERAL")){
-					character = "GENERAL";
-					general.drop();
-				}
-				
-				if(command[1].equals("JAFFA")){
-					character = "JAFFA";
-					jaffa.drop();
-				}
-				break;
-			case "SAVE":
-				System.out.println("GAME SAVED"); 
-				log.println("GAME SAVED"); 
-				break;
-			case "MOVE":
-				if(command[1].equals("GENERAL")){
-					character = "GENERAL";
-					general.move(stringToDirection(command[2]));
-				}
-				
-				if(command[1].equals("JAFFA")){
-					character = "JAFFA";
-					jaffa.move(stringToDirection(command[2]));
-				}
-				break;
-			default: break;
+				}	
+			}else{
+				System.out.println("Invalid command! Usage: SHOOT GENERAL YELLOW");
 			}
-		}
-		log.close();
+			break;
+		case "DROP":
+			if(command.length != 2)System.out.println("Invalid command! Usage: DROP JAFFA");
+			else{
+				if(command[1].equals("GENERAL")){
+						character = "GENERAL";
+						general.drop();
+					}
+					
+					if(command[1].equals("JAFFA")){
+						character = "JAFFA";
+						jaffa.drop();
+					}
+			}		
+			
+			break;
+		case "SAVE":
+			System.out.println("GAME SAVED"); 
+			log.println("GAME SAVED"); 
+			break;
+		case "MOVE":
+			if(command.length != 3)System.out.println("Invalid command! Usage: MOVE GENERAL WEST");
+			else{
+			if(command[1].equals("GENERAL")){
+				character = "GENERAL";
+				general.move(stringToDirection(command[2]));
+			}
+			
+			if(command[1].equals("JAFFA")){
+				character = "JAFFA";
+				jaffa.move(stringToDirection(command[2]));
+			}
+			if(command[1].equals("REPLICATOR")){
+				character = "REPLICATOR";
+				if(replicator != null)
+					replicator.move(stringToDirection(command[2]));
+				else{
+					System.out.println("REPLICATOR IS NULL");
+				}
+				
+				
+				}
+			}
+			break;
+		case "STATUSZ":
+				fullStatusz();
+			break;
+		default: 
+			break;
+		
 	}
+}
 
 
 	//azért staticok, mert csak egy létezik belõlük.
@@ -390,6 +445,7 @@ class Application {
 		System.out.println("|	9.Loves falra\t\t\t\t\t|");
 		System.out.println("|	10.Loves csillagkapura\t\t\t\t|");
 		System.out.println("|	11.Replikatort lelovik\t\t\t\t|");
+		System.out.println("|	12.Parancsok bevitele konzolrol\t\t\t\t|");
 		System.out.println("---------------------------------------------------------");
 		System.out.println("Valassz egy tesztesetet es ird be a szamat!");
 		
@@ -398,15 +454,26 @@ class Application {
 		int i=0;
 		i = Integer.parseInt(in.readLine());
 		runPrototype(i);
-		if(checklog(i)){
-			System.out.println("Success");
-		}
-		else
-			System.out.println("Failure");
+		if(i != 12)
+			if(checklog(i)){
+				System.out.println("Success");
+			}
+			else
+				System.out.println("Failure");
+		log.close();
 	}
 	
 	public static void endGame(String winOrLose){
 		System.out.println(winOrLose);
+	}
+	public static void fullStatusz(){
+		if(replicator != null)
+			System.out.println("\n"+general+"\n"+jaffa+"\n"+replicator);
+		else{
+			System.out.println("\n"+general+"\n"+jaffa+"\n"+"REPLICATOR:NULL");
+
+		}
+		maze.listStatusz();
 	}
 }
 

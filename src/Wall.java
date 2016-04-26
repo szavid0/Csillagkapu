@@ -5,7 +5,7 @@ import com.sun.org.apache.bcel.internal.generic.RETURN;
 //Fal osztaly megvalositasa, AbstractBlockbol oroklodik.
 public class Wall extends AbstractBlock {
 	//Specialis fal-e, melyre love csillagkapu alakul ki.
-	private boolean isSpecial;
+	protected boolean isSpecial;
 	
 	//Konstruktor.
 	public Wall(int id,int[] n){
@@ -64,5 +64,9 @@ public class Wall extends AbstractBlock {
 	@Override
 	public void moveToThisBlock(Replicator creature) {
 		
+	}
+	@Override
+	public String toString() {
+		return super.toString()+" SPECIAL:"+ Boolean.toString(isSpecial).toUpperCase();
 	}
 }

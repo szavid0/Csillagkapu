@@ -1,7 +1,5 @@
 import java.io.IOException;
 
-import javafx.scene.input.TouchPoint;
-import sun.net.www.http.PosterOutputStream;
 
 public class Character extends Creature {
 
@@ -96,9 +94,16 @@ public class Character extends Creature {
 				//Ha ra lehet lepni, akkor beallitjuk a pozicionak.
 				//Az eddigi blokkot pedig ertesitjuk, hogy elleptunk rola.
 				if(block.isPassable()){
-					PosBlock.notifyBlock();	
+					PosBlock.notifyBlock();
+					PosBlock.setPassable(true);					
 					block.moveToThisBlock(this);
 			}
+	}
+	@Override
+	public void setPosBlock(AbstractBlock PosBlock) {
+		super.setPosBlock(PosBlock);
+		PosBlock.setPassable(false);
+		PosBlock.setShootable(false);
 	}
 	public void die(){
 		//Megnezi, hogy van e meg vesztheto elete, ha nincs jelezzuk, hogy vesztett a jatekos.
@@ -115,6 +120,11 @@ public class Character extends Creature {
 
 	public void collectZpm() {
 		LabirinthManager.addZpm(this);
+	}
+	@Override
+	public String toString() {
+		boolean b = (box!= null);
+		return super.toString()+" HASBOX:"+Boolean.toString(b).toUpperCase()+" LIVES:"+lives;
 	}
 		
 		
