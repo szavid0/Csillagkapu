@@ -30,9 +30,9 @@ public abstract class Creature {
 
 		this.direction = direction;
 	}
-	public abstract void move(Direction dir);
 	@Override
 	public String toString() {
 		return getClass().getName().toUpperCase()+","+PosBlock.getIndex()+","+direction;
 	}
+
 }

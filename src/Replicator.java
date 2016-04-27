@@ -16,14 +16,13 @@ public class Replicator  extends Creature implements Runnable  {
 		
 	}
 
-	@Override
-	//Replicator mozgasat leiro fuggveny
-	public void move(Direction dir) {
+
+	public void move(boolean explicit, Direction dir) {
 		Direction random_dir;
 		AbstractBlock n;
 		
 		//Random modban kerunk egy random iranyt
-		if(Application.random == true){
+		if(Application.random == true && explicit == false){
 			random_dir = Application.maze.getRandomDirection();
 			 n = PosBlock.getNeighbour(random_dir);
 		}else{

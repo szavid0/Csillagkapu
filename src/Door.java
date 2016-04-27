@@ -45,7 +45,6 @@ public class Door extends AbstractBlock {
 	//Ha a replikator ralep, akkor jelzi.
 	@Override
 	public void moveToThisBlock(Replicator r) {
-			r.setPosBlock(this);
 	}
 	
 	@Override

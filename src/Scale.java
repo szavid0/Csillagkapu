@@ -66,7 +66,7 @@ public class Scale extends Field {
 				System.out.println("COLLECTBOX");
 				Application.log.println("COLLECTBOX");
 			}
-			Box box = boxes.get(boxes.size()-1);
+			Box box = boxes.remove(boxes.size()-1);
 			//A doboz sulyaval csokkentjuk a merlegen levo sulyt.
 			currentWeight -= box.getWeight();
 			System.out.println("WEIGHT ON SCALE="+currentWeight+" WEIGHTLIMIT="+weightlimit);

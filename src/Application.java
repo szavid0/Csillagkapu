@@ -415,9 +415,9 @@ class Application {
 				character = "REPLICATOR";
 				if (replicator != null){
 					if(command.length == 3){
-						replicator.move(stringToDirection(command[2]));	//EXPLICIT MEGADAS
+						replicator.move(true,stringToDirection(command[2]));	//EXPLICIT MEGADAS
 					}else if(command.length == 2 && random == true){
-						replicator.move(Direction.WEST);	//RANDOM IRANY(A WEST ITT FELULIRODIK)
+						replicator.move(false,Direction.WEST);	//RANDOM IRANY(A WEST ITT FELULIRODIK)
 					}else if(command.length == 2 && random == false){
 						System.out.println("TURN ON RANDOM MODE: \"RANDOM ON\"");
 					}
@@ -496,13 +496,13 @@ class Application {
 	//teljes statuszkepet ad a jatekrol
 	//STATUSZ parancs
 	public static void fullStatusz(){
+		maze.listStatusz();
 		if(replicator != null)
-			System.out.println("\n"+general+"\n"+jaffa+"\n"+replicator);
+			System.out.println(general+"\n"+jaffa+"\n"+replicator);
 		else{
-			System.out.println("\n"+general+"\n"+jaffa+"\n"+"REPLICATOR:NULL");
+			System.out.println(general+"\n"+jaffa+"\n"+"REPLICATOR:NULL");
 
 		}
-		maze.listStatusz();
 	}
 }
 

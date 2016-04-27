@@ -235,13 +235,13 @@ public class LabirinthManager {
 		boolean empty_field = false;
 		while(!empty_field){
 			b = map.get(new Random().nextInt(map.size()));
-			while(!(b.getClass() == Field.class || b.getClass() == Scale.class)){
-				b = map.get(new Random().nextInt(map.size()));
+			while(!(b.getClass() == Field.class || b.getClass() == Scale.class)){	//mezot vagy merleget keresunk
+				b = map.get(new Random().nextInt(map.size()));	//random mezo lekerese
 			}
 			Field f = (Field)b;
-			if(f.getContainsBox()==false){
+			if(f.getContainsBox()==false && f.getContainsZpm() == false){ //Ures-e a mezo
 				empty_field = true;
-				f.putZpm();
+				f.putZpm();	//zpm elhelyezése a mezon
 			}
 		}
 	}
@@ -260,11 +260,10 @@ public class LabirinthManager {
 	}
 	//terkep statuszanak listazasa mezonkent
 	public void listStatusz(){
-		System.out.println("GENERALZPM:"+GeneralZpmCnt+" JAFFAZPM:"+JaffaZpmCnt+" ALL:"+allZpmCnt+"\n");
 		for(AbstractBlock s:map){
 			System.out.println(s);
 		}
-		System.out.println();
+		System.out.println("\nGENERALZPM:"+GeneralZpmCnt+" JAFFAZPM:"+JaffaZpmCnt+" ALL:"+allZpmCnt);
 	}
 
 

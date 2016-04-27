@@ -62,7 +62,7 @@ public class Field extends AbstractBlock {
 				System.out.println("COLLECTBOX");
 				Application.log.println("COLLECTBOX");
 			}
-			return boxes.get(boxes.size()-1);
+			return boxes.remove(boxes.size()-1);	//legfelso doboz visszaadasa es torlese a mezorol
 		}
 		return null;
 	}
