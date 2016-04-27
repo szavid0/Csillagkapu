@@ -24,7 +24,7 @@ public class Field extends AbstractBlock {
 			this.containsBox = true;
 			passable = false;
 			shootable = false;
-			boxes.add(new Box(1));
+			boxes.add(new Box(2));
 		}
 		//Ha nincs a mezon doboz, akkor athaladhato.
 		else{
@@ -75,6 +75,9 @@ public class Field extends AbstractBlock {
 		passable = false;
 		shootable = false;
 
+	}
+	public void putZpm(){
+		this.containsZpm = true;
 	}
 	
 	//A karakter ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta.

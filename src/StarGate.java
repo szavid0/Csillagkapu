@@ -84,6 +84,33 @@ public class StarGate extends Wall {
 			c.setDirection(dir);
 		}
 	}
+	@Override
+	public void moveToThisBlock(Replicator r){
+		//Ha van parja, megkeressuk.
+				//Ha nincs, akkor nem csinalunk semmit.
+				if(isPaired){
+					StarGate pair = null;
+					if(color == Color.BLUE) {
+						//Sarga par.
+						pair = Application.maze.getYellowStarGate();
+					}
+					else if(color == Color.YELLOW){
+						//Kek par.
+						pair = Application.maze.getBlueStarGate();
+					}else if(color == Color.RED){
+						pair = Application.maze.getGreenStarGate();
+					}else{
+						pair = Application.maze.getRedStarGate();
+					}
+					//Lekeri a parjanak az iranyat es az ott levo szomszedot.
+					Direction dir = pair.getDirection();
+					AbstractBlock neighbour = pair.getNeighbour(dir);	
+					//Atlepunk arra a blockra es beallitjuk az ezredes iranyat.
+					r.setPosBlock(neighbour);
+					r.setDirection(dir);
+				}
+					
+	}
 	
 	//Loves esemeny kezelese.
 	@Override

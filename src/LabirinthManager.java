@@ -205,6 +205,8 @@ public class LabirinthManager {
 			Application.log.println("COLLECTZPM ZPMCNT="+GeneralZpmCnt);
 			if(GeneralZpmCnt % 2 == 0){
 				CreateZpm();
+				allZpmCnt++;
+				return;
 			}
 			
 			
@@ -225,6 +227,19 @@ public class LabirinthManager {
 	private static  void CreateZpm() {  //RANDOM
 		System.out.println("CREATEZPM");
 		Application.log.println("CREATEZPM");
+		AbstractBlock b;
+		boolean empty_field = false;
+		while(!empty_field){
+			b = map.get(new Random().nextInt(map.size()));
+			while(!(b.getClass() == Field.class || b.getClass() == Scale.class)){
+				b = map.get(new Random().nextInt(map.size()));
+			}
+			Field f = (Field)b;
+			if(f.getContainsBox()==false){
+				empty_field = true;
+				f.putZpm();
+			}
+		}
 	}
 	//zpm elhelyezese a palyan
 	private  void CreateZpm(int fieldIndex) {  //DETERMINISZTIKUS
