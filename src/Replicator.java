@@ -19,8 +19,17 @@ public class Replicator  extends Creature implements Runnable  {
 	@Override
 	//Replicator mozgasat leiro fuggveny
 	public void move(Direction dir) {
+		Direction random_dir;
+		AbstractBlock n;
 		
-		AbstractBlock n = PosBlock.getNeighbour(dir);
+		//Random modban kerunk egy random iranyt
+		if(Application.random == true){
+			random_dir = Application.maze.getRandomDirection();
+			 n = PosBlock.getNeighbour(random_dir);
+		}else{
+			n = PosBlock.getNeighbour(dir);
+		}
+		
 		if(n.isPassable() || n.getContainsBox()){ //passable vagy dobozos mezo a szomszed
 			PosBlock.setShootable(true);
 			setPosBlock(n);

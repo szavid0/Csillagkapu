@@ -66,7 +66,7 @@ public class LabirinthManager {
 			map.set(w.getIndex(), blueStarGate);
 			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
-			if(yellowStarGate!= null)createWormHole(col);
+			if(yellowStarGate != null)createWormHole(col);
 		}
 		
 		//Egyebkent sarga csillagkapu.
@@ -75,8 +75,8 @@ public class LabirinthManager {
 			map.set(w.getIndex(), yellowStarGate);
 			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
-			if(blueStarGate!= null)createWormHole(col);
-
+			if(blueStarGate != null)createWormHole(col);
+			
 		}
 		else if (col == Color.GREEN){
 			greenStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.GREEN);
@@ -167,13 +167,17 @@ public class LabirinthManager {
 		
 		if(col1 == Color.YELLOW || col1 == Color.BLUE){
 			blueyellowWormHoleExists = true;
-			yellowStarGate.setPair(blueStarGate.getIndex(),oppDir(blueStarGate.getDirection()));
-			blueStarGate.setPair(yellowStarGate.getIndex(),oppDir(yellowStarGate.getDirection()));
+			blueStarGate.setPassable(true);
+			blueStarGate.setIsPaired(true);
+			yellowStarGate.setIsPaired(true);
+			yellowStarGate.setPassable(true);
 		}
 		else{
 			redgreenWormHoleExists = true;
-			greenStarGate.setPair(redStarGate.getIndex(),oppDir(blueStarGate.getDirection()));
-			redStarGate.setPair(greenStarGate.getIndex(),oppDir(yellowStarGate.getDirection()));
+			redStarGate.setPassable(true);
+			greenStarGate.setIsPaired(true);
+			redStarGate.setIsPaired(true);
+			greenStarGate.setPassable(true);
 		}
 		//Csillagkapu parok beallitasa.
 		
@@ -261,5 +265,11 @@ public class LabirinthManager {
 			System.out.println(s);
 		}
 		System.out.println();
+	}
+
+
+	public Direction getRandomDirection() {
+		int dirnum = new Random().nextInt(Direction.values().length); //Random irany generalasa
+		return Direction.values()[dirnum];		//enumkent adjuk vissza
 	}
 }

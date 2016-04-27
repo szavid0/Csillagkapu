@@ -78,6 +78,8 @@ public class Field extends AbstractBlock {
 	}
 	public void putZpm(){
 		this.containsZpm = true;
+		System.out.println("NEW ZPM CREATED AT:"+this.getClass().getName().toUpperCase()+"(ID="+index+")");
+		Application.log.println("NEW ZPM CREATED AT:"+this.getClass().getName().toUpperCase()+"(ID="+index+")");
 	}
 	
 	//A karakter ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta.

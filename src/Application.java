@@ -2,9 +2,9 @@
 import java.io.*;
 class Application {
 	
-	static BufferedReader br;
-	static int i = 0;
-	
+	private static BufferedReader br;
+	private static int i = 0;
+	static boolean random = false;
 	//teszt kimenet ellenorzese
 	//a log fajl tartalmat veti ossze az elvart kimenettel	
 	static boolean checklog(Integer testnum) throws IOException{
@@ -242,9 +242,9 @@ class Application {
 	static void runPrototype(Integer testnum) throws IOException{
 		loadMap();
 		String line = new String();
-		if(testnum < 12){	//automatikus tesztesetek
+		if(testnum != 13){	//automatikus tesztesetek
 			br = new BufferedReader(new FileReader("teszt_" + testnum.toString() + ".txt"));
-			for(int i = 0; !(line = br.readLine()).equals(""); i++){
+			for(int i = 0; !(line = br.readLine()).isEmpty() ; i++){
 				processCommand(line, testnum);
 			}
 		}else{
@@ -274,7 +274,7 @@ class Application {
 	public static void processCommand(String line,Integer testnum) throws IOException{
 		String[] command;
 		
-			if(i<3 && testnum != 12){		//karakter inicializálás, csak fájlból olvasás esetén
+			if(i<3 && testnum != 13){		//karakter inicializálás, csak fájlból olvasás esetén
 			String[] parts = line.split(",");
 			if(parts[0].equals("GENERAL")){
 				if(parts.length == 4){
@@ -307,12 +307,14 @@ class Application {
 			log.println("NEW GAME STARTED");
 			loadMap();
 			break;
-		case "RANDOM":		//nincs megvalositva (random mod)
+		case "RANDOM":		
 			if(command[1].equals("ON")){
+				random = true;
 				System.out.println("RANDOM MODE ON");
 				log.println("RANDOM MODE ON");
 			}
 			if(command[1].equals("OFF")){
+				random = false;
 				System.out.println("RANDOM MODE OFF");
 				log.println("RANDOM MODE OFF");
 			}
@@ -398,7 +400,7 @@ class Application {
 			log.println("GAME SAVED"); 
 			break;
 		case "MOVE":
-			if(command.length != 3)System.out.println("Invalid command! Usage: MOVE GENERAL WEST");
+			if(command.length != 3 && command.length != 2)System.out.println("Invalid command! Usage: MOVE GENERAL WEST");
 			else{
 			if(command[1].equals("GENERAL")){
 				character = "GENERAL";
@@ -411,14 +413,23 @@ class Application {
 			}
 			if(command[1].equals("REPLICATOR")){
 				character = "REPLICATOR";
-				if(replicator != null)
-					replicator.move(stringToDirection(command[2]));
+				if (replicator != null){
+					if(command.length == 3){
+						replicator.move(stringToDirection(command[2]));	//EXPLICIT MEGADAS
+					}else if(command.length == 2 && random == true){
+						replicator.move(Direction.WEST);	//RANDOM IRANY(A WEST ITT FELULIRODIK)
+					}else if(command.length == 2 && random == false){
+						System.out.println("TURN ON RANDOM MODE: \"RANDOM ON\"");
+					}
+				}
 				else{
 					System.out.println("REPLICATOR IS NULL");
 				}
+			}
+			
 				
 				
-				}
+				
 			}
 			break;
 		case "STATUSZ":
@@ -458,7 +469,8 @@ class Application {
 		System.out.println("|	9.Loves falra\t\t\t\t\t|");
 		System.out.println("|	10.Loves csillagkapura\t\t\t\t|");
 		System.out.println("|	11.Replikatort lelovik\t\t\t\t|");
-		System.out.println("|	12.Parancsok bevitele konzolrol\t\t\t\t|");
+		System.out.println("|	12.Random lepes replikatorral\t\t\t\t|");
+		System.out.println("|	13.Parancsok bevitele konzolrol\t\t\t\t|");
 		System.out.println("---------------------------------------------------------");
 		System.out.println("Valassz egy tesztesetet es ird be a szamat!");
 		
@@ -468,7 +480,7 @@ class Application {
 		runPrototype(i);
 		
 		//logfajl ellenorzes
-		if(i != 12)
+		if(i != 13)
 			if(checklog(i)){
 				System.out.println("Success");
 			}

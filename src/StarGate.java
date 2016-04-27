@@ -138,4 +138,8 @@ public class StarGate extends Wall {
 		s += " "+ color+" DIRECTION:"+direction+" PAIRED:"+Boolean.toString(isPaired).toUpperCase();
 		return s;
 	}
+
+	public void setIsPaired(boolean b) {
+		this.isPaired = b;
+	}
 }
