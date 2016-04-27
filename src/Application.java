@@ -492,6 +492,10 @@ class Application {
 	//jatek vege
 	public static void endGame(String winOrLose){
 		System.out.println(winOrLose);
+		log.println(winOrLose);
+		System.out.println("Game Over!");
+		
+		System.exit(0);
 	}
 	//teljes statuszkepet ad a jatekrol
 	//STATUSZ parancs

@@ -59,6 +59,7 @@ public class Field extends AbstractBlock {
 			if(boxes.size() == 1){
 				passable = true;
 				shootable = true;
+				containsBox = false;
 				System.out.println("COLLECTBOX");
 				Application.log.println("COLLECTBOX");
 			}
@@ -74,6 +75,7 @@ public class Field extends AbstractBlock {
 		//Nem passable, shootable ha van a mezon doboz.
 		passable = false;
 		shootable = false;
+		containsBox = true;
 
 	}
 	public void putZpm(){

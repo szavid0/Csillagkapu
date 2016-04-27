@@ -72,8 +72,7 @@ public class Character extends Creature {
 	public void drop(){
 
 		AbstractBlock f = PosBlock.getNeighbour(direction);
-		if(f.isPassable()) //vagy ures vagy dobozos blokkra lehet rakni
-				if(hasBox()){
+				if(hasBox() && f.isPassable()){
 					System.out.println(getClass().getName().toUpperCase()+ " DROPPED BOX ON "+f.getClass().getName().toUpperCase()+"(ID="+f.getIndex()+")");
 					Application.log.println(getClass().getName().toUpperCase()+ " DROPPED BOX ON "+f.getClass().getName().toUpperCase()+"(ID="+f.getIndex()+")");
 					
@@ -110,8 +109,10 @@ public class Character extends Creature {
 		//Megnezi, hogy van e meg vesztheto elete, ha nincs jelezzuk, hogy vesztett a jatekos.
 	
 
-		if(lives ==	0)
-			Application.endGame("LOSE");
+		if(lives ==	0){
+			Application.endGame(getClass().getName().toUpperCase()+" LOSE");
+			return;
+		}
 		else
 			lives--;
 		System.out.println(getClass().getName().toUpperCase()+ " DIE LIVES="+lives);

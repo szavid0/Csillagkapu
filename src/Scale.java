@@ -63,6 +63,7 @@ public class Scale extends Field {
 				//Passable, shootable igaz, ha 1 doboz volt rajta es levettek.
 				passable = true;
 				shootable = true;
+				containsBox = false;
 				System.out.println("COLLECTBOX");
 				Application.log.println("COLLECTBOX");
 			}
