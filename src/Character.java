@@ -72,7 +72,7 @@ public class Character extends Creature {
 	public void drop(){
 
 		AbstractBlock f = PosBlock.getNeighbour(direction);
-				if(hasBox() && f.isPassable()){
+				if(hasBox() && (f.isPassable() || f.getContainsBox()) ){
 					System.out.println(getClass().getName().toUpperCase()+ " DROPPED BOX ON "+f.getClass().getName().toUpperCase()+"(ID="+f.getIndex()+")");
 					Application.log.println(getClass().getName().toUpperCase()+ " DROPPED BOX ON "+f.getClass().getName().toUpperCase()+"(ID="+f.getIndex()+")");
 					

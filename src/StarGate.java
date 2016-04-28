@@ -14,6 +14,7 @@ public class StarGate extends Wall {
 		this.color = color;
 		this.isPaired = isPaired;
 		isSpecial = true;
+		shootable = false;
 		//Ha van parja, akkor a passable true, ha nincs, akkor false.
 		if (isPaired){
 			passable=true;
@@ -123,6 +124,7 @@ public class StarGate extends Wall {
 			//Regi csillagkapu torlese.
 			Application.maze.deleteStarGate(this.color);
 			//Uj csillagkapu letrehozasa a regi helyen.
+				
 			Application.maze.createStarGate(this,bulletcolor,Application.maze.oppDir(dir));
 		}
 	}

@@ -9,7 +9,7 @@ import sun.security.action.GetBooleanAction;
 public class LabirinthManager {
 	//Letaroljuk a palyat, a csillagkapukat es a kezdopoziciot.
 	private static List<AbstractBlock> map = new ArrayList<AbstractBlock>();
-	private boolean blueyellowWormHoleExists = false;
+	private boolean blueyellowWormHoleExists = true;
 	private boolean redgreenWormHoleExists = false;
 	static StarGate yellowStarGate;
 	static StarGate blueStarGate;
@@ -107,10 +107,8 @@ public class LabirinthManager {
 			map.set(blueStarGate.getIndex(), new Wall(blueStarGate.getIndex(),blueStarGate.getNeighboursIndex(),true));
 			blueStarGate=null;
 			if(blueyellowWormHoleExists){
-				map.set(yellowStarGate.getIndex(), new Wall(yellowStarGate.getIndex(),yellowStarGate.getNeighboursIndex(),true));
-				yellowStarGate=null;
-				System.out.println("DELETESTARGATE "+Color.YELLOW);
-				Application.log.println("DELETESTARGATE "+Color.YELLOW);
+				blueyellowWormHoleExists = false;
+				deleteStarGate(Color.YELLOW);
 			}
 		}
 		//Kitoroljuk az adott szinu csillagkaput es letrehozunk helyette egy specialis falat.
@@ -118,28 +116,22 @@ public class LabirinthManager {
 			map.set(yellowStarGate.getIndex(), new Wall(yellowStarGate.getIndex(),yellowStarGate.getNeighboursIndex(),true));
 			yellowStarGate=null;
 			if(blueyellowWormHoleExists){
-				map.set(blueStarGate.getIndex(), new Wall(blueStarGate.getIndex(),blueStarGate.getNeighboursIndex(),true));
-				blueStarGate=null;
-				System.out.println("DELETESTARGATE "+Color.BLUE);
-				Application.log.println("DELETESTARGATE "+Color.BLUE);
+				blueyellowWormHoleExists = false;
+				deleteStarGate(Color.BLUE);
 			}
 		}else if(col == Color.GREEN){
 			map.set(greenStarGate.getIndex(), new Wall(greenStarGate.getIndex(),greenStarGate.getNeighboursIndex(),true));
 			greenStarGate=null;
 			if(redgreenWormHoleExists){
-				map.set(redStarGate.getIndex(), new Wall(redStarGate.getIndex(),redStarGate.getNeighboursIndex(),true));
-				redStarGate=null;
-				System.out.println("DELETESTARGATE "+Color.RED);
-				Application.log.println("DELETESTARGATE "+Color.RED);
+				redgreenWormHoleExists = false;
+				deleteStarGate(Color.RED);
 			}
 		}else{
 			map.set(redStarGate.getIndex(), new Wall(redStarGate.getIndex(),redStarGate.getNeighboursIndex(),true));
 			redStarGate=null;
 			if(redgreenWormHoleExists){
-				map.set(greenStarGate.getIndex(), new Wall(greenStarGate.getIndex(),greenStarGate.getNeighboursIndex(),true));
-				greenStarGate=null;
-				System.out.println("DELETESTARGATE "+Color.GREEN);
-				Application.log.println("DELETESTARGATE "+Color.GREEN);
+				redgreenWormHoleExists = false;
+				deleteStarGate(Color.GREEN);
 			}
 		}
 	}

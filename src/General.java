@@ -7,6 +7,7 @@ public class General extends Character{
 		//Az ezredes pozicioja es iranya.
 		PosBlock = pos;
 		direction = dir;
+		PosBlock.setPassable(false);
 		//Van-e doboz az ezredesnel.
 		if(hasbox)
 			this.box = new Box(2);

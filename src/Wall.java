@@ -39,6 +39,7 @@ public class Wall extends AbstractBlock {
 			if (isSpecial){
 				System.out.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
 				Application.log.println(col+" BULLET HIT SPECIALWALL(ID="+index+")");
+				
 				//Csillagkapu letrehozasa a megfelelo szinnel.
 				Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
 				return;

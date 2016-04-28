@@ -47,6 +47,8 @@ class Canyon extends AbstractBlock {
 	@Override
 	public void setBox(Box box){
 		box = null;
+		System.out.println("BOX DESTROYED");
+		Application.log.println("BOX DESTROYED");
 	}
 
 	//Ha karakter lep ra, akkor meghivja a die() fuggvenyet.
