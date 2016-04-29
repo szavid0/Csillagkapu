@@ -4,6 +4,7 @@ import java.util.Random;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 import sun.security.action.GetBooleanAction;
 
 public class LabirinthManager {
@@ -19,6 +20,7 @@ public class LabirinthManager {
 	private static int allZpmCnt = 2;
 	private static int JaffaZpmCnt = 0;
 	private static int GeneralZpmCnt = 0;
+	private static Random rand = new Random();
 
 
 
@@ -62,6 +64,9 @@ public class LabirinthManager {
 		
 		//Ha kek volt a lovedek, akkor kek csillagkapu.
 		if(col == Color.BLUE){
+			//teszt
+			if(blueStarGate != null)deleteStarGate(Color.BLUE);
+			
 			blueStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.BLUE);
 			map.set(w.getIndex(), blueStarGate);
 			
@@ -71,6 +76,9 @@ public class LabirinthManager {
 		
 		//Egyebkent sarga csillagkapu.
 		else if (col == Color.YELLOW){
+			//teszt
+			if(yellowStarGate != null)deleteStarGate(Color.YELLOW);
+			
 			yellowStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.YELLOW);
 			map.set(w.getIndex(), yellowStarGate);
 			
@@ -79,6 +87,9 @@ public class LabirinthManager {
 			
 		}
 		else if (col == Color.GREEN){
+			//teszt
+			if(greenStarGate != null)deleteStarGate(Color.GREEN);
+			
 			greenStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.GREEN);
 			map.set(w.getIndex(), greenStarGate);
 			
@@ -86,6 +97,9 @@ public class LabirinthManager {
 			if(redStarGate!= null)createWormHole(col);
 
 		}else{
+			//teszt
+			if(redStarGate != null)deleteStarGate(Color.RED);
+			
 			redStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.RED);
 			map.set(w.getIndex(), redStarGate);
 			
@@ -145,10 +159,26 @@ public class LabirinthManager {
 	public StarGate getBlueStarGate(){
 		return blueStarGate;
 	}
+	public static Field getRandomEmptyField(){
+		AbstractBlock b = null;
+		boolean empty_field = false;
+		while(!empty_field){
+			b = map.get(new Random().nextInt(map.size()));
+			while(!(b.getClass() == Field.class || b.getClass() == Scale.class)){	//mezot vagy merleget keresunk
+				b = map.get(rand.nextInt(map.size()));	//random mezo lekerese
+			}
+			Field f = (Field)b;
+			if(f.isPassable() == true && f.getContainsZpm() == false){ //Ures-e a mezo
+				empty_field = true;
+				b = f;
+			}
+		}
+		return (Field)b;
+	}
 	
 	//Kezdo pozicio lekerese.
 	public Field getStartField() {
-		return (Field)map.get(54);
+		return getRandomEmptyField();
 	}
 	
 	//Feregjarat letrehozasa.
@@ -223,19 +253,8 @@ public class LabirinthManager {
 	private static  void CreateZpm() {  //RANDOM
 		System.out.println("CREATEZPM");
 		Application.log.println("CREATEZPM");
-		AbstractBlock b;
-		boolean empty_field = false;
-		while(!empty_field){
-			b = map.get(new Random().nextInt(map.size()));
-			while(!(b.getClass() == Field.class || b.getClass() == Scale.class)){	//mezot vagy merleget keresunk
-				b = map.get(new Random().nextInt(map.size()));	//random mezo lekerese
-			}
-			Field f = (Field)b;
-			if(f.getContainsBox()==false && f.getContainsZpm() == false){ //Ures-e a mezo
-				empty_field = true;
-				f.putZpm();	//zpm elhelyezése a mezon
-			}
-		}
+		
+		getRandomEmptyField().putZpm();
 	}
 	//zpm elhelyezese a palyan
 	private  void CreateZpm(int fieldIndex) {  //DETERMINISZTIKUS

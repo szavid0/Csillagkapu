@@ -4,6 +4,7 @@ class Application {
 	
 	private static BufferedReader br;
 	private static int i = 0;
+	private static int mapWidth = 10;  //csak tesztpalya felepitese miatt kell
 	static boolean random = false;
 	//teszt kimenet ellenorzese
 	//a log fajl tartalmat veti ossze az elvart kimenettel	
@@ -45,8 +46,8 @@ class Application {
 				if(koordinatak.length==2){
 					for(int i=Integer.parseInt(koordinatak[0]);i<=Integer.parseInt(koordinatak[1]);i++){
 						int t[]=new int[4];
-						t[0]=i-10;
-						t[1]=i+10;
+						t[0]=i-mapWidth;
+						t[1]=i+mapWidth;
 						t[2]=i+1;
 						t[3]=i-1;
 						maze.addBlock(new Wall(i,t,false));
@@ -55,8 +56,8 @@ class Application {
 				else{
 					int poz=Integer.parseInt(koordinatak[0]);
 					int t[]=new int[4];
-					t[0]=poz-10;
-					t[1]=poz+10;
+					t[0]=poz-mapWidth;
+					t[1]=poz+mapWidth;
 					t[2]=poz+1;
 					t[3]=poz-1;
 					maze.addBlock(new Wall(poz,t,false));
@@ -66,8 +67,8 @@ class Application {
 				if(koordinatak.length==2){
 					for(int i=Integer.parseInt(koordinatak[0]);i<=Integer.parseInt(koordinatak[1]);i++){
 						int t[]=new int[4];
-						t[0]=i-10;
-						t[1]=i+10;
+						t[0]=i-mapWidth;
+						t[1]=i+mapWidth;
 						t[2]=i+1;
 						t[3]=i-1;
 						maze.addBlock(new Wall(i,t,true));
@@ -76,8 +77,8 @@ class Application {
 				else{
 					int poz=Integer.parseInt(koordinatak[0]);
 					int t[]=new int[4];
-					t[0]=poz-10;
-					t[1]=poz+10;
+					t[0]=poz-mapWidth;
+					t[1]=poz+mapWidth;
 					t[2]=poz+1;
 					t[3]=poz-1;
 					maze.addBlock(new Wall(poz,t,true));
@@ -87,8 +88,8 @@ class Application {
 				if(koordinatak.length==2){
 					for(int i=Integer.parseInt(koordinatak[0]);i<=Integer.parseInt(koordinatak[1]);i++){
 						int t[]=new int[4];
-						t[0]=i-10;
-						t[1]=i+10;
+						t[0]=i-mapWidth;
+						t[1]=i+mapWidth;
 						t[2]=i+1;
 						t[3]=i-1;
 						maze.addBlock(new Field(i,t,false,false));
@@ -97,8 +98,8 @@ class Application {
 				else{
 					int poz=Integer.parseInt(koordinatak[0]);
 					int t[]=new int[4];
-					t[0]=poz-10;
-					t[1]=poz+10;
+					t[0]=poz-mapWidth;
+					t[1]=poz+mapWidth;
 					t[2]=poz+1;
 					t[3]=poz-1;
 					maze.addBlock(new Field(poz,t,false,false));
@@ -108,8 +109,8 @@ class Application {
 				if(koordinatak.length==2){
 					for(int i=Integer.parseInt(koordinatak[0]);i<=Integer.parseInt(koordinatak[1]);i++){
 						int t[]=new int[4];
-						t[0]=i-10;
-						t[1]=i+10;
+						t[0]=i-mapWidth;
+						t[1]=i+mapWidth;
 						t[2]=i+1;
 						t[3]=i-1;
 						maze.addBlock(new Field(i,t,false,true));
@@ -118,8 +119,8 @@ class Application {
 				else{
 					int poz=Integer.parseInt(koordinatak[0]);
 					int t[]=new int[4];
-					t[0]=poz-10;
-					t[1]=poz+10;
+					t[0]=poz-mapWidth;
+					t[1]=poz+mapWidth;
 					t[2]=poz+1;
 					t[3]=poz-1;
 					maze.addBlock(new Field(poz,t,false,true));
@@ -129,8 +130,8 @@ class Application {
 				if(koordinatak.length==2){
 					for(int i=Integer.parseInt(koordinatak[0]);i<=Integer.parseInt(koordinatak[1]);i++){
 						int t[]=new int[4];
-						t[0]=i-10;
-						t[1]=i+10;
+						t[0]=i-mapWidth;
+						t[1]=i+mapWidth;
 						t[2]=i+1;
 						t[3]=i-1;
 						maze.addBlock(new Field(i,t,true,false));
@@ -139,8 +140,8 @@ class Application {
 				else{
 					int poz=Integer.parseInt(koordinatak[0]);
 					int t[]=new int[4];
-					t[0]=poz-10;
-					t[1]=poz+10;
+					t[0]=poz-mapWidth;
+					t[1]=poz+mapWidth;
 					t[2]=poz+1;
 					t[3]=poz-1;
 					maze.addBlock(new Field(poz,t,true,false));
@@ -150,8 +151,8 @@ class Application {
 				if(koordinatak.length==2){
 					for(int i=Integer.parseInt(koordinatak[0]);i<=Integer.parseInt(koordinatak[1]);i++){
 						int t[]=new int[4];
-						t[0]=i-10;
-						t[1]=i+10;
+						t[0]=i-mapWidth;
+						t[1]=i+mapWidth;
 						t[2]=i+1;
 						t[3]=i-1;
 						maze.addBlock(new Door(i,t));
@@ -160,8 +161,8 @@ class Application {
 				else{
 					int poz=Integer.parseInt(koordinatak[0]);
 					int t[]=new int[4];
-					t[0]=poz-10;
-					t[1]=poz+10;
+					t[0]=poz-mapWidth;
+					t[1]=poz+mapWidth;
 					t[2]=poz+1;
 					t[3]=poz-1;
 					maze.addBlock(new Door(poz,t));
@@ -171,8 +172,8 @@ class Application {
 				if(koordinatak.length==2){
 					for(int i=Integer.parseInt(koordinatak[0]);i<=Integer.parseInt(koordinatak[1]);i++){
 						int t[]=new int[4];
-						t[0]=i-10;
-						t[1]=i+10;
+						t[0]=i-mapWidth;
+						t[1]=i+mapWidth;
 						t[2]=i+1;
 						t[3]=i-1;
 						maze.addBlock(new Canyon(i,t));
@@ -181,8 +182,8 @@ class Application {
 				else{
 					int poz=Integer.parseInt(koordinatak[0]);
 					int t[]=new int[4];
-					t[0]=poz-10;
-					t[1]=poz+10;
+					t[0]=poz-mapWidth;
+					t[1]=poz+mapWidth;
 					t[2]=poz+1;
 					t[3]=poz-1;
 					maze.addBlock(new Canyon(poz,t));
@@ -191,8 +192,8 @@ class Application {
 			case "YELLOW_STARGATE":{
 				int poz=Integer.parseInt(koordinatak[0]);
 				int t[]=new int[4];
-				t[0]=poz-10;
-				t[1]=poz+10;
+				t[0]=poz-mapWidth;
+				t[1]=poz+mapWidth;
 				t[2]=poz+1;
 				t[3]=poz-1;
 				StarGate yellow = new StarGate(89,t,Direction.WEST,Color.YELLOW,true);
@@ -203,8 +204,8 @@ class Application {
 			case "BLUE_STARGATE":{
 				int poz=Integer.parseInt(koordinatak[0]);
 				int t[]=new int[4];
-				t[0]=poz-10;
-				t[1]=poz+10;
+				t[0]=poz-mapWidth;
+				t[1]=poz+mapWidth;
 				t[2]=poz+1;
 				t[3]=poz-1;
 				StarGate blue = new StarGate(50,t,Direction.EAST,Color.BLUE,true);
@@ -215,8 +216,8 @@ class Application {
 			case "SCALE":{
 				int poz=Integer.parseInt(koordinatak[0]);
 				int t[]=new int[4];
-				t[0]=poz-10;
-				t[1]=poz+10;
+				t[0]=poz-mapWidth;
+				t[1]=poz+mapWidth;
 				t[2]=poz+1;
 				t[3]=poz-1;
 				String[] doorweight=br.readLine().split(" ");
@@ -250,11 +251,10 @@ class Application {
 		}else{
 			br = new BufferedReader(new InputStreamReader(System.in));		//Manual mod
 			System.out.println("MANUAL MOD - ENTER STATUSZ FOR FULLSTATUSZ");
-			System.out.println("\nNEW GAME STARTED");
-			log.println("NEW GAME STARTED");
-			general = new General(maze.getBlock(52),Direction.EAST,false);
-			jaffa = new Jaffa(maze.getBlock(27), Direction.WEST,false);
-			replicator = new Replicator(maze.getBlock(77),Direction.NORTH);
+
+			general = new General(maze.getBlock(11),Direction.EAST,false);
+			jaffa = new Jaffa(maze.getBlock(16), Direction.WEST,false);
+			replicator = new Replicator(maze.getBlock(18),Direction.NORTH);
 			if(replicator != null)
 				System.out.println("\n"+general+"\n"+jaffa+"\n"+replicator+"\n");
 			else{

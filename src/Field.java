@@ -9,7 +9,7 @@ public class Field extends AbstractBlock {
 	protected boolean containsBox = false;
 	protected List<Box> boxes = new ArrayList<Box>();
 	
-	//Konstruktor.
+	//Konstruktor
 	public Field(int id,int[] neighbours){
 		super(id,neighbours);
 		//Passable beallitasa.
