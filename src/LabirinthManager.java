@@ -64,7 +64,7 @@ public class LabirinthManager {
 		
 		//Ha kek volt a lovedek, akkor kek csillagkapu.
 		if(col == Color.BLUE){
-			//teszt
+			//ha letezik mar adoot szinu csillagkapu, toroljuk
 			if(blueStarGate != null)deleteStarGate(Color.BLUE);
 			
 			blueStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.BLUE);
@@ -76,7 +76,7 @@ public class LabirinthManager {
 		
 		//Egyebkent sarga csillagkapu.
 		else if (col == Color.YELLOW){
-			//teszt
+			//ha letezik mar adoot szinu csillagkapu, toroljuk
 			if(yellowStarGate != null)deleteStarGate(Color.YELLOW);
 			
 			yellowStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.YELLOW);
@@ -87,7 +87,7 @@ public class LabirinthManager {
 			
 		}
 		else if (col == Color.GREEN){
-			//teszt
+			//ha letezik mar adoot szinu csillagkapu, toroljuk
 			if(greenStarGate != null)deleteStarGate(Color.GREEN);
 			
 			greenStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.GREEN);
@@ -97,7 +97,7 @@ public class LabirinthManager {
 			if(redStarGate!= null)createWormHole(col);
 
 		}else{
-			//teszt
+			//ha letezik mar adoot szinu csillagkapu, toroljuk
 			if(redStarGate != null)deleteStarGate(Color.RED);
 			
 			redStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.RED);
