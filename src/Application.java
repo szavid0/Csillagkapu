@@ -255,12 +255,16 @@ class Application {
 			general = new General(maze.getBlock(11),Direction.EAST,false);
 			jaffa = new Jaffa(maze.getBlock(16), Direction.WEST,false);
 			replicator = new Replicator(maze.getBlock(18),Direction.NORTH);
-			if(replicator != null)
+			if(replicator != null){
 				System.out.println("\n"+general+"\n"+jaffa+"\n"+replicator+"\n");
+				log.println("\n"+general+"\n"+jaffa+"\n"+replicator+"\n");
+			}
 			else{
 				System.out.println("\n"+general+"\n"+jaffa+"\n"+"REPLICATOR:NULL\n");
-
+				log.println("\n"+general+"\n"+jaffa+"\n"+"REPLICATOR:NULL\n");
 			}
+			System.out.println("NEW GAME STARTED");
+			log.println("NEW GAME STARTED");
 
 			//parancs feldolgozasa, reszekre tordelese
 			for(int i = 0; !(line = br.readLine()).equals("EXIT"); i++){	//EXIT PARANCS
@@ -494,6 +498,7 @@ class Application {
 		System.out.println(winOrLose);
 		log.println(winOrLose);
 		System.out.println("Game Over!");
+		log.close();
 		
 		System.exit(0);
 	}

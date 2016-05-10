@@ -58,8 +58,7 @@ public class LabirinthManager {
 	
 	//Csillagkapu letrehozasa.
 	public void createStarGate(Wall w,Color col,Direction dir){
-		System.out.println("CREATESTARGATE "+col);
-		Application.log.println("CREATESTARGATE "+col);
+		
 
 		
 		//Ha kek volt a lovedek, akkor kek csillagkapu.
@@ -69,6 +68,9 @@ public class LabirinthManager {
 			
 			blueStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.BLUE);
 			map.set(w.getIndex(), blueStarGate);
+			
+			System.out.println("CREATESTARGATE "+col);
+			Application.log.println("CREATESTARGATE "+col);
 			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
 			if(yellowStarGate != null)createWormHole(col);
@@ -82,6 +84,9 @@ public class LabirinthManager {
 			yellowStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.YELLOW);
 			map.set(w.getIndex(), yellowStarGate);
 			
+			System.out.println("CREATESTARGATE "+col);
+			Application.log.println("CREATESTARGATE "+col);			
+			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
 			if(blueStarGate != null)createWormHole(col);
 			
@@ -93,6 +98,9 @@ public class LabirinthManager {
 			greenStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.GREEN);
 			map.set(w.getIndex(), greenStarGate);
 			
+			System.out.println("CREATESTARGATE "+col);
+			Application.log.println("CREATESTARGATE "+col);
+			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
 			if(redStarGate!= null)createWormHole(col);
 
@@ -103,10 +111,14 @@ public class LabirinthManager {
 			redStarGate = new StarGate(w.getIndex(),w.getNeighboursIndex(),dir, Color.RED);
 			map.set(w.getIndex(), redStarGate);
 			
+			System.out.println("CREATESTARGATE "+col);
+			Application.log.println("CREATESTARGATE "+col);
+			
 			//Ha van mar masik szinu csillagkapu, akkor feregjaratot csinalunk.
 			if(greenStarGate!= null)createWormHole(col);
 
 		}
+		
 
 	}
 	
@@ -122,7 +134,7 @@ public class LabirinthManager {
 			blueStarGate=null;
 			if(blueyellowWormHoleExists){
 				blueyellowWormHoleExists = false;
-				deleteStarGate(Color.YELLOW);
+				yellowStarGate.setPaired(false);
 			}
 		}
 		//Kitoroljuk az adott szinu csillagkaput es letrehozunk helyette egy specialis falat.
@@ -131,21 +143,21 @@ public class LabirinthManager {
 			yellowStarGate=null;
 			if(blueyellowWormHoleExists){
 				blueyellowWormHoleExists = false;
-				deleteStarGate(Color.BLUE);
+				blueStarGate.setPaired(false);
 			}
 		}else if(col == Color.GREEN){
 			map.set(greenStarGate.getIndex(), new Wall(greenStarGate.getIndex(),greenStarGate.getNeighboursIndex(),true));
 			greenStarGate=null;
 			if(redgreenWormHoleExists){
 				redgreenWormHoleExists = false;
-				deleteStarGate(Color.RED);
+				redStarGate.setPaired(false);
 			}
 		}else{
 			map.set(redStarGate.getIndex(), new Wall(redStarGate.getIndex(),redStarGate.getNeighboursIndex(),true));
 			redStarGate=null;
 			if(redgreenWormHoleExists){
 				redgreenWormHoleExists = false;
-				deleteStarGate(Color.GREEN);
+				greenStarGate.setPaired(false);
 			}
 		}
 	}

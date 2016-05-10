@@ -21,6 +21,7 @@ public class Door extends AbstractBlock {
 			Application.log.println("CLOSE DOOR(ID="+index+")");
 		}
 		passable=tf;
+		shootable=tf;
 	}
 	
 	//Ralepes esemeny, ha athaladhatosag engedelyezve van, a pozicio erre az elemre valtozik.

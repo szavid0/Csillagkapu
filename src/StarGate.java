@@ -7,6 +7,10 @@ public class StarGate extends Wall {
 	private Color color;
 	private boolean isPaired;
 	
+	public void setPaired(boolean isPaired) {
+		this.isPaired = isPaired;
+	}
+
 	//Csillagkapu konstruktora: irany, szin, par es passable beallitasa.
 	public StarGate(int index,int[] neighbours,Direction dir,Color color,boolean isPaired){
 		super(index,neighbours);
@@ -63,7 +67,7 @@ public class StarGate extends Wall {
 	public void moveToThisBlock(Character c){
 		//Ha van parja, megkeressuk.
 		//Ha nincs, akkor nem csinalunk semmit.
-		if(isPaired){
+		if(isPaired && isPassable()){
 			StarGate pair = null;
 			if(color == Color.BLUE) {
 				//Sarga par.

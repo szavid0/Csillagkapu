@@ -21,7 +21,10 @@ public class Character extends Creature {
 	}
 	
 	public int getWeight() {
-		return weight;
+		if(box == null)
+			return weight;
+		else 
+			return weight + box.getWeight();
 	}
 	//Visszaadja a karakter iranyat.
 		public Direction getDirection(){
