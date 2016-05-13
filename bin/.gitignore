@@ -1,5 +1,8 @@
 /.DS_Store
 /AbstractBlock.class
+/Application$1.class
+/Application$2.class
+/Application$3.class
 /Application.class
 /Box.class
 /Canyon.class
@@ -16,3 +19,10 @@
 /Scale.class
 /StarGate.class
 /Wall.class
+/Control.class
+/Controller.class
+/View.class
+/Drawable.class
+/AbstractBlockView.class
+/CreatureView.class
+/BoxView.class
