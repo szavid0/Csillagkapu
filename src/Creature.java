@@ -52,7 +52,7 @@ public abstract class Creature {
 		int marginV = p.marginV;
 		int marginH = p.marginH;
 		
-		g.fillOval(marginV + (x * rectWidth)+rectWidth/2, marginH + (y * rectHeight)-rectHeight/2,(int)( rectWidth*0.7), (int)(rectHeight*0.7));		
+		g.fillOval(marginV + (x * rectWidth), marginH + (y * rectHeight),(int)( rectWidth*0.85), (int)(rectHeight*0.85));		
 
 	}
 
