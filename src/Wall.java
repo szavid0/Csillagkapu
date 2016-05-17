@@ -43,6 +43,7 @@ public class Wall extends AbstractBlock {
 				
 				//Csillagkapu letrehozasa a megfelelo szinnel.
 				Application.maze.createStarGate(this, col, Application.maze.oppDir(dir));
+				Application.app.getGamePanel().repaint();
 				return;
 			}
 			System.out.println(col+" BULLET HIT WALL(ID="+index+")");

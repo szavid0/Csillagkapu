@@ -319,6 +319,7 @@ class Application extends JFrame{
 			general = new General(maze.getRandomEmptyField(),Direction.EAST,false);
 			jaffa = new Jaffa(maze.getRandomEmptyField(), Direction.WEST,false);
 			replicator = new Replicator(maze.getRandomEmptyField(),Direction.NORTH);
+			new Thread(replicator).start();
 			System.out.println(general+"\n"+jaffa+"\n"+replicator);					
 		}
 		

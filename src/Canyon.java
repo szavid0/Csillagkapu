@@ -17,6 +17,7 @@ class Canyon extends AbstractBlock {
 		System.out.println("REPLICATOR DISAPPEARS");
 		Application.log.write("REPLICATOR DISAPPEARS");
 			//Replicator megszunik es mezo lesz a szakadek azon resze helyett.
+			Application.replicator.stop();
 			Application.replicator = null;
 			Application.maze.transformCanyon(index);	
 		 	

@@ -14,14 +14,14 @@ public class Replicator  extends Creature implements Runnable  {
 	
 	/**
 	 * A replikator viselkedese: 
-	 * lep egyet veletlenszeruen majd 1 mp-et alszik es ujra lep
+	 * lep egyet veletlenszeruen majd 2 mp-et alszik es ujra lep
 	 */
 	@Override
 	public void run() {
 		while(!stop){
 			move();
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(500);	//2 mp-enkent lep
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -41,11 +41,13 @@ public class Replicator  extends Creature implements Runnable  {
 			Direction random_dir = Application.maze.getRandomDirection();
 			AbstractBlock n = PosBlock.getNeighbour(random_dir);
 	
-		if(n.isPassable() || n.getContainsBox()){ //passable vagy dobozos mezo a szomszed
+		if(n.isPassable() || n.getContainsBox() || n == Application.general.getPosBlock() || n == Application.jaffa.getPosBlock()){ //passable vagy dobozos mezo a szomszed
 			PosBlock.setShootable(true);
 			setPosBlock(n);
 			n.setShootable(false);
 			n.moveToThisBlock(this);
+			Application.app.getGamePanel().repaint();
+
 		}
 	}
 

@@ -109,5 +109,10 @@ public class Scale extends Field {
 		
 		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
 	
+		if(containsBox || containsZpm){
+			if(containsBox)g.setColor(new java.awt.Color(185,156,107));
+			else if (containsZpm)g.setColor(new java.awt.Color(80, 200, 100));	
+			g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth-15, rectHeight-15);
+		}
 	}
 }

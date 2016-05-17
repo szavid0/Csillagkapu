@@ -131,6 +131,8 @@ public class StarGate extends Wall {
 			//Uj csillagkapu letrehozasa a regi helyen.
 				
 			Application.maze.createStarGate(this,bulletcolor,Application.maze.oppDir(dir));
+			Application.app.getGamePanel().repaint();
+
 		}
 	}
 	
