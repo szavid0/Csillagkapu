@@ -67,6 +67,8 @@ public class Character extends Creature {
 			//Leellenorizzuk, hogy visszaad-e dobozt. Ha igen akkor felvesszuk.
 			if(!hasBox() && b.getContainsBox()){
 					box = b.getBox();
+					Application.app.getGamePanel().repaint();
+
 				}	
 		}
 	
@@ -81,6 +83,8 @@ public class Character extends Creature {
 					
 					f.setBox(getBox());
 					this.box=null;
+					Application.app.getGamePanel().repaint();
+
 				}
 		
 	}
@@ -100,6 +104,8 @@ public class Character extends Creature {
 					PosBlock.setPassable(true);	
 					PosBlock.setShootable(true);
 					block.moveToThisBlock(this);
+					Application.app.getGamePanel().repaint();
+
 			}
 	}
 	@Override
