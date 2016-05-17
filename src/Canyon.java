@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.IOException;
 
 //A szakadek osztalyt valositja meg, az AbstractBlock-bol oroklodik.
@@ -63,6 +64,22 @@ class Canyon extends AbstractBlock {
 	@Override
 	public String toString() {
 		return super.toString();
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(java.awt.Color.RED);
+		GamePanel p = Application.app.getGamePanel();
+		int rectWidth = p.rectWidth;
+		int rectHeight = p.rectHeight;
+		int marginV = p.marginV;
+		int marginH = p.marginH;
+		
+		int x = index % 10; //oszlopindex
+		int y = index /10;  //sorindex
+		
+		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);		
+	
 	}
 
 

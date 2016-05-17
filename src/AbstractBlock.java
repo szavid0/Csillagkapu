@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.IOException;
 
 //AbstractBlock osztaly megvalositasa.
@@ -79,5 +80,6 @@ public abstract class AbstractBlock {
 	public String toString() {
 		return getClass().getName().toUpperCase()+"(ID="+index+")";
 	}
+	public abstract void draw(Graphics g);
 
 }

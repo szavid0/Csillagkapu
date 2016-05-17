@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.IOException;
 
 import com.sun.org.apache.bcel.internal.generic.RETURN;
@@ -72,5 +73,24 @@ public class Wall extends AbstractBlock {
 	@Override
 	public String toString() {
 		return super.toString()+" SPECIAL:"+ Boolean.toString(isSpecial).toUpperCase();
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		if(!isSpecial)g.setColor(java.awt.Color.darkGray);
+		else g.setColor(java.awt.Color.gray);
+		
+		GamePanel p = Application.app.getGamePanel();
+		int rectWidth = p.rectWidth;
+		int rectHeight = p.rectHeight;
+		int marginV = p.marginV;
+		int marginH = p.marginH;
+		
+		int x = index % 10; //oszlopindex
+		int y = index /10;  //sorindex
+		
+		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
+	
+		
 	}
 }

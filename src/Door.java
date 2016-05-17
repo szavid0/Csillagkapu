@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.IOException;
 
 //Ajto osztaly megvalositasa, AbstractBlock-bol oroklodik.
@@ -54,5 +55,22 @@ public class Door extends AbstractBlock {
 		if(passable) s+= " OPEN";
 		else s += " CLOSED";
 		return s;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(new java.awt.Color(165,113,78));
+		GamePanel p = Application.app.getGamePanel();
+		int rectWidth = p.rectWidth;
+		int rectHeight = p.rectHeight;
+		int marginV = p.marginV;
+		int marginH = p.marginH;
+		
+		int x = index % 10; //oszlopindex
+		int y = index /10;  //sorindex
+		
+		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
+	
+		
 	}	
 }

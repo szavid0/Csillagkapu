@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +30,7 @@ public class Field extends AbstractBlock {
 		//Ha nincs a mezon doboz, akkor athaladhato.
 		else{
 			passable = true;
+			shootable = true;
 		}
 		//Zpm van a mezon.
 		if(hasZpm){
@@ -132,6 +134,26 @@ public class Field extends AbstractBlock {
 		String s = super.toString();
 		s += " BOXES:"+boxes.size()+" ZPM:"+Boolean.toString(containsZpm).toUpperCase();
 		return s;
+	}
+
+	@Override
+	public void draw(Graphics g) {
+		if(containsBox)g.setColor(new java.awt.Color(185,156,107));
+		else if (containsZpm)g.setColor(new java.awt.Color(80, 200, 100));
+		else g.setColor(java.awt.Color.white);
+	
+		GamePanel p = Application.app.getGamePanel();
+		int rectWidth = p.rectWidth;
+		int rectHeight = p.rectHeight;
+		int marginV = p.marginV;
+		int marginH = p.marginH;
+		
+		int x = index % 10; //oszlopindex
+		int y = index /10;  //sorindex
+		
+		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
+	
+				
 	}
 
 

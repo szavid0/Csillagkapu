@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.IOException;
 
 //Merleg osztaly megvalositasa, a mezobol oroklodik.
@@ -93,5 +94,20 @@ public class Scale extends Field {
 		String s = super.toString();
 		s += " WEIGHT:"+currentWeight+" WEIGHTLIMIT:"+weightlimit+" DOOR:"+doorToOpen.getIndex();
 		return s;
+	}
+	@Override
+	public void draw(Graphics g) {
+		g.setColor(java.awt.Color.magenta);
+		GamePanel p = Application.app.getGamePanel();
+		int rectWidth = p.rectWidth;
+		int rectHeight = p.rectHeight;
+		int marginV = p.marginV;
+		int marginH = p.marginH;
+		
+		int x = index % 10; //oszlopindex
+		int y = index /10;  //sorindex
+		
+		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
+	
 	}
 }

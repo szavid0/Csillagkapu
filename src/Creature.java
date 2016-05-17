@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.IOException;
 
 public abstract class Creature {
@@ -33,6 +34,26 @@ public abstract class Creature {
 	@Override
 	public String toString() {
 		return getClass().getName().toUpperCase()+","+PosBlock.getIndex()+","+direction;
+	}
+	public void draw(Graphics g){
+		if(this.getClass() == General.class){
+			g.setColor(new java.awt.Color(0,204,0));	//general szin
+		}else if(this.getClass() == Jaffa.class){
+			g.setColor(new java.awt.Color(230,150,0)); //jaffa szin
+		}else
+			g.setColor(new java.awt.Color(204,0,0));
+		
+		int x = PosBlock.getIndex() % 10; //oszlopindex
+		int y = PosBlock.getIndex() / 10;  //sorindex
+		
+		GamePanel p = Application.app.getGamePanel();
+		int rectWidth = p.rectWidth;
+		int rectHeight = p.rectHeight;
+		int marginV = p.marginV;
+		int marginH = p.marginH;
+		
+		g.fillOval(marginV + (x * rectWidth)+rectWidth/2, marginH + (y * rectHeight)-rectHeight/2,(int)( rectWidth*0.7), (int)(rectHeight*0.7));		
+
 	}
 
 }

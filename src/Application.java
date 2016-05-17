@@ -1,6 +1,12 @@
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.*;
 
 import javax.swing.Box;
@@ -16,8 +22,6 @@ class Application extends JFrame{
 	private static int i = 0;
 	private static int mapWidth = 10;  //csak tesztpalya felepitese miatt kell
 	static boolean random = false;
-	public static Graphics g;
-	
 	//teszt kimenet ellenorzese
 	//a log fajl tartalmat veti ossze az elvart kimenettel	
 	static boolean checklog(Integer testnum) throws IOException{
@@ -41,7 +45,7 @@ class Application extends JFrame{
         br2.close();
         return true;
     }
-
+	
 	//Palya betoltese a map.txt fajlbol
 	//palyaelemenkent beallitja a szomszedokat es az egyedi blokktulajdonsagokat
 	//majd hozzaadja a map-hoz
@@ -239,7 +243,6 @@ class Application extends JFrame{
 			}
 		}
 		br.close();
-		Controller.Update();//frissítjük!
 	}
 	
 	//azért staticok, mert csak egy létezik belõlük.
@@ -253,6 +256,8 @@ class Application extends JFrame{
 
 		@Override
 		public void keyPressed(KeyEvent e) {
+			
+			
 			System.out.println("Key Pressed "+ e.getKeyCode());
 			switch(e.getKeyCode()){
 			case 87: jaffa.move(Direction.NORTH);break;  //W
@@ -304,6 +309,7 @@ class Application extends JFrame{
 			gamePanel.setFocusable(true);
 			gamePanel.requestFocusInWindow();
 			gamePanel.addKeyListener(myKeyListener);
+			
 			try {
 				loadMap();
 			} catch (IOException e1) {
@@ -331,12 +337,13 @@ class Application extends JFrame{
 	private JButton exit = new JButton("EXIT");
 	private JPanel panel = new JPanel();
 	private JPanel container = new JPanel();
-	private JPanel gamePanel = new JPanel();
-	private static Application app;
+	 GamePanel gamePanel = new GamePanel();
+	 static Application app;
 
 	
 	public Application(){
 		setSize(600, 600);
+		setResizable(false);
 		setTitle("GAME of STARGATE");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
@@ -397,9 +404,12 @@ class Application extends JFrame{
 		container.add(panel);
 		this.add(container);
 		this.setLocation(450,0);
-		setVisible(true);
+		setVisible(true);		
+		
+
+		
+		
 	}
-	
 	public static void main(String[] args) throws IOException{
 		
 		//logfajl
@@ -408,7 +418,7 @@ class Application extends JFrame{
 	    
 	    //ablak letrehozasa
 	    app = new Application();
-	    
+		
 		log.close();
 	}
 	
@@ -431,6 +441,10 @@ class Application extends JFrame{
 			System.out.println(general+"\n"+jaffa+"\n"+"REPLICATOR:NULL");
 
 		}
+	}
+
+	public GamePanel getGamePanel() {
+		return gamePanel;
 	}
 }
 

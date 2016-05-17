@@ -1,3 +1,4 @@
+import java.awt.Graphics;
 import java.io.IOException;
 
 //A csillagkapu osztaly megvalositasa, a falbol oroklodik.
@@ -147,5 +148,26 @@ public class StarGate extends Wall {
 
 	public void setIsPaired(boolean b) {
 		this.isPaired = b;
+	}
+	@Override
+	public void draw(Graphics g) {
+		switch(this.color){
+		case YELLOW: g.setColor(java.awt.Color.yellow);break;
+		case BLUE: g.setColor(java.awt.Color.CYAN);break;
+		case RED: g.setColor(java.awt.Color.red);break;
+		case GREEN: g.setColor(java.awt.Color.green);break;
+		}
+		
+		GamePanel p = Application.app.getGamePanel();
+		int rectWidth = p.rectWidth;
+		int rectHeight = p.rectHeight;
+		int marginV = p.marginV;
+		int marginH = p.marginH;
+		
+		int x = index % 10; //oszlopindex
+		int y = index /10;  //sorindex
+		
+		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
+		
 	}
 }

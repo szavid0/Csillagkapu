@@ -1,11 +1,13 @@
 //A LabirinthManager osztaly megvalositasa.
 import java.util.List;
 import java.util.Random;
+import java.awt.Graphics;
 import java.io.IOException;
 import java.util.ArrayList;
 
 import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 import sun.security.action.GetBooleanAction;
+import sun.security.util.Resources_zh_TW;
 
 public class LabirinthManager {
 	//Letaroljuk a palyat, a csillagkapukat es a kezdopoziciot.
@@ -293,5 +295,10 @@ public class LabirinthManager {
 	public Direction getRandomDirection() {
 		int dirnum = new Random().nextInt(Direction.values().length); //Random irany generalasa
 		return Direction.values()[dirnum];		//enumkent adjuk vissza
+	}
+	public void drawMap(Graphics g){
+		for(AbstractBlock b : map){
+			b.draw(g);
+		}
 	}
 }
