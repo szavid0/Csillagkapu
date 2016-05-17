@@ -331,6 +331,11 @@ class Application extends JFrame{
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
+			
+			File f = new File("save_map.txt");
+			File f2 = new File("save_char.txt");
+			if(f.exists() && f2.exists()){
+			
 			//uj panel aktivalasa
 			container.setVisible(false);
 			
@@ -342,16 +347,14 @@ class Application extends JFrame{
 			gamePanel.addKeyListener(myKeyListener);
 			menu.setEnabled(true);
 			
-			
-			
 			try {
+				
 				ObjectInputStream is = new ObjectInputStream(new FileInputStream("save_map.txt"));
 				maze = new LabirinthManager();
 				maze.readObject(is);
 				
 				ObjectInputStream is2 = new ObjectInputStream(new FileInputStream("save_char.txt"));				
 				general = (General)is2.readObject();
-				System.out.println(general.getPosBlock());
 				
 				jaffa = (Jaffa)is2.readObject();
 				replicator = (Replicator)is2.readObject();
@@ -361,7 +364,6 @@ class Application extends JFrame{
 //				System.out.println(general+"\n"+jaffa+"\n"+replicator);					
 				
 			} catch (FileNotFoundException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -370,6 +372,8 @@ class Application extends JFrame{
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}
+			}
+			
 		}
 		
 	};
