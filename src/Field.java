@@ -104,6 +104,7 @@ public class Field extends AbstractBlock {
 			shootable = true;
 			System.out.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
 			Application.log.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
+			Application.app.getGamePanel().repaint();
 		}
 		else {
 		System.out.println(col+" BULLET HIT "+getClass().getName().toUpperCase()+"(ID="+index+")");

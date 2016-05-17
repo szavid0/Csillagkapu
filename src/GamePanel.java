@@ -13,11 +13,12 @@ public class GamePanel extends JPanel {
 	public static int marginH;
 	
 	public GamePanel(){
-		setSize(580, 580);
+		setSize(600, 600);
 		rectWidth = (int) (this.getWidth()/10 *0.96);
 		rectHeight = (int) (this.getHeight()/10 *0.96);
 		marginV = (this.getWidth() - 10 * rectWidth )/2; 
 		marginH = (this.getHeight() - 10 * rectHeight )/2; 
+	
 	}
 	/**
 	 * Grafikus felulet kirajzolasaert felelos fuggveny

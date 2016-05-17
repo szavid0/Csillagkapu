@@ -3,13 +3,17 @@ import java.util.List;
 import java.util.Random;
 import java.awt.Graphics;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 import sun.security.action.GetBooleanAction;
 import sun.security.util.Resources_zh_TW;
 
-public class LabirinthManager {
+public class LabirinthManager implements Serializable{
 	//Letaroljuk a palyat, a csillagkapukat es a kezdopoziciot.
 	private static List<AbstractBlock> map = new ArrayList<AbstractBlock>();
 	private boolean blueyellowWormHoleExists = true;
@@ -18,7 +22,6 @@ public class LabirinthManager {
 	static StarGate blueStarGate;
 	static StarGate greenStarGate;
 	static StarGate redStarGate;
-	private Field startField;
 	private static int allZpmCnt = 2;
 	private static int JaffaZpmCnt = 0;
 	private static int GeneralZpmCnt = 0;
@@ -299,6 +302,42 @@ public class LabirinthManager {
 	public void drawMap(Graphics g){
 		for(AbstractBlock b : map){
 			b.draw(g);
+		}
+	}
+	
+	public void writeObject(ObjectOutputStream os){
+		try {
+			os.writeObject(map);
+			os.writeObject(blueStarGate);
+			os.writeObject(yellowStarGate);
+			os.writeObject(greenStarGate);
+			os.writeObject(redStarGate);
+			os.writeObject(allZpmCnt);
+			os.writeObject(JaffaZpmCnt);
+			os.writeObject(GeneralZpmCnt);
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
+	}
+	public void readObject(ObjectInputStream is){
+		try {
+			map = (List<AbstractBlock>)is.readObject();
+			blueStarGate = (StarGate)is.readObject();
+			yellowStarGate = (StarGate)is.readObject();
+			greenStarGate = (StarGate) is.readObject();
+			redStarGate = (StarGate)is.readObject();
+			allZpmCnt = (int)is.readObject();
+			JaffaZpmCnt = (int)is.readObject();
+			GeneralZpmCnt = (int) is.readObject();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

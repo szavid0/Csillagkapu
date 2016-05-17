@@ -59,7 +59,9 @@ public class Door extends AbstractBlock {
 
 	@Override
 	public void draw(Graphics g) {
-		g.setColor(new java.awt.Color(165,113,78));
+		if(!passable)
+			g.setColor(new java.awt.Color(165,113,78));
+		else g.setColor(new java.awt.Color(185,135,100));
 		GamePanel p = Application.app.getGamePanel();
 		int rectWidth = p.rectWidth;
 		int rectHeight = p.rectHeight;

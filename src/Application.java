@@ -14,6 +14,9 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
 class Application extends JFrame{
@@ -291,9 +294,83 @@ class Application extends JFrame{
 		}
 		
 	};
-	
-	private ActionListener newgameListener = new ActionListener(){
+	/**
+	 * szerializaltan kiirja a labmanager es a karakterek allapotat fajlba
+	 */
+	private ActionListener saveGameListener = new ActionListener(){
 
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			try {
+				ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("save_map.txt"));
+				os.writeObject(maze);
+				maze.writeObject(os);
+				os.close();
+				ObjectOutputStream os2 = new ObjectOutputStream(new FileOutputStream("save_char.txt"));
+
+				os2.writeObject(general);
+				os2.writeObject(jaffa);
+				os2.writeObject(replicator);
+				os2.close();
+				
+			} catch (FileNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	};
+
+	private ActionListener loadGameListener = new ActionListener(){
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//uj panel aktivalasa
+			container.setVisible(false);
+			gamePanel.setBackground(new java.awt.Color(25,35,125));
+			app.add(gamePanel);
+			gamePanel.setFocusable(true);
+			gamePanel.requestFocusInWindow();
+			gamePanel.addKeyListener(myKeyListener);
+			menu.setEnabled(true);
+			
+			
+			
+			try {
+				ObjectInputStream is = new ObjectInputStream(new FileInputStream("save_map.txt"));
+				maze = (LabirinthManager)is.readObject();
+				maze.readObject(is);
+				
+				ObjectInputStream is2 = new ObjectInputStream(new FileInputStream("save_char.txt"));				
+				general = (General)is2.readObject();
+				jaffa = (Jaffa)is2.readObject();
+				replicator = (Replicator)is2.readObject();
+				if(replicator != null)
+					new Thread(replicator).start();
+				
+				System.out.println(general+"\n"+jaffa+"\n"+replicator);					
+				
+				
+			} catch (FileNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (ClassNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+	};
+private ActionListener newgameListener = new ActionListener(){
+		
+	
+	
 		/**
 		 * Uj jatek inditasa,
 		 * palya betoltese, karakterek inicalizalasa
@@ -309,6 +386,7 @@ class Application extends JFrame{
 			gamePanel.setFocusable(true);
 			gamePanel.requestFocusInWindow();
 			gamePanel.addKeyListener(myKeyListener);
+			menu.setEnabled(true);
 			
 			try {
 				loadMap();
@@ -339,13 +417,33 @@ class Application extends JFrame{
 	private JPanel panel = new JPanel();
 	private JPanel container = new JPanel();
 	 GamePanel gamePanel = new GamePanel();
+	private JMenu menu;
+	private JMenuItem exitgame;
+	private JMenuItem savegame;
+	private JMenuItem newgamemenu;
 	 static Application app;
 
 	
 	public Application(){
-		setSize(600, 600);
+		setSize(600, 645);
 		setResizable(false);
 		setTitle("GAME of STARGATE");
+		JMenuBar bar = new JMenuBar();
+		menu = new JMenu("Menu");
+		savegame = new JMenuItem("Save Game");
+		exitgame = new JMenuItem("Exit Game");
+		newgamemenu = new JMenuItem("New Game");
+		newgamemenu.addActionListener(newgameListener);
+		savegame.addActionListener(saveGameListener);
+		exitgame.addActionListener(exitListener);
+		
+		menu.add(newgamemenu);
+		menu.add(savegame);
+		menu.add(exitgame);
+		bar.add(menu);
+		this.setJMenuBar(bar);
+		menu.setEnabled(false);
+		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setLayout(new BorderLayout());
 		container.setLayout(new BorderLayout());
@@ -374,6 +472,7 @@ class Application extends JFrame{
 		newgame.setFont(new Font("Arial",Font.PLAIN,20));
 		newgame.setForeground(new java.awt.Color(25,35,125));
 		loadgame.setFont(new Font("Arial",Font.PLAIN,20));
+		loadgame.addActionListener(loadGameListener);
 		loadgame.setForeground(new java.awt.Color(0,145,90));
 		
 		JPanel bodyFirsLine = new JPanel();

@@ -1,14 +1,15 @@
 import java.awt.Graphics;
 import java.io.IOException;
+import java.io.Serializable;
 
 //AbstractBlock osztaly megvalositasa.
 //Alap epitoelem, ebbol szarmazik a Field, Wall, Canyon es Door osztaly.
 //Nem lehet peldanyositani.
-public abstract class AbstractBlock {
+public abstract class AbstractBlock implements Serializable{
 	//Az elem indexenek, szomszedjainak es athaladhatosaganak tarolasa.
 	protected int index;
 	protected int[] neighbourIndexes = new int[4];
-	protected boolean passable =true;
+	protected boolean passable = true;
 	protected boolean shootable = true;
 	public boolean isShootable() {
 		return shootable;

@@ -156,7 +156,7 @@ public class StarGate extends Wall {
 		switch(this.color){
 		case YELLOW: g.setColor(java.awt.Color.yellow);break;
 		case BLUE: g.setColor(java.awt.Color.CYAN);break;
-		case RED: g.setColor(java.awt.Color.red);break;
+		case RED: g.setColor(new java.awt.Color(220,20,60));break;
 		case GREEN: g.setColor(java.awt.Color.green);break;
 		}
 		

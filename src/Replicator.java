@@ -21,7 +21,7 @@ public class Replicator  extends Creature implements Runnable  {
 		while(!stop){
 			move();
 			try {
-				Thread.sleep(500);	//2 mp-enkent lep
+				Thread.sleep(5000);	//2 mp-enkent lep
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
