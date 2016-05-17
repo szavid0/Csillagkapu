@@ -34,9 +34,17 @@ public class Door extends AbstractBlock {
 	//Loves kezelese az ajtonal.
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {		
+		if(Application.replicator != null && this==Application.replicator.PosBlock){
+			Application.replicator.stop();
+			Application.replicator = null;
+			shootable = true;
+			System.out.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
+			Application.log.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
+			Application.app.getGamePanel().repaint();
+		}else{
 		System.out.println(col+" BULLET HIT DOOR(ID="+index+")");
 		Application.log.println(col+" BULLET HIT DOOR(ID="+index+")");
-
+		}
 	}
 	
 	//Nem szukseges a jelzes neki, igy nem csinal semmit.
@@ -59,9 +67,9 @@ public class Door extends AbstractBlock {
 
 	@Override
 	public void draw(Graphics g) {
-		if(!passable)
-			g.setColor(new java.awt.Color(165,113,78));
+		if(!passable)g.setColor(new java.awt.Color(165,113,78));
 		else g.setColor(new java.awt.Color(185,135,100));
+		
 		GamePanel p = Application.app.getGamePanel();
 		int rectWidth = p.rectWidth;
 		int rectHeight = p.rectHeight;

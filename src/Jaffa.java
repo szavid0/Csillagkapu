@@ -5,6 +5,8 @@ public class Jaffa extends Character {
 		PosBlock = pos;
 		direction = dir;
 		PosBlock.setPassable(false);
+		PosBlock.setShootable(false);
+		
 		if(hasbox)box = new Box(1);
 	}
 	public Jaffa(){}

@@ -100,6 +100,7 @@ public class Field extends AbstractBlock {
 	@Override
 	public void shootOnThisBlock(Color col, Direction dir) {
 		if(Application.replicator != null && this==Application.replicator.PosBlock){
+			Application.replicator.stop();
 			Application.replicator = null;
 			shootable = true;
 			System.out.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");

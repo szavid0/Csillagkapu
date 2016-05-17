@@ -15,24 +15,24 @@ import sun.security.util.Resources_zh_TW;
 
 public class LabirinthManager implements Serializable{
 	//Letaroljuk a palyat, a csillagkapukat es a kezdopoziciot.
-	private static List<AbstractBlock> map = new ArrayList<AbstractBlock>();
+	private static List<AbstractBlock> map;
 	private boolean blueyellowWormHoleExists = true;
 	private boolean redgreenWormHoleExists = false;
-	static StarGate yellowStarGate;
-	static StarGate blueStarGate;
-	static StarGate greenStarGate;
-	static StarGate redStarGate;
-	private static int allZpmCnt = 2;
-	private static int JaffaZpmCnt = 0;
-	private static int GeneralZpmCnt = 0;
+	static StarGate yellowStarGate = null;
+	static StarGate blueStarGate = null;
+	static StarGate greenStarGate = null;
+	static StarGate redStarGate = null;
+	private static int allZpmCnt;
+	private static int JaffaZpmCnt;
+	private static int GeneralZpmCnt;
 	private static Random rand = new Random();
 
 
 
-	//A konstruktorban a parameterkent atadott tesztesethez szukseges palyat hozzuk letre.
 	public LabirinthManager(){
-		//Ezredes letrehozasa.
-		
+		allZpmCnt = 2;
+		GeneralZpmCnt = JaffaZpmCnt = 0;
+		map = new ArrayList<AbstractBlock>();
 	}
 	
 	
@@ -198,7 +198,10 @@ public class LabirinthManager implements Serializable{
 		return getRandomEmptyField();
 	}
 	
-	//Feregjarat letrehozasa.
+	/**
+	 * feregjarat letrehozasa
+	 * @param col1
+	 */
 	public void createWormHole(Color col1){
 		System.out.println("CREATEWORMHOLE");
 		Application.log.println("CREATEWORMHOLE");
@@ -222,8 +225,11 @@ public class LabirinthManager implements Serializable{
 		
 	}
 
-	//replikator atalakitja a szakadekot
-	//a szakadek kikerul a terkeprol, egy ures mezo adodik hozza
+	/**
+	 * replikator atalakitja a szakadekot
+	 * a szakadek kikerul a terkeprol, egy ures mezo adodik hozza
+	 * @param index
+	 */
 	public void transformCanyon(int index) {
 		System.out.println("TRANSFORM CANYON");
 		Application.log.println("TRANSFORM CANYON");
@@ -240,7 +246,10 @@ public class LabirinthManager implements Serializable{
 		return redStarGate;
 	}
 
-	//hozzaad a karakter zpm-jeihez egyet
+	/**
+	 * Hozzaad egyet a karakter zpm-jeihez
+	 * @param character
+	 */
 	public static  void addZpm(Character character) {
 		if (character == Application.general){
 			GeneralZpmCnt++;
@@ -266,14 +275,20 @@ public class LabirinthManager implements Serializable{
 	}
 
 
-	//zpm elhelyezese a palyan
+	/**
+	 * Zpm elhelyezese a palyan
+	 */
 	private static  void CreateZpm() {  //RANDOM
 		System.out.println("CREATEZPM");
 		Application.log.println("CREATEZPM");
 		
 		getRandomEmptyField().putZpm();
 	}
-	//zpm elhelyezese a palyan
+
+	/**
+	 * Zpm elhelyezese a palyan
+	 * @param fieldIndex
+	 */
 	private  void CreateZpm(int fieldIndex) {  //DETERMINISZTIKUS
 		Field f = (Field)map.get(fieldIndex);
 		f.setZpm();
@@ -286,19 +301,31 @@ public class LabirinthManager implements Serializable{
 	public void addBlock(AbstractBlock a){
 			map.add(a);
 	}
-	//terkep statuszanak listazasa mezonkent
+	
+	/**
+	 * Mezok statuszanak kilistazasa
+	 */
 	public void listStatusz(){
 		for(AbstractBlock s:map){
 			System.out.println(s);
 		}
+		System.out.println("map size:"+map.size());
 		System.out.println("\nGENERALZPM:"+GeneralZpmCnt+" JAFFAZPM:"+JaffaZpmCnt+" ALL:"+allZpmCnt);
 	}
 
-
+	/**
+	 * Visszaad egy random iranyt, Replicator mozgatasahoz kell
+	 * @return
+	 */
 	public Direction getRandomDirection() {
 		int dirnum = new Random().nextInt(Direction.values().length); //Random irany generalasa
 		return Direction.values()[dirnum];		//enumkent adjuk vissza
 	}
+	
+	/**
+	 *Mezonkent kirajzolja a palyat
+	 * @param g
+	 */
 	public void drawMap(Graphics g){
 		for(AbstractBlock b : map){
 			b.draw(g);
@@ -308,6 +335,8 @@ public class LabirinthManager implements Serializable{
 	public void writeObject(ObjectOutputStream os){
 		try {
 			os.writeObject(map);
+			os.writeObject(blueyellowWormHoleExists);
+			os.writeObject(redgreenWormHoleExists);
 			os.writeObject(blueStarGate);
 			os.writeObject(yellowStarGate);
 			os.writeObject(greenStarGate);
@@ -324,6 +353,8 @@ public class LabirinthManager implements Serializable{
 	public void readObject(ObjectInputStream is){
 		try {
 			map = (List<AbstractBlock>)is.readObject();
+			blueyellowWormHoleExists = (boolean)is.readObject();
+			redgreenWormHoleExists = (boolean)is.readObject();
 			blueStarGate = (StarGate)is.readObject();
 			yellowStarGate = (StarGate)is.readObject();
 			greenStarGate = (StarGate) is.readObject();

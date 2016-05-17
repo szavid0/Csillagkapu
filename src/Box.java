@@ -1,5 +1,7 @@
+import java.io.Serializable;
+
 //A doboz osztalyt valositja meg.
-public class Box {
+public class Box implements Serializable{
 	//Doboz sulya.
 	private int weight;
 

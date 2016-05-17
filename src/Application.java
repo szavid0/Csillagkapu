@@ -249,11 +249,11 @@ class Application extends JFrame{
 	}
 	
 	//azért staticok, mert csak egy létezik belõlük.
-	public static General general = new General();
-	public static Replicator replicator = new Replicator();
-	public static Jaffa jaffa = new Jaffa();
+	public static General general;
+	public static Replicator replicator;
+	public static Jaffa jaffa;
 	public static PrintWriter log;
-	public static LabirinthManager maze = new LabirinthManager();
+	public static LabirinthManager maze;
 	
 	private KeyListener myKeyListener = new KeyListener(){
 
@@ -271,6 +271,9 @@ class Application extends JFrame{
 			case 69: jaffa.shoot(Color.GREEN);break;	//E - jaffa shoot green
 			case 70: jaffa.pick();break;	//F - jaffa pick
 			case 71: jaffa.drop();break;	//G - jaffa drop
+			
+			case 89: fullStatusz();break;	
+
 			
 			case 38: general.move(Direction.NORTH);break;	//up-arrow
 			case 37: general.move(Direction.WEST);break;	//left-arrow
@@ -303,7 +306,6 @@ class Application extends JFrame{
 		public void actionPerformed(ActionEvent arg0) {
 			try {
 				ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream("save_map.txt"));
-				os.writeObject(maze);
 				maze.writeObject(os);
 				os.close();
 				ObjectOutputStream os2 = new ObjectOutputStream(new FileOutputStream("save_char.txt"));
@@ -311,6 +313,7 @@ class Application extends JFrame{
 				os2.writeObject(general);
 				os2.writeObject(jaffa);
 				os2.writeObject(replicator);
+				
 				os2.close();
 				
 			} catch (FileNotFoundException e) {
@@ -330,6 +333,8 @@ class Application extends JFrame{
 		public void actionPerformed(ActionEvent e) {
 			//uj panel aktivalasa
 			container.setVisible(false);
+			
+			gamePanel = new GamePanel();
 			gamePanel.setBackground(new java.awt.Color(25,35,125));
 			app.add(gamePanel);
 			gamePanel.setFocusable(true);
@@ -341,18 +346,19 @@ class Application extends JFrame{
 			
 			try {
 				ObjectInputStream is = new ObjectInputStream(new FileInputStream("save_map.txt"));
-				maze = (LabirinthManager)is.readObject();
+				maze = new LabirinthManager();
 				maze.readObject(is);
 				
 				ObjectInputStream is2 = new ObjectInputStream(new FileInputStream("save_char.txt"));				
 				general = (General)is2.readObject();
+				System.out.println(general.getPosBlock());
+				
 				jaffa = (Jaffa)is2.readObject();
 				replicator = (Replicator)is2.readObject();
 				if(replicator != null)
 					new Thread(replicator).start();
 				
-				System.out.println(general+"\n"+jaffa+"\n"+replicator);					
-				
+//				System.out.println(general+"\n"+jaffa+"\n"+replicator);					
 				
 			} catch (FileNotFoundException e1) {
 				// TODO Auto-generated catch block
@@ -381,14 +387,19 @@ private ActionListener newgameListener = new ActionListener(){
 			
 			//uj panel aktivalasa
 			container.setVisible(false);
+			if(gamePanel != null && gamePanel.isVisible())gamePanel.setVisible(false);
+			
+			gamePanel = new GamePanel();
 			gamePanel.setBackground(new java.awt.Color(25,35,125));
 			app.add(gamePanel);
+			gamePanel.setVisible(true);
 			gamePanel.setFocusable(true);
 			gamePanel.requestFocusInWindow();
 			gamePanel.addKeyListener(myKeyListener);
 			menu.setEnabled(true);
 			
 			try {
+				maze = new LabirinthManager();
 				loadMap();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
@@ -398,6 +409,7 @@ private ActionListener newgameListener = new ActionListener(){
 			jaffa = new Jaffa(maze.getRandomEmptyField(), Direction.WEST,false);
 			replicator = new Replicator(maze.getRandomEmptyField(),Direction.NORTH);
 			new Thread(replicator).start();
+			
 			System.out.println(general+"\n"+jaffa+"\n"+replicator);					
 		}
 		
@@ -416,7 +428,7 @@ private ActionListener newgameListener = new ActionListener(){
 	private JButton exit = new JButton("EXIT");
 	private JPanel panel = new JPanel();
 	private JPanel container = new JPanel();
-	 GamePanel gamePanel = new GamePanel();
+	 GamePanel gamePanel;
 	private JMenu menu;
 	private JMenuItem exitgame;
 	private JMenuItem savegame;
@@ -504,10 +516,7 @@ private ActionListener newgameListener = new ActionListener(){
 		container.add(panel);
 		this.add(container);
 		this.setLocation(450,0);
-		setVisible(true);		
-		
-
-		
+		setVisible(true);				
 		
 	}
 	public static void main(String[] args) throws IOException{
@@ -534,7 +543,7 @@ private ActionListener newgameListener = new ActionListener(){
 	//teljes statuszkepet ad a jatekrol
 	//STATUSZ parancs
 	public static void fullStatusz(){
-		maze.listStatusz();
+		maze.listStatusz();		
 		if(replicator != null)
 			System.out.println(general+"\n"+jaffa+"\n"+replicator);
 		else{

@@ -95,7 +95,8 @@ public class Character extends Creature {
 		}
 
 	public void move(Direction dir){
-			direction = dir;
+				//irany beallitasa, szomszed mezo lekerdezese
+				direction = dir;
 				AbstractBlock block = PosBlock.getNeighbour(dir);
 				//Ha ra lehet lepni, akkor beallitjuk a pozicionak.
 				//Az eddigi blokkot pedig ertesitjuk, hogy elleptunk rola.

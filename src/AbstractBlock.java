@@ -79,7 +79,7 @@ public abstract class AbstractBlock implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return getClass().getName().toUpperCase()+"(ID="+index+")";
+		return getClass().getName().toUpperCase()+"(ID="+index+") + passable:"+isPassable();
 	}
 	public abstract void draw(Graphics g);
 

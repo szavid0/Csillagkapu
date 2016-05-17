@@ -8,6 +8,7 @@ public class General extends Character{
 		PosBlock = pos;
 		direction = dir;
 		PosBlock.setPassable(false);
+		PosBlock.setShootable(false);
 		//Van-e doboz az ezredesnel.
 		if(hasbox)
 			this.box = new Box(2);

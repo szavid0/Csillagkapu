@@ -86,7 +86,8 @@ public class StarGate extends Wall {
 			Direction dir = pair.getDirection();
 			AbstractBlock neighbour = pair.getNeighbour(dir);	
 			//Atlepunk arra a blockra es beallitjuk az ezredes iranyat.
-			c.setPosBlock(neighbour);
+			
+			neighbour.moveToThisBlock(c);
 			c.setDirection(dir);
 		}
 	}
