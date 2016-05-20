@@ -92,6 +92,6 @@ public class Wall extends AbstractBlock {
 		
 		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
 	
-		
+		super.draw(g);
 	}
 }

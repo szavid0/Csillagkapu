@@ -37,6 +37,7 @@ public class Door extends AbstractBlock {
 		if(Application.replicator != null && this==Application.replicator.PosBlock){
 			Application.replicator.stop();
 			Application.replicator = null;
+			Application.app.replicator_null = true;
 			shootable = true;
 			System.out.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
 			Application.log.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
@@ -67,6 +68,8 @@ public class Door extends AbstractBlock {
 
 	@Override
 	public void draw(Graphics g) {
+		super.draw(g);
+		
 		if(!passable)g.setColor(new java.awt.Color(165,113,78));
 		else g.setColor(new java.awt.Color(185,135,100));
 		

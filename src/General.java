@@ -6,9 +6,11 @@ public class General extends Character{
 	public General(AbstractBlock pos, Direction dir,Boolean hasbox){
 		//Az ezredes pozicioja es iranya.
 		PosBlock = pos;
-		direction = dir;
+		direction = dir;	
+		
 		PosBlock.setPassable(false);
 		PosBlock.setShootable(false);
+		
 		//Van-e doboz az ezredesnel.
 		if(hasbox)
 			this.box = new Box(2);

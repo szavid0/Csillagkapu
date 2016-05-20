@@ -1,18 +1,32 @@
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 
 public class Character extends Creature {
 
-	protected int lives = 3;
+	protected int lives = 2;
+	
+	public int getLives() {
+		return lives;
+	}
+
+	public void setLives(int lives) {
+		this.lives = lives;
+	}
 	protected int weight = 3;
 	protected Box box;	
 	
 
 
+	public void setBox(Box box) {
+		this.box = box;
+	}
+
 	//A Character konstruktorai.
 	public Character(){
-		lives=3;
-		weight=2;
+		lives=2;
+		weight=3;
 	}
 	
 	public Character(int l, int w){
@@ -45,7 +59,7 @@ public class Character extends Creature {
 	//Kapott szinu lovedeket lo.
 	public void shoot(Color col){
 //		System.out.println(getClass().getName().toUpperCase()+" SHOOT "+col);
-//		Application.log.write(getClass().getName().toUpperCase()+" SHOOT "+col);
+//		Application.log.te(getClass().getName().toUpperCase()+" SHOOT "+col);
 
 		
 		AbstractBlock bulletPos;
@@ -101,13 +115,13 @@ public class Character extends Creature {
 				//Ha ra lehet lepni, akkor beallitjuk a pozicionak.
 				//Az eddigi blokkot pedig ertesitjuk, hogy elleptunk rola.
 				if(block.isPassable()){
-					PosBlock.notifyBlock();
+					PosBlock.notifyBlock();			
 					PosBlock.setPassable(true);	
 					PosBlock.setShootable(true);
 					block.moveToThisBlock(this);
-					Application.app.getGamePanel().repaint();
-
 			}
+				Application.app.getGamePanel().repaint();
+
 	}
 	@Override
 	public void setPosBlock(AbstractBlock PosBlock) {
@@ -120,11 +134,16 @@ public class Character extends Creature {
 	
 
 		if(lives ==	0){
-			Application.endGame(getClass().getName().toUpperCase()+" LOSE");
+			Application.endGame(getClass().getName().toUpperCase()+" LOSE!\n"+getClass().getName().toUpperCase()+ " LIVES: 0");
 			return;
 		}
 		else
 			lives--;
+		
+		if(box != null){
+			box = null;
+			System.out.println("BOX DESTROYED");
+		}
 		System.out.println(getClass().getName().toUpperCase()+ " DIE LIVES="+lives);
 		Application.log.println(getClass().getName().toUpperCase()+ " DIE LIVES="+lives);
 	
@@ -138,6 +157,31 @@ public class Character extends Creature {
 		boolean b = (box!= null);
 		return super.toString()+" HASBOX:"+Boolean.toString(b).toUpperCase()+" LIVES:"+lives;
 	}
-		
+	public void writeObject(ObjectOutputStream os){
+		super.writeObject(os);
+		try {
+			os.writeObject(box);
+			os.writeObject(lives);
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void readObject(ObjectInputStream is){
+		super.readObject(is);
+		try {
+			box = (Box)is.readObject();
+			lives = (int)is.readObject();
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 		
 }

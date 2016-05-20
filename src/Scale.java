@@ -26,6 +26,12 @@ public class Scale extends Field {
 			passable=false;
 			boxes.add(new Box(1));
 		}
+		
+		//bedrotozott értékek
+		if(this.index == 82){
+			this.weightlimit = 4;
+		}else if (this.index == 84)
+			this.weightlimit = 2;
 	}
 	
 	//Az ezredes ralep, ha nincs rajta doboz es osszegyujti a ZPM-et, ha van rajta. Ajtot nyit megfelelo sulyra.
@@ -35,6 +41,12 @@ public class Scale extends Field {
 		c.setPosBlock(this);
 		System.out.println("WEIGHT ON SCALE="+c.getWeight()+" WEIGHTLIMIT="+weightlimit);
 		Application.log.println("WEIGHT ON SCALE="+c.getWeight()+" WEIGHTLIMIT="+weightlimit);
+		
+		if(containsZpm){
+			c.collectZpm();
+			containsZpm = false;
+		}
+		
 		//Ha megfelelo suly van rajta, ajtot nyit.
 		if (c.getWeight() >= weightlimit){
 				doorToOpen.Open(true);
@@ -114,5 +126,8 @@ public class Scale extends Field {
 			else if (containsZpm)g.setColor(new java.awt.Color(80, 200, 100));	
 			g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth-15, rectHeight-15);
 		}
-	}
+		
+		g.setColor(java.awt.Color.black);		
+		g.drawRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);		
+		}
 }

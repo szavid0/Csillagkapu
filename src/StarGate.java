@@ -172,5 +172,8 @@ public class StarGate extends Wall {
 		
 		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
 		
+		g.setColor(java.awt.Color.black);		
+		g.drawRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);		
+	
 	}
 }

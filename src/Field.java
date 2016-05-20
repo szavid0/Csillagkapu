@@ -102,6 +102,7 @@ public class Field extends AbstractBlock {
 		if(Application.replicator != null && this==Application.replicator.PosBlock){
 			Application.replicator.stop();
 			Application.replicator = null;
+			Application.app.replicator_null = true;
 			shootable = true;
 			System.out.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
 			Application.log.println("BULLET HIT REPLICATOR\nREPLICATOR DISAPPEARS");
@@ -155,6 +156,7 @@ public class Field extends AbstractBlock {
 		
 		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);
 	
+		super.draw(g);
 				
 	}
 

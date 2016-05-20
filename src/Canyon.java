@@ -1,6 +1,8 @@
 import java.awt.Graphics;
 import java.io.IOException;
 
+import sun.applet.AppletPanel;
+
 //A szakadek osztalyt valositja meg, az AbstractBlock-bol oroklodik.
 class Canyon extends AbstractBlock {
 	
@@ -16,9 +18,11 @@ class Canyon extends AbstractBlock {
 	public void moveToThisBlock(Replicator r){
 		System.out.println("REPLICATOR DISAPPEARS");
 		Application.log.write("REPLICATOR DISAPPEARS");
-			//Replicator megszunik es mezo lesz a szakadek azon resze helyett.
+			//Replicator megszunik es mezo lesz a szakadek azon resze helyett.		
+			
 			Application.replicator.stop();
 			Application.replicator = null;
+			Application.app.replicator_null = true;
 			Application.maze.transformCanyon(index);	
 		 	
 	}
@@ -56,7 +60,7 @@ class Canyon extends AbstractBlock {
 	//Ha karakter lep ra, akkor meghivja a die() fuggvenyet.
 	@Override
 	public void moveToThisBlock(Character c) {
-		c.setPosBlock(this);
+		c.setPosBlock(this);		
 		Field start = Application.maze.getStartField();
 		c.die();
 		c.setPosBlock(start);
@@ -69,6 +73,7 @@ class Canyon extends AbstractBlock {
 
 	@Override
 	public void draw(Graphics g) {
+		
 		g.setColor(java.awt.Color.RED);
 		GamePanel p = Application.app.getGamePanel();
 		int rectWidth = p.rectWidth;
@@ -80,7 +85,9 @@ class Canyon extends AbstractBlock {
 		int y = index /10;  //sorindex
 		
 		g.fillRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);		
-	
+
+		super.draw(g);
+
 	}
 
 

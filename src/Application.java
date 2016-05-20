@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.*;
+import java.nio.ReadOnlyBufferException;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -17,11 +18,13 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 class Application extends JFrame{
 	
-	private static BufferedReader br;
+	public  Thread repl;
+	boolean replicator_null = false;
 	private static int i = 0;
 	private static int mapWidth = 10;  //csak tesztpalya felepitese miatt kell
 	static boolean random = false;
@@ -245,6 +248,11 @@ class Application extends JFrame{
 			}
 			}
 		}
+		//5 random zpm-et teszunk a palyara
+		for(int i =0;i<5 ;i++){
+			maze.CreateZpm();
+			app.getGamePanel().repaint();
+		}
 		br.close();
 	}
 	
@@ -259,9 +267,7 @@ class Application extends JFrame{
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			
-			
-			System.out.println("Key Pressed "+ e.getKeyCode());
+						
 			switch(e.getKeyCode()){
 			case 87: jaffa.move(Direction.NORTH);break;  //W
 			case 65: jaffa.move(Direction.WEST);break;	//A
@@ -274,7 +280,6 @@ class Application extends JFrame{
 			
 			case 89: fullStatusz();break;	
 
-			
 			case 38: general.move(Direction.NORTH);break;	//up-arrow
 			case 37: general.move(Direction.WEST);break;	//left-arrow
 			case 40: general.move(Direction.SOUTH);break;	//down-arrow
@@ -313,6 +318,7 @@ class Application extends JFrame{
 				os2.writeObject(general);
 				os2.writeObject(jaffa);
 				os2.writeObject(replicator);
+
 				
 				os2.close();
 				
@@ -338,7 +344,6 @@ class Application extends JFrame{
 			
 			//uj panel aktivalasa
 			container.setVisible(false);
-			
 			gamePanel = new GamePanel();
 			gamePanel.setBackground(new java.awt.Color(25,35,125));
 			app.add(gamePanel);
@@ -350,28 +355,38 @@ class Application extends JFrame{
 			try {
 				
 				ObjectInputStream is = new ObjectInputStream(new FileInputStream("save_map.txt"));
+				
 				maze = new LabirinthManager();
 				maze.readObject(is);
+
 				
 				ObjectInputStream is2 = new ObjectInputStream(new FileInputStream("save_char.txt"));				
-				general = (General)is2.readObject();
+
+				try {
+					general = (General)is2.readObject();
+					jaffa = (Jaffa)is2.readObject();
+					replicator = (Replicator)is2.readObject();
+					
+				} catch (ClassNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				
-				jaffa = (Jaffa)is2.readObject();
-				replicator = (Replicator)is2.readObject();
-				if(replicator != null)
-					new Thread(replicator).start();
 				
-//				System.out.println(general+"\n"+jaffa+"\n"+replicator);					
+				if(replicator != null){
+					repl = new Thread(replicator);
+					repl.start();
+				}
+				
+				
+				System.out.println(general+"\n"+jaffa+"\n"+replicator);					
 				
 			} catch (FileNotFoundException e1) {
 				e1.printStackTrace();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
-			} catch (ClassNotFoundException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			} 
 			}
 			
 		}
@@ -381,13 +396,13 @@ private ActionListener newgameListener = new ActionListener(){
 		
 	
 	
+
 		/**
 		 * Uj jatek inditasa,
 		 * palya betoltese, karakterek inicalizalasa
 		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			
 			
 			//uj panel aktivalasa
 			container.setVisible(false);
@@ -411,8 +426,10 @@ private ActionListener newgameListener = new ActionListener(){
 			}
 			general = new General(maze.getRandomEmptyField(),Direction.EAST,false);
 			jaffa = new Jaffa(maze.getRandomEmptyField(), Direction.WEST,false);
+			if(replicator != null) replicator.stop();
 			replicator = new Replicator(maze.getRandomEmptyField(),Direction.NORTH);
-			new Thread(replicator).start();
+			repl = new Thread(replicator);
+			repl.start();
 			
 			System.out.println(general+"\n"+jaffa+"\n"+replicator);					
 		}
@@ -537,7 +554,8 @@ private ActionListener newgameListener = new ActionListener(){
 	
 	//jatek vege
 	public static void endGame(String winOrLose){
-		System.out.println(winOrLose);
+		JOptionPane.showMessageDialog(app, winOrLose);
+		
 		log.println(winOrLose);
 		System.out.println("Game Over!");
 		log.close();

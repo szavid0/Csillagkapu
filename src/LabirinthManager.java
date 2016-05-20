@@ -30,7 +30,7 @@ public class LabirinthManager implements Serializable{
 
 
 	public LabirinthManager(){
-		allZpmCnt = 2;
+		allZpmCnt = 5;
 		GeneralZpmCnt = JaffaZpmCnt = 0;
 		map = new ArrayList<AbstractBlock>();
 	}
@@ -270,7 +270,8 @@ public class LabirinthManager implements Serializable{
 		
 		//jatek vege, osszeszedtuk a zpm-eket a palyan
 		if(JaffaZpmCnt + GeneralZpmCnt == allZpmCnt){
-			Application.endGame(GeneralZpmCnt > JaffaZpmCnt ? "GENERAL WINS" : "JAFFA WINS");
+			if(JaffaZpmCnt == GeneralZpmCnt)Application.endGame("GAME TIE!\nGENERAL ZPM: "+GeneralZpmCnt+"\nJAFFA ZPM: "+JaffaZpmCnt);
+			Application.endGame(GeneralZpmCnt > JaffaZpmCnt ? "GENERAL WINS!\nGENERAL ZPM: "+GeneralZpmCnt+"\nJAFFA ZPM: "+JaffaZpmCnt : "JAFFA WINS!\nGENERAL ZPM: "+GeneralZpmCnt+"\nJAFFA ZPM: "+JaffaZpmCnt);
 		}
 	}
 
@@ -278,7 +279,7 @@ public class LabirinthManager implements Serializable{
 	/**
 	 * Zpm elhelyezese a palyan
 	 */
-	private static  void CreateZpm() {  //RANDOM
+	public static  void CreateZpm() {  //RANDOM
 		System.out.println("CREATEZPM");
 		Application.log.println("CREATEZPM");
 		

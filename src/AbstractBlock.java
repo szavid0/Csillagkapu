@@ -49,10 +49,9 @@ public abstract class AbstractBlock implements Serializable{
 		}
 		return passable;
 	}
-	
 	//Beallitjuk, az athaladhatosagat.
 	public void setPassable(boolean tf){
-		passable = tf;
+		passable = tf;		
 	}
 	
 	//Abstract fuggvenyek:
@@ -81,6 +80,19 @@ public abstract class AbstractBlock implements Serializable{
 	public String toString() {
 		return getClass().getName().toUpperCase()+"(ID="+index+") + passable:"+isPassable();
 	}
-	public abstract void draw(Graphics g);
+	public void draw(Graphics g){
+		g.setColor(java.awt.Color.black);
+		GamePanel p = Application.app.getGamePanel();
+		int rectWidth = p.rectWidth;
+		int rectHeight = p.rectHeight;
+		int marginV = p.marginV;
+		int marginH = p.marginH;
+		
+		int x = index % 10; //oszlopindex
+		int y = index /10;  //sorindex
+		
+		g.drawRect(marginV + (x * rectWidth), marginH + (y * rectHeight), rectWidth, rectHeight);		
+	
+	}
 
 }
